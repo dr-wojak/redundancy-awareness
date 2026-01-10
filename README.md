@@ -10,9 +10,9 @@ These documents demonstrate the jurisdictional gap where complex strategic signa
 
 **Key components of this record include:**
 * **The Finality of Notice**: Documentation of the 2025 follow-up, confirming that the Office of the Tánaiste remained in possession of high-level strategic warnings for over 12 months without initiating a decision pathway.
-* **Exhibition of "Designed Forgetting"**: A chronological mapping showing how evidence submitted in 2024 was systematically "lost" in the administrative architecture, requiring the 2025 re-submission archived here.
+* **Exhibition of "Designed Forgetting"**: A chronological mapping showing how evidence submitted in 2024 was systematically lost in the administrative architecture, requiring the 2025 re-submission archived here.
 * **Jurisdictional Dead-Ends**: Records of the circular referral process, where the enquiry was bounced between departments to avoid substantive engagement, providing a live case study of *Séachanachas* (Governance by Avoidance).
-* **The Trigger for Statutory Filing**: This file serves as the immediate precursor to the *Ethics in Public Office Act* filings; it establishes that the "Policy Disagreement" defence is void, as the State refused to even acknowledge the scientific basis of the proposal, let alone disagree with it.
+* **The Trigger for Statutory Filing**: This file serves as the immediate precursor to the *Ethics in Public Office Act* filings; it establishes that the "Policy Disagreement" defence is void, as the [State refused to even acknowledge the scientific basis of the proposal, let alone disagree with it.](https://github.com/dr-wojak/governmentality-2025) 
 
 ## Directory Structure
 
@@ -51,7 +51,7 @@ These files are essential for any legal review or Public Accounts Committee (PAC
 
 * [**Harris / Martin / Chambers Correspondence**](https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB&usp=drive_copy) Consolidated documentary evidence of formal notice provided to the offices of the Taoiseach, Tánaiste, and Minister for Finance, establishing ministerial awareness of the O.R. governance deficit.  
 * [**Summary of Enquiry with the Tánaiste (2024)**](https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR&usp=drive_copy) A detailed record of the initial enquiry cycle with the Office of the Tánaiste regarding national preparedness and the submission of strategic intelligence tools.
-* [**Summary of Enquiry with the Tánaiste (2025)**](https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link) This document represents the definitive evidentiary "end-state" of the enquiry cycle. It records the final attempt to secure executive oversight regarding the State's failure to adopt Operations Research (O.R.) before the matter was escalated to a formal statutory complaint. While the 2024 Summary captures the initial transmission of intelligence, the 2025 Summary is more significant legally. It transforms a "failure to act" into a "documented refusal to govern." In the context of the larger project, this file proves that the institutional non-responsiveness was not a result of "bureaucratic friction" or "oversight," but a stable, repeatable, and designed feature of the Irish Executive’s decision-making architecture.
+* [**Summary of Enquiry with the Tánaiste (2025)**](https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link) This document represents the definitive evidentiary "end-state" of the enquiry cycle. It records the final attempt to secure executive oversight regarding the State's failure to adopt Operations Research (O.R.) before the matter was escalated to a formal statutory complaint. While the 2024 Summary captures the initial transmission of intelligence, the 2025 Summary is more significant legally. It transforms a failure to act into a documented refusal to govern. In the context of the larger project, this file proves that the institutional non-responsiveness was not a result of bureaucratic friction or oversight, but a stable, repeatable, and designed feature of the Irish Executive’s decision-making architecture.
 * [**Summary of Enquiry 2025: Cover Documentation**](https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm&usp=drive_copy) The formal transmittal record for the 2025 consolidation of evidence, marking the final attempt at executive engagement before statutory escalation.
 * [**Key to the Summary of Enquiry with the Tánaiste**](https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi&usp=drive_copy) An interpretive index and navigational aid designed to guide reviewers through the evidentiary trail of the multi-year Tánaiste enquiry.  
 
@@ -93,12 +93,13 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 **Press (Media & Transparency)**
 
-* **Description**: Contains the "National Exhibition of Administrative Failure," media kits, and executive summaries formatted for journalistic investigation. It provides a chronological signal-to-silence timeline to aid in public interest reporting.  
+* **Description**: Contains the **National Exhibition of Administrative Failure**, media kits, and executive summaries formatted for journalistic investigation. It provides a chronological signal-to-silence timeline to aid in public interest reporting.
+* **GitHub Landing Page**: [https://github.com/dr-wojak/press](https://github.com/dr-wojak/press)
 * **Placement**: The external-facing portal for public awareness and investigative scrutiny.
 
 **Public Relations (Civic Engagement)**
 
-* **Description**: Manages the interface between civic signals and the state. This repo documents the methods used to simulate engagement and provides the proposed frameworks (Charters) to restore genuine public relations through "Substantive Acknowledgment."  
+* **Description**: Manages the interface between civic signals and the state. This repo documents the methods used to simulate engagement and provides the proposed frameworks (Charters) to restore genuine public relations through Substantive Acknowledgment.  
 * **GitHub Landing Page**: [https://github.com/dr-wojak/public-relations](https://github.com/dr-wojak/public-relations)  
 * **Placement**: Focuses on the social contract and the restoration of institutional trust through design reform.
 
