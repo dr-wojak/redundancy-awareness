@@ -85,9 +85,8 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 * **Description**: Analyzes the fiscal negligence inherent in the rejection of Operations Research. This repo documents the opportunity costs, lost efficiencies in national logistics, and the fiduciary breach of failing to use data-driven decision tools during fiscal crises
 * Landing page is under construction. See examples such as:
-
-     [Stiglitz Greenwald.pdf](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy)  
-     [second-order-interpretation-of-misgovernance.png](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)  
+&ensp; [Externalities in Economies with Imperfect Information and Incomplete Markets -Bruce C. Greenwald, Joseph E. Stiglitz](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy)
+&ensp; [Second Order Interpretation of Misgovernance -reference chart (after Bateson)](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)  
 * **Placement**: Serves as the evidence base for the Committee on Public Accounts and national economic auditors.
 
 **Legal (Constitutional & Statutory Records)**
@@ -104,9 +103,22 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 **Public Relations (Civic Engagement)**
 
-* **Description**: Manages the interface between civic signals and the state. This repo documents the methods used to simulate engagement and provides the proposed frameworks (Charters) to restore genuine public relations through Substantive Acknowledgment.  
+* **Description**: Manages the interface between civic signals and the state. This repo documents the methods used to simulate engagement and provides the proposed frameworks (Charters) to restore genuine public relations through Substantive Acknowledgment. The historical, socio-economic, civil and civic accounting is fully explained via various surveys of the established (doctrinal) science.
 * **GitHub Landing Page**: [https://github.com/dr-wojak/public-relations](https://github.com/dr-wojak/public-relations)  
-* **Placement**: Focuses on the social contract and the restoration of institutional trust through design reform.
+* **Placement**: Focuses on the social contract and the restoration of institutional trust through design reform. With background material and visual guides to complement a host of interpretations.
+
+**Redundancy Awareness Podcasts (Civic Engagement cont.)**
+
+* **Description**: The archive includes:
+* **GitHub Landing Page**: [https://github.com/dr-wojak/redundancy-awareness-podcasts](https://github.com/dr-wojak/redundancy-awareness-podcasts)  
+
+  - Quick explainers (8-18 min)
+  - Technical deep-dives (23-60 min)
+  - Multilingual versions (EN/ES)
+  - Solution frameworks
+
+* **Placement**: Each podcast translates complexity into clarity, without assuming any background knowledge of the subject. For the most part, this is set to accompany the Public Relations material. The arguments are more speculative yet, in some cases, more refined. The project therefore poses questions to the public —in the name of technological progress. In this way, the civic notion of what Operations Research can achieve (say, in the Public Interest) is now a free domain for public engagement; the general benefits are thus over-simplified —if not under-represented— via the podcast format. But such is the technology, languishing in 2026 —as evidenced in through the Governmentality 2025 portal.
+
 
 **Governmentality 2025**
 
