@@ -88,7 +88,8 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 **Legal (Constitutional & Statutory Records)**
 
-* **Description**: A specialized repository of legal filings, judicial review precedents, outlining the architecture of accountability. It includes a curated list of Senior Counsel specializing in constitutional law, specifically targeting the enforcement of Article 15.10 and the Houses of the Oireachtas Act 2013\.  
+* **Description**: A specialized repository of legal filings, judicial review precedents, outlining the architecture of accountability. It includes a curated list of Senior Counsel specializing in constitutional law, specifically targeting the enforcement of Article 15.10 and the Houses of the Oireachtas Act 2013\.
+* **GitHub Landing Page**: [https://github.com/dr-wojak/press](https://github.com/dr-wojak/press)
 * **Placement**: Primary resource for legal practitioners and human rights observers preparing for litigation.
 
 **Press (Media & Transparency)**
