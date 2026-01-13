@@ -85,8 +85,10 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 * **Description**: Analyzes the fiscal negligence inherent in the rejection of Operations Research. This repo documents the opportunity costs, lost efficiencies in national logistics, and the fiduciary breach of failing to use data-driven decision tools during fiscal crises
 * Landing page is under construction. See examples such as:
-&ensp; [Externalities in Economies with Imperfect Information and Incomplete Markets -Bruce C. Greenwald, Joseph E. Stiglitz](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy)
-&ensp; [Second Order Interpretation of Misgovernance -reference chart (after Bateson)](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)  
+
+&ensp;&ensp;&ensp;&ensp; [Externalities in Economies with Imperfect Information and Incomplete Markets](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy) -Bruce C. Greenwald, Joseph E. Stiglitz
+
+&ensp;&ensp;&ensp;&ensp; [Second Order Interpretation of Misgovernance](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)   -reference chart (after Bateson)
 * **Placement**: Serves as the evidence base for the Committee on Public Accounts and national economic auditors.
 
 **Legal (Constitutional & Statutory Records)**
