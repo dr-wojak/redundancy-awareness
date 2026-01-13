@@ -86,15 +86,15 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 * **Description**: Analyzes the fiscal negligence inherent in the rejection of Operations Research. This repo documents the opportunity costs, lost efficiencies in national logistics, and the fiduciary breach of failing to use data-driven decision tools during fiscal crises
 * Landing page is under construction. See examples such as:
 
-&ensp;&ensp;&ensp;&ensp; [Externalities in Economies with Imperfect Information and Incomplete Markets](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy) -Bruce C. Greenwald, Joseph E. Stiglitz
+&ensp;&ensp;&ensp;&ensp;&ensp; [Externalities in Economies with Imperfect Information and Incomplete Markets](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy) -Bruce C. Greenwald, Joseph E. Stiglitz
 
-&ensp;&ensp;&ensp;&ensp; [Second Order Interpretation of Misgovernance](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)   -reference chart (after Bateson)
+&ensp;&ensp;&ensp;&ensp;&ensp; [Second Order Interpretation of Misgovernance](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)   -reference chart (after Bateson)
 * **Placement**: Serves as the evidence base for the Committee on Public Accounts and national economic auditors.
 
 **Legal (Constitutional & Statutory Records)**
 
 * **Description**: A specialized repository of legal filings, judicial review precedents, outlining the architecture of accountability. It includes a curated list of Senior Counsel specializing in constitutional law, specifically targeting the enforcement of Article 15.10 and the Houses of the Oireachtas Act 2013\.
-* **GitHub Landing Page**: [https://github.com/dr-wojak/press](https://github.com/dr-wojak/legal)
+* **GitHub Landing Page**: [https://github.com/dr-wojak/legal](https://github.com/dr-wojak/legal)
 * **Placement**: Primary resource for legal practitioners and human rights observers preparing for litigation.
 
 **Press (Media & Transparency)**
