@@ -84,7 +84,7 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 **Econ (Economic Oversight)**
 
 * **Description**: Analyzes the fiscal negligence inherent in the rejection of Operations Research. This repo documents the opportunity costs, lost efficiencies in national logistics, and the fiduciary breach of failing to use data-driven decision tools during fiscal crises
-* See also:
+* Landing page is under construction. See examples such as:
 
      [Stiglitz Greenwald.pdf](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy)  
      [second-order-interpretation-of-misgovernance.png](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)  
