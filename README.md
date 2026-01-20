@@ -119,7 +119,7 @@ The **Governmentality 2025** project is deployed across several thematic reposit
   - Multilingual versions (EN/ES)
   - Solution frameworks
 
-* **Placement**: Each podcast translates complexity into clarity, without assuming any background knowledge of the subject. For the most part, this is set to accompany the Public Relations material. The arguments are more speculative yet, in some cases, more refined. The project therefore poses questions to the public —in the name of technological progress. In this way, the civic notion of what Operations Research can achieve (say, in the Public Interest) is now a free domain for public engagement; the general benefits are thus over-simplified —if not under-represented— via the podcast format. But such is the technology, languishing in 2026 —as evidenced in through the Governmentality 2025 portal.
+* **Placement**: Each podcast translates complexity into clarity, without assuming any background knowledge of the subject. For the most part, this is set to accompany the Public Relations material. The arguments are more speculative yet, in some cases, more refined. The project therefore poses questions to the public —in the name of technological progress. In this way, the civic notion of what Operations Research can achieve (say, in the Public Interest) is now a free domain for public engagement; the general benefits are thus over-simplified —if not under-represented— via the podcast format. But such is the technology, languishing in 2026 —as evidenced in the Governmentality 2025 repository (portal).
 
 
 **Governmentality 2025**
