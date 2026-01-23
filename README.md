@@ -4,7 +4,7 @@
 *A Secondary Repository of Ministerial Correspondence, Jurisdictional Deflection, and Executive Enquiries*
 
 ## Overview
-This repository serves as the **Redundancy and Oversight Record** for the Governmentality 2025 project. While the primary canon establishes the theoretical and statutory basis of the complaint, the materials archived here provide the granular documentary evidence of how the matter was processed—or deflected—across the highest levels of the Irish Executive and Parliament.
+This repository serves as the **Redundancy & Oversight Record**. While the primary canon establishes the theoretical and statutory basis of the complaint, the materials archived here provide the granular documentary evidence of how the matter was processed (or deflected) across the highest levels of the Irish Executive and Parliament.
 
 These documents demonstrate the jurisdictional gap where complex strategic signals are absorbed without generating corrective action. They are organised to highlight the overlap between ministerial offices and the redundancy of oversight requests.
 
