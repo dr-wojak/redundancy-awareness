@@ -129,6 +129,10 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 * **GitHub Landing Page**: [https://github.com/dr-wojak/governmentality-2025](https://github.com/dr-wojak/governmentality-2025)  
 * **Placement**: A hub that anchors repositories, providing the conceptual framework and the core theoretical foundation for the entire evidential ecosystem.
 
+## **"Full Retard"**
+The material is presented in full, ad hoc and raw. Your mileage may vary.
+[**Redundancy Awareness Full Repository*](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
+
 **Legal Footnotes and Authorities**
 
 This record is grounded in the following statutory pillars:
