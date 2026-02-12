@@ -77,7 +77,7 @@ These files are essential for any legal review or Public Accounts Committee (PAC
 
 * [**Governance System Dynamics and Misgovernance**](https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb&usp=drive_copy) a visual mapping of the institutional feedback loops that convert expert signals into bureaucratic static or jurisdictional gaps.
 
-**Inter-Repository Ecosystem & Placement**
+## **Inter-Repository Ecosystem & Placement**
 
 The **Governmentality 2025** project is deployed across several thematic repositories. This modular placement is a strategic counter-measure against **Séachanachas** (Governance by Avoidance); by segmenting the evidence into disciplinary pillars, we ensure that no single administrative dead zone can suppress the entire record. Each repository serves a specific stakeholder group while maintaining cross-linked integrity through the central project hub.
 
