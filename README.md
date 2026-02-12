@@ -81,17 +81,6 @@ These files are essential for any legal review or Public Accounts Committee (PAC
 
 The **Governmentality 2025** project is deployed across several thematic repositories. This modular placement is a strategic counter-measure against **Séachanachas** (Governance by Avoidance); by segmenting the evidence into disciplinary pillars, we ensure that no single administrative dead zone can suppress the entire record. Each repository serves a specific stakeholder group while maintaining cross-linked integrity through the central project hub.
 
-**Econ (Economic Oversight)**
-
-* **Description**: This repo documents the opportunity costs, lost efficiencies in national logistics, and the fiduciary duty to use data-driven decision tools during fiscal crises.
-* **GitHub Landing Page**: [https://github.com/dr-wojak/econ](https://github.com/dr-wojak/econ)
-* See examples such as:
-
-  - [Externalities in Economies with Imperfect Information and Incomplete Markets](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy) -Bruce C. Greenwald, Joseph E. Stiglitz
- 
-  - [Second Order Interpretation of Misgovernance](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)   -reference chart (after Bateson)
-* **Placement**: Serves as the evidence base for the Committee on Public Accounts and national economic auditors.
-
 **Legal (Constitutional & Statutory Records)**
 
 * **Description**: A specialized repository of legal filings, judicial review precedents, outlining the architecture of accountability. It includes a curated list of Senior Counsel specializing in constitutional law, specifically targeting the enforcement of Article 15.10 and the Houses of the Oireachtas Act 2013\.
@@ -121,6 +110,17 @@ The **Governmentality 2025** project is deployed across several thematic reposit
   - Solution frameworks
 
 * **Placement**: Each podcast translates complexity into clarity, without assuming any background knowledge of the subject. For the most part, this is set to accompany the Public Relations material. The arguments are more speculative yet, in some cases, more refined. The project therefore poses questions to the public —in the name of technological progress. In this way, the civic notion of what Operations Research can achieve (say, in the Public Interest) is now a free domain for public engagement; the general benefits are thus over-simplified —if not under-represented— via the podcast format. But such is the technology, languishing in 2026 —as evidenced in the Governmentality 2025 repository (portal).
+
+**Econ (Economic Research)**
+
+* **Description**: This repo documents edge-subjects such as: opportunity costs, lost efficiencies, and the fiduciary duty to use data-driven decision tools in fiscal policy.
+* **GitHub Landing Page**: [https://github.com/dr-wojak/econ](https://github.com/dr-wojak/econ)
+* See examples such as:
+
+  - [Externalities in Economies with Imperfect Information and Incomplete Markets](https://drive.google.com/open?id=1vvNpE6C-KuxyX3KTAf05d1fceG0EHKR-&usp=drive_copy) -Bruce C. Greenwald, Joseph E. Stiglitz
+ 
+  - [Second Order Interpretation of Misgovernance](https://drive.google.com/open?id=1vGIhi-fgLa7Njz3JGsJUMYFttZX21nVP&usp=drive_copy)   -reference chart (after Bateson)
+* **Placement**: Serves as research material for future development. NB: this is not to be considered part of the diagnostic record (e.g. the formal complaint, petition, etc.)
 
 
 **Governmentality 2025**
