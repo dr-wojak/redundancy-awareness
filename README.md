@@ -131,6 +131,17 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 
 ## **"Full Retard"**
 The material is presented in full, ad hoc and raw. Your mileage may vary.
+
+|Language|UI-Friendly Meme Label|Notes / Tone|
+|---|---|---|
+|**EN**|Full Send|Short, punchy, widely recognized in meme / internet culture|
+|**FR**|À fond|Compact, idiomatic; conveys “all-in / maximum intensity”|
+|**ES**|A tope|Informal, energetic, concise; meme-friendly|
+|**GR**|Όλο τρέλα|“All crazy”; humorous and emphatic|
+|**CY**|Όλο τρέλα|Same as Standard Greek; dialectically natural|
+|**LT**|Pilna pakrauta|“Fully loaded / maxed out”; informal but strong|
+|**GA**|I gcroílár iomlán|“All the way / fully in”; concise and idiomatic|
+
 [**Redundancy Awareness Full Repository*](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
 
 **Legal Footnotes and Authorities**
