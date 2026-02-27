@@ -132,21 +132,43 @@ The **Governmentality 2025** project is deployed across several thematic reposit
 ## **"Full Retard"**
 The material is presented in full, ad hoc and raw. Your mileage may vary.
 
-|Language|UI-Friendly Meme Label|Notes / Tone|
-|---|---|---|
-|**EN (US)**|Full Send|Short, punchy, widely recognised in meme / internet culture|
-|**EN (GB)**|Full Monty|Cultural idiom; maximum commitment|
-|**ES**|A tope|Informal, energetic, concise; meme-friendly|
-|**FR**|À fond|Compact, idiomatic; conveys "all-in / maximum intensity"|
-|**PT**|A fundo|"Full-on / all the way"; idiomatic|
-|**DE**|Vollgas|"Full gas"; idiomatic, energetic, concise|
-|**JA**|全力で (zenryoku de)|"With full power / all effort"; concise, natural|
-|**KO**|전력으로 (jeon-ryeok-euro)|"With full force / all-out"; punchy|
-|**IT**|A tutto gas|"At full throttle"; playful, colloquial|
-|**NL**|Voluit|"Full-out / fully"; punchy, idiomatic|
-|**GR**|Όλο τρέλα|"All crazy"; humorous and emphatic|
-|**LT**|Pilna pakrauta|"Fully loaded / maxed out"; informal but strong|
-|**GA**|I gcroílár iomlán|"All the way / fully in"; concise and idiomatic|
+<details>
+
+
+<summary>UI-Friendly Meme Labels</summary>
+
+| Language    | UI-Friendly Meme Label | Notes / Tone                                                |
+| ----------- | ---------------------- | ----------------------------------------------------------- |
+| **EN (US)** | Full Send              | Short, punchy, widely recognized in meme / internet culture |
+| **EN (GB)** | Full Monty             | Cultural idiom; maximum commitment                          |
+| **ES**      | A tope                 | Informal, energetic, concise; meme-friendly                 |
+| **FR**      | À fond                 | Compact, idiomatic; conveys "all-in / maximum intensity"    |
+| **PT**      | A fundo                | "Full-on / all the way"; idiomatic                          |
+| **RO**      | La maximum             | "At maximum"; punchy, widely understood, meme-natural       |
+| **DE**      | Vollgas                | "Full gas"; idiomatic, energetic, concise                   |
+| **JA**      | 全力で (zenryoku de)      | "With full power / all effort"; concise, natural            |
+| **KO**      | 전력으로 (jeon-ryeok-euro) | "With full force / all-out"; punchy                         |
+| **IT**      | A tutto gas            | "At full throttle"; playful, colloquial                     |
+| **PL**      | Na całego              | "All out / full-on"; colloquial, punchy, meme-friendly      |
+| **NL**      | Voluit                 | "Full-out / fully"; punchy, idiomatic                       |
+| **HU**      | Teljes gőzzel          | "Full steam"; idiomatic, energetic                          |
+| **SV**      | För fullt              | "At full / full-on"; concise, natural Swedish idiom         |
+| **GR**      | Όλο τρέλα              | "All crazy"; humorous and emphatic                          |
+| **CZ**      | Naplno                 | "Full-on / at full capacity"; concise, natural, idiomatic   |
+| **BG**      | На пълни обороти       | "At full revs"; energetic, colloquial                       |
+| **SK**      | Naplno                 | "Full-on"; closely mirrors CZ — note the kinship            |
+| **DA**      | For fuld skrue         | "Full throttle"; nautical idiom, punchy                     |
+| **FI**      | Täysillä               | "At full / full-on"; concise, very natural in Finnish       |
+| **HR**      | Punom parom            | "Full steam"; idiomatic, colloquial                         |
+| **SL**      | Na polno               | "Full-on / at full"; direct and natural                     |
+| **LV**      | Pilnā sparā            | "At full momentum"; idiomatic, energetic                    |
+| **LT**      | Pilna pakrauta         | "Fully loaded / maxed out"; informal but strong             |
+| **ET**      | Täiega                 | "Fully / all-out"; very colloquial, meme-friendly           |
+| **MT**      | Bis-sħiħ               | "Fully / wholeheartedly"; idiomatic, natural Maltese        |
+| **GA**      | I gcroílár iomlán      | "All the way / fully in"; concise and idiomatic             |
+
+</details>
+
 
 👉 [**Redundancy Awareness Full Repository**](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
 
