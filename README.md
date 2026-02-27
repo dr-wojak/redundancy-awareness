@@ -134,7 +134,7 @@ The material is presented in full, ad hoc and raw. Your mileage may vary.
 
 |Language|UI-Friendly Meme Label|Notes / Tone|
 |---|---|---|
-|**EN (US)**|Full Send|Short, punchy, widely recognized in meme / internet culture|
+|**EN (US)**|Full Send|Short, punchy, widely recognised in meme / internet culture|
 |**EN (GB)**|Full Monty|Cultural idiom; maximum commitment|
 |**ES**|A tope|Informal, energetic, concise; meme-friendly|
 |**FR**|À fond|Compact, idiomatic; conveys "all-in / maximum intensity"|
