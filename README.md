@@ -135,18 +135,18 @@ The material is presented in full, ad hoc and raw. Your mileage may vary.
 |Language|UI-Friendly Meme Label|Notes / Tone|
 |---|---|---|
 |**EN (US)**|Full Send|Short, punchy, widely recognized in meme / internet culture|
-|**EN (GB)**|Full Monty | Cultural idiom; maximum commitment|
-|**FR**|À fond|Compact, idiomatic; conveys “all-in / maximum intensity”|
+|**EN (GB)**|Full Monty|Cultural idiom; maximum commitment|
 |**ES**|A tope|Informal, energetic, concise; meme-friendly|
-|**DE**|Vollgas|“Full gas”; idiomatic, energetic, concise|
-|**GR**|Όλο τρέλα|“All crazy”; humorous and emphatic|
-|**IT**|A tutto gas|“At full throttle”; playful, colloquial|
-|**PT**|A fundo|“Full-on / all the way”; idiomatic|
-|**NL**|Voluit|“Full-out / fully”; punchy, idiomatic|
-|**LT**|Pilna pakrauta|“Fully loaded / maxed out”; informal but strong|
-|**GA**|I gcroílár iomlán|“All the way / fully in”; concise and idiomatic|
-|**JA**|全力で (zenryoku de)|“With full power / all effort”; concise, natural|
-|**KO**|전력으로 (jeon-ryeok-euro)|“With full force / all-out”; punchy|
+|**FR**|À fond|Compact, idiomatic; conveys "all-in / maximum intensity"|
+|**PT**|A fundo|"Full-on / all the way"; idiomatic|
+|**DE**|Vollgas|"Full gas"; idiomatic, energetic, concise|
+|**JA**|全力で (zenryoku de)|"With full power / all effort"; concise, natural|
+|**KO**|전력으로 (jeon-ryeok-euro)|"With full force / all-out"; punchy|
+|**IT**|A tutto gas|"At full throttle"; playful, colloquial|
+|**NL**|Voluit|"Full-out / fully"; punchy, idiomatic|
+|**GR**|Όλο τρέλα|"All crazy"; humorous and emphatic|
+|**LT**|Pilna pakrauta|"Fully loaded / maxed out"; informal but strong|
+|**GA**|I gcroílár iomlán|"All the way / fully in"; concise and idiomatic|
 
 [**Redundancy Awareness Full Repository**](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
 
