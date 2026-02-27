@@ -148,7 +148,7 @@ The material is presented in full, ad hoc and raw. Your mileage may vary.
 |**LT**|Pilna pakrauta|"Fully loaded / maxed out"; informal but strong|
 |**GA**|I gcroílár iomlán|"All the way / fully in"; concise and idiomatic|
 
-[**Redundancy Awareness Full Repository**](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
+👉 [**Redundancy Awareness Full Repository**](https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g)
 
 **Legal Footnotes and Authorities**
 
