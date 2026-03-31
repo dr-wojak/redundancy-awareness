@@ -23,550 +23,835 @@
 <meta name="twitter:image" content="https://dr-crunch.github.io/redundancy-awareness/og-image.jpg" />
 <meta name="description" content="Pre-litigation public evidentiary record on the 19-year administrative non-decision by the Irish State under the Meinhardt Initiative. EU Council Presidency deadline: 1 July 2026." />
 
-  
 <style>
-:root {
-  --ink: #06050a;
-  --surface: #0e0d14;
-  --surface2: #13121b;
-  --parchment: #e8e3d4;
-  --parchment-dim: #9e9887;
-  --parchment-faint: #2a2720;
-  --purple: #8b83e8;
-  --purple-dim: #534ab7;
-  --purple-bg: #1a1830;
-  --green: #2fb882;
-  --green-dim: #0f6e56;
-  --green-bg: #0d1f1a;
-  --terra: #d4643d;
-  --terra-dim: #993d1d;
-  --terra-bg: #1f1109;
-  --amber: #c9881f;
-  --amber-dim: #854f0b;
-  --amber-bg: #1e1509;
-  --blue: #4a9fe0;
-  --blue-dim: #185fa5;
-  --blue-bg: #0c1929;
-  --gold: #c9a84c;
-  --star: #d4cfc0;
-  --rule: rgba(232, 227, 212, 0.08);
-  --rule-strong: rgba(232, 227, 212, 0.15);
-}
+  :root {
+    --ink: #06050a;
+    --surface: #0e0d14;
+    --surface2: #13121b;
+    --parchment: #e8e3d4;
+    --parchment-dim: #9e9887;
+    --parchment-faint: #2a2720;
+    --purple: #8b83e8;
+    --purple-dim: #534ab7;
+    --purple-bg: #1a1830;
+    --green: #2fb882;
+    --green-dim: #0f6e56;
+    --green-bg: #0d1f1a;
+    --terra: #d4643d;
+    --terra-dim: #993d1d;
+    --terra-bg: #1f1109;
+    --amber: #c9881f;
+    --amber-dim: #854f0b;
+    --amber-bg: #1e1509;
+    --blue: #4a9fe0;
+    --blue-dim: #185fa5;
+    --blue-bg: #0c1929;
+    --gold: #c9a84c;
+    --rule: rgba(232, 227, 212, 0.08);
+    --rule-strong: rgba(232, 227, 212, 0.15);
+  }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
 
-body {
-  background: var(--ink);
-  color: var(--parchment);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 18px;
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+  body {
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.35;
-}
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+  }
 
-#starfield {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.55;
-}
+  #starfield {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.55;
+  }
 
-/* ─── SIDEREAL BAND ─── */
-.sidereal-band {
-  position: relative;
-  z-index: 1;
-  background: linear-gradient(to bottom, rgba(6,5,10,0) 0%, rgba(6,5,10,0.85) 100%);
-  padding: 20px 32px 0;
-  max-width: 960px;
-  margin: 0 auto;
-}
-.sidereal-coord {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: rgba(220,182,96,0.8);
-  text-transform: uppercase;
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(201,168,76,0.1);
-}
-.sidereal-coord span { color: rgba(220,182,96,0.8); margin: 0 4px; }
+  /* ─── SIDEREAL BAND ─── */
+  .sidereal-band {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(6,5,10,0) 0%, rgba(6,5,10,0.85) 100%);
+    padding: 20px 32px 0;
+    max-width: 960px;
+    margin: 0 auto;
+  }
 
-/* ─── ALERT STRIP ─── */
-.alert-strip {
-  background: var(--amber-bg);
-  border-bottom: 1px solid var(--amber-dim);
-  padding: 10px 32px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  position: relative;
-  z-index: 10;
-  flex-wrap: wrap;
-}
-.alert-strip-text {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  color: var(--amber);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.alert-strip-text span { color: var(--parchment-dim); margin: 0 6px; }
+  .sidereal-coord {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: rgba(220,182,96,0.8);
+    text-transform: uppercase;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
 
-.hot-buttons { display: flex; gap: 10px; flex-shrink: 0; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 18px;
-  border-radius: 3px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
-}
-.btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: currentColor;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.btn:hover::before { opacity: 0.08; }
+  .sidereal-coord span { color: rgba(220,182,96,0.8); margin: 0 4px; }
 
-.btn-normie { background: var(--green-bg); border-color: var(--green-dim); color: var(--green); }
-.btn-normie:hover { border-color: var(--green); box-shadow: 0 0 12px rgba(47,184,130,0.15); }
-.btn-drive { background: var(--amber-bg); border-color: var(--amber-dim); color: var(--amber); }
-.btn-drive:hover { border-color: var(--amber); box-shadow: 0 0 12px rgba(201,168,76,0.2); }
-.btn-icon { font-size: 13px; }
+  /* ─── ALERT STRIP ─── */
+  .alert-strip {
+    background: var(--amber-bg);
+    border-bottom: 1px solid var(--amber-dim);
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+  }
 
-/* ─── HEADER ─── */
-header {
-  position: relative;
-  z-index: 1;
-  padding: 64px 32px 48px;
-  max-width: 960px;
-  margin: 0 auto;
-  border-bottom: 1px solid var(--rule);
-}
-.header-eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.header-eyebrow::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--gold);
-  opacity: 0.3;
-  max-width: 200px;
-}
-h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-weight: 300;
-  font-size: clamp(36px, 6vw, 68px);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  color: var(--parchment);
-  margin-bottom: 8px;
-}
-h1 em { font-style: italic; color: var(--parchment-dim); }
+  .alert-strip-text {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
 
-.header-subtitle {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--parchment-dim);
-  margin-bottom: 32px;
-  line-height: 1.4;
-}
-.header-lede {
-  font-size: 17px;
-  font-weight: 400;
-  color: var(--parchment);
-  max-width: 680px;
-  line-height: 1.75;
-  border-left: 2px solid var(--amber);
-  padding-left: 20px;
-  margin-bottom: 32px;
-}
-.header-meta { display: flex; gap: 32px; flex-wrap: wrap; }
-.meta-item { display: flex; flex-direction: column; gap: 3px; }
-.meta-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--parchment-dim);
-}
-.meta-value { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--parchment); }
-.meta-value.live { color: var(--amber); }
+  .alert-strip-text span { color: var(--parchment-dim); margin: 0 6px; }
 
-/* ─── MACHOL / AXIOM BAR ─── */
-.machol {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px;
-  border-bottom: 1px solid var(--rule);
-  display: flex; gap: 24px; align-items: flex-start;
-}
-.machol-line {
-  width: 3px;
-  background: linear-gradient(to bottom, var(--amber), transparent);
-  flex-shrink: 0; align-self: stretch; min-height: 60px;
-}
-.machol-body blockquote {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 21px; font-weight: 300; font-style: italic;
-  color: var(--parchment); line-height: 1.5; margin-bottom: 8px;
-}
-.machol-attribution {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px; letter-spacing: 0.1em;
-  color: var(--amber); text-transform: uppercase;
-}
-.machol-note {
-  margin-top: 14px; font-size: 16px;
-  color: var(--parchment-dim);
-  max-width: 580px; line-height: 1.7;
-}
+  .hot-buttons { display: flex; gap: 10px; flex-shrink: 0; }
 
-/* ─── SECTION LABEL ─── */
-.section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.15em;
-  text-transform: uppercase; color: var(--parchment-dim); margin-bottom: 20px;
-}
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 18px;
+    border-radius: 3px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-/* ─── KEY COMPONENTS GRID (replaces hypotheses) ─── */
-.components-section {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px; border-bottom: 1px solid var(--rule);
-}
-.comp-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1px;
-  background: var(--rule-strong);
-  border: 1px solid var(--rule-strong);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.comp-card {
-  background: var(--surface);
-  padding: 24px;
-  position: relative;
-  transition: background 0.2s;
-}
-.comp-card:hover { background: var(--surface2); }
-.comp-card::before {
-  content: attr(data-num);
-  position: absolute;
-  top: 14px; right: 18px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 44px; font-weight: 300; font-style: italic;
-  opacity: 0.06; color: var(--parchment); line-height: 1;
-}
-.comp-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px; letter-spacing: 0.1em;
-  text-transform: uppercase; color: var(--amber); margin-bottom: 8px;
-}
-.comp-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-weight: 400;
-  color: var(--parchment); line-height: 1.3; margin-bottom: 8px;
-}
-.comp-body {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 15px; color: var(--parchment-dim); line-height: 1.65;
-}
-.comp-body strong { color: var(--parchment); font-weight: 500; }
-.comp-body em { font-style: italic; }
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
 
-/* ─── DIRECTORY SECTION ─── */
-.directory-section {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px; border-bottom: 1px solid var(--rule);
-}
-.dir-header {
-  display: flex; align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
-}
-.dir-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 300; color: var(--parchment);
-}
-.dir-note {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
-  color: var(--parchment-dim); text-transform: uppercase;
-}
+  .btn:hover::before { opacity: 0.08; }
 
-/* document entry rows */
-.dir-block {
-  margin-bottom: 32px;
-}
-.dir-block-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-  display: flex; align-items: center; gap: 10px;
-}
-.dir-block-label::before { content: '§'; opacity: 0.6; }
+  .btn-main {
+    background: var(--green-bg);
+    border-color: var(--green-dim);
+    color: var(--green);
+  }
 
-.doc-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: start;
-  gap: 16px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--rule);
-  transition: background 0.15s;
-}
-.doc-row:last-child { border-bottom: none; }
-.doc-row:hover { background: rgba(201,168,76,0.03); }
+  .btn-main:hover {
+    border-color: var(--green);
+    box-shadow: 0 0 12px rgba(47,184,130,0.15);
+  }
 
-.doc-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px; font-weight: 500; color: var(--parchment);
-  margin-bottom: 4px;
-}
-.doc-desc {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 14px; color: var(--parchment-dim); line-height: 1.55;
-  max-width: 560px;
-}
-.doc-desc em { font-style: italic; }
-.doc-desc strong { color: var(--parchment); font-weight: 500; }
-.doc-link {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.05em;
-  color: var(--amber); text-decoration: none;
-  border: 1px solid rgba(201,168,76,0.3);
-  padding: 5px 10px; border-radius: 3px; white-space: nowrap;
-  transition: all 0.15s;
-  flex-shrink: 0;
-}
-.doc-link:hover {
-  color: var(--gold);
-  border-color: var(--gold);
-  background: rgba(201,168,76,0.07);
-}
+  .btn-drive {
+    background: var(--amber-bg);
+    border-color: var(--amber-dim);
+    color: var(--amber);
+  }
 
-/* ─── LINK MAP SECTION ─── */
-.map-section {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px; border-bottom: 1px solid var(--rule);
-}
-.map-header {
-  display: flex; align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
-}
-.map-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 300; color: var(--parchment);
-}
-.map-note {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.08em;
-  color: var(--parchment-dim); text-transform: uppercase;
-}
-.svg-container {
-  background: var(--surface2);
-  border: 1px solid var(--rule-strong);
-  border-radius: 6px;
-  padding: 24px 16px;
-  overflow-x: auto;
-}
-.svg-container svg { display: block; max-width: 100%; height: auto; }
+  .btn-drive:hover {
+    border-color: var(--amber);
+    box-shadow: 0 0 12px rgba(201,136,31,0.2);
+  }
 
-/* ─── ECOSYSTEM SECTION ─── */
-.ecosystem-section {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px; border-bottom: 1px solid var(--rule);
-}
-.eco-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 0;
-  border: 1px solid var(--rule-strong);
-  border-radius: 2px;
-}
-.eco-card {
-  padding: 24px 24px 20px;
-  border-right: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
-  background: var(--surface);
-  transition: background 0.2s;
-}
-.eco-card:hover { background: var(--surface2); }
-.eco-card:last-child,
-.eco-card:nth-child(2n) { border-right: none; }
-.eco-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--gold);
-  opacity: 0.7; margin-bottom: 10px;
-  display: flex; align-items: center; gap: 8px;
-}
-.eco-tag::before { content: '✦'; font-size: 7px; opacity: 0.5; }
-.eco-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-weight: 400;
-  color: var(--parchment); margin-bottom: 6px;
-}
-.eco-desc {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 14px; color: var(--parchment-dim); line-height: 1.6;
-  margin-bottom: 10px;
-}
-.eco-link {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 9px; letter-spacing: 0.06em;
-  color: rgba(201,168,76,0.5); text-decoration: none;
-  border-top: 1px solid var(--rule);
-  padding-top: 8px; display: block;
-  transition: color 0.15s;
-}
-.eco-link:hover { color: var(--gold); }
+  .btn-icon { font-size: 13px; }
 
-/* ─── LEGAL FOOTNOTES ─── */
-.legal-section {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 40px 32px; border-bottom: 1px solid var(--rule);
-}
-.footnote-list {
-  display: flex; flex-direction: column; gap: 12px;
-}
-.footnote-item {
-  display: grid;
-  grid-template-columns: 3px 1fr;
-  gap: 16px;
-}
-.fn-rule {
-  width: 3px; border-radius: 2px;
-  background: linear-gradient(to bottom, rgba(201,168,76,0.4), rgba(201,168,76,0.05));
-  align-self: stretch; min-height: 40px;
-}
-.fn-body {}
-.fn-statute {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
-}
-.fn-text {
-  font-family: 'EB Garamond', Georgia, serif;
-  font-size: 15px; color: var(--parchment-dim); line-height: 1.6;
-}
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    z-index: 1;
+    padding: 64px 32px 48px;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+  }
 
-/* ─── FOOTER ─── */
-footer {
-  position: relative; z-index: 1;
-  max-width: 960px; margin: 0 auto;
-  padding: 32px;
-  display: flex; justify-content: space-between;
-  align-items: center; flex-wrap: wrap; gap: 16px;
-}
-.footer-left {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px; letter-spacing: 0.08em;
-  color: var(--parchment-dim); line-height: 1.8;
-}
-.footer-left a {
-  color: var(--parchment-dim); text-decoration: none; transition: color 0.15s;
-}
-.footer-left a:hover { color: var(--parchment); }
-.footer-right {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px; letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(158,152,135,0.4); text-align: right;
-}
+  .header-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
-.fade-up:nth-child(1) { animation-delay: 0.05s; }
-.fade-up:nth-child(2) { animation-delay: 0.15s; }
-.fade-up:nth-child(3) { animation-delay: 0.25s; }
-.fade-up:nth-child(4) { animation-delay: 0.35s; }
+  .header-eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--amber);
+    opacity: 0.3;
+    max-width: 200px;
+  }
 
-@media (max-width: 600px) {
-  .alert-strip { flex-direction: column; align-items: flex-start; }
-  .hot-buttons { width: 100%; }
-  .btn { flex: 1; justify-content: center; }
-  h1 { font-size: 36px; }
-  .comp-grid { grid-template-columns: 1fr; }
-  .machol { flex-direction: column; }
-  .machol-line { width: 40px; height: 3px; min-height: auto; }
-  .doc-row { grid-template-columns: 1fr; }
-}
+  h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--parchment);
+    margin-bottom: 8px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--parchment-dim);
+  }
+
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--parchment-dim);
+    margin-bottom: 32px;
+    line-height: 1.4;
+  }
+
+  .header-lede {
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--parchment);
+    max-width: 680px;
+    line-height: 1.75;
+    border-left: 2px solid var(--amber);
+    padding-left: 20px;
+    margin-bottom: 32px;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item { display: flex; flex-direction: column; gap: 3px; }
+
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+  }
+
+  .meta-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--parchment);
+  }
+
+  .meta-value.live { color: var(--terra); }
+  .meta-value.amber { color: var(--amber); }
+
+  /* ─── MACHOL-STYLE QUOTE ─── */
+  .machol {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .machol-line {
+    width: 3px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 60px;
+  }
+
+  .machol-body blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--parchment);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .machol-attribution {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--amber);
+    text-transform: uppercase;
+  }
+
+  .machol-note {
+    margin-top: 14px;
+    font-size: 16px;
+    color: var(--parchment-dim);
+    max-width: 580px;
+    line-height: 1.7;
+  }
+
+  /* ─── FOUR COMPONENTS ─── */
+  .hypotheses {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    margin-bottom: 20px;
+  }
+
+  .hyp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule-strong);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .hyp-card {
+    background: var(--surface);
+    padding: 24px;
+    position: relative;
+  }
+
+  .hyp-card::before {
+    content: attr(data-letter);
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    font-style: italic;
+    opacity: 0.07;
+    color: var(--parchment);
+    line-height: 1;
+  }
+
+  .hyp-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    margin-bottom: 8px;
+  }
+
+  .hyp-body {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--parchment);
+    line-height: 1.6;
+  }
+
+  .hyp-remedy {
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--amber);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── DIRECTORY SECTIONS ─── */
+  .dir-section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .dir-section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .dir-section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    opacity: 0.7;
+  }
+
+  .dir-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--parchment);
+  }
+
+  .star-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border: 1px solid var(--rule-strong);
+    border-radius: 2px;
+  }
+
+  .star-article {
+    padding: 28px 28px 24px;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    background: var(--surface);
+    transition: background 0.25s;
+  }
+
+  .star-article:hover { background: var(--surface2); }
+
+  .star-glyph {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--amber);
+    opacity: 0.7;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .star-glyph::before {
+    content: '✦';
+    font-size: 8px;
+    color: var(--amber);
+    opacity: 0.5;
+  }
+
+  .star-article h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--parchment);
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  .star-article h3 em { font-style: italic; color: var(--parchment-dim); }
+
+  .star-plain {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    color: var(--parchment-dim);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .star-plain strong { color: var(--parchment); font-weight: 500; }
+
+  .star-cite {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: rgba(201,168,76,0.5);
+    text-transform: uppercase;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    margin-top: 10px;
+  }
+
+  .star-cite a {
+    color: rgba(201,136,31,0.8);
+    text-decoration: none;
+  }
+
+  .star-cite a:hover { color: var(--amber); }
+
+  /* ─── AXIOM BAR ─── */
+  .axiom-bar {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 3px 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .axiom-rule {
+    width: 3px;
+    align-self: stretch;
+    background: linear-gradient(to bottom, var(--amber) 0%, rgba(201,136,31,0.1) 100%);
+    border-radius: 2px;
+    min-height: 80px;
+  }
+
+  .axiom-body { display: flex; flex-direction: column; gap: 10px; }
+
+  .axiom-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(201,136,31,0.5);
+  }
+
+  .axiom-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--parchment);
+    line-height: 1.45;
+  }
+
+  .axiom-plain {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 15px;
+    color: var(--parchment-dim);
+    line-height: 1.7;
+    max-width: 620px;
+  }
+
+  /* ─── SITE LINK MAP ─── */
+  .map-section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .map-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .map-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--parchment);
+  }
+
+  .map-note {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--parchment-dim);
+    text-transform: uppercase;
+  }
+
+  .svg-container {
+    background: var(--surface2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 6px;
+    padding: 24px 16px;
+    overflow-x: auto;
+  }
+
+  .svg-container svg { display: block; max-width: 100%; height: auto; }
+
+  /* ─── ECOSYSTEM ─── */
+  .ecosystem-section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .eco-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--rule-strong);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 24px;
+  }
+
+  .eco-card {
+    background: var(--surface);
+    padding: 22px 24px;
+    transition: background 0.25s;
+  }
+
+  .eco-card:hover { background: var(--surface2); }
+
+  .eco-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--parchment-dim);
+    margin-bottom: 8px;
+  }
+
+  .eco-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--parchment);
+    margin-bottom: 8px;
+  }
+
+  .eco-body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 14px;
+    color: var(--parchment-dim);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+
+  .eco-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: rgba(201,136,31,0.7);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(201,136,31,0.2);
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .eco-link:hover {
+    color: var(--amber);
+    border-color: var(--amber);
+  }
+
+  /* ─── LEGAL FOOTNOTES ─── */
+  .legal-section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .legal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .legal-card {
+    padding: 20px;
+    border: 1px solid var(--rule-strong);
+    border-top: 3px solid rgba(201,136,31,0.4);
+    background: var(--surface);
+    border-radius: 2px;
+  }
+
+  .legal-card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+
+  .legal-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    color: var(--parchment);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .legal-card-body {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 14px;
+    color: var(--parchment-dim);
+    line-height: 1.65;
+  }
+
+  /* ─── KEYWORDS ─── */
+  .keywords-section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .keyword-blob {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    line-height: 2.0;
+    color: var(--parchment-dim);
+    background: var(--surface2);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 24px;
+    word-break: break-word;
+  }
+
+  .keyword-blob .k-core { color: var(--purple); }
+  .keyword-blob .k-legal { color: var(--blue); }
+  .keyword-blob .k-irish { color: var(--green); }
+  .keyword-blob .k-mech { color: var(--amber); }
+  .keyword-blob .k-exec { color: var(--terra); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-left {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--parchment-dim);
+    line-height: 1.8;
+  }
+
+  .footer-left a {
+    color: var(--parchment-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-left a:hover { color: var(--parchment); }
+
+  .footer-right {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(158,152,135,0.4);
+    text-align: right;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
+  .fade-up:nth-child(1) { animation-delay: 0.05s; }
+  .fade-up:nth-child(2) { animation-delay: 0.15s; }
+  .fade-up:nth-child(3) { animation-delay: 0.25s; }
+  .fade-up:nth-child(4) { animation-delay: 0.35s; }
+
+  .tooltip {
+    position: fixed;
+    background: var(--surface2);
+    border: 1px solid var(--rule-strong);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--parchment);
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.15s;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .tooltip.visible { opacity: 1; }
+
+  @media (max-width: 600px) {
+    .alert-strip { flex-direction: column; align-items: flex-start; }
+    .hot-buttons { width: 100%; }
+    .btn { flex: 1; justify-content: center; }
+    h1 { font-size: 36px; }
+    .hyp-grid { grid-template-columns: 1fr; }
+    .machol { flex-direction: column; }
+    .machol-line { width: 40px; height: 3px; min-height: auto; }
+    .star-grid { grid-template-columns: 1fr; }
+    .star-article { border-right: none; }
+  }
 </style>
 </head>
 <body>
 
 <canvas id="starfield"></canvas>
 
-<!-- ─── SIDEREAL COORD BAR ─── -->
+<!-- ─── SIDEREAL BAND ─── -->
 <div class="sidereal-band">
   <div class="sidereal-coord">
-    <span>Redundancy Awareness</span><span>·</span>
-    <span>Secondary Repository · Historical Snapshot 2025</span><span>·</span>
-    <span>Meinhardt Initiative · Interregnum Nullificans</span>
+    <span>Epoch 2006.6 → 2026.3</span><span>·</span>
+    <span>Secondary Repository · Evidentiary</span><span>·</span>
+    <span>Fixed reference: Bunreacht na hÉireann 1937</span>
   </div>
 </div>
 
 <!-- ─── ALERT STRIP ─── -->
 <div class="alert-strip">
   <div class="alert-strip-text">
-    Ministerial correspondence<span>·</span>Jurisdictional deflection<span>·</span>Séachanachas documented<span>·</span>CC0 · Open access
+    Séachanachas documented<span>·</span>2006–2026<span>·</span>Historical snapshot · 2025<span>·</span>EU Council Presidency deadline: 1 July 2026
   </div>
   <div class="hot-buttons">
-    <a href="https://dr-crunch.github.io/" class="btn btn-normie" target="_blank" rel="noopener">
+    <a href="https://dr-crunch.github.io/" class="btn btn-main" target="_blank" rel="noopener">
       <span class="btn-icon">◎</span> Main Record
     </a>
     <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" class="btn btn-drive" target="_blank" rel="noopener">
@@ -578,7 +863,7 @@ footer {
 <!-- ─── HEADER ─── -->
 <header>
   <div class="header-eyebrow fade-up">Meinhardt Initiative · Secondary Repository</div>
-  <h1 class="fade-up">Redundancy<br><em>Awareness</em></h1>
+  <h1 class="fade-up">Redundancy <em>Awareness</em></h1>
   <div class="header-subtitle fade-up">Ministerial correspondence · Jurisdictional deflection · Executive enquiries</div>
   <p class="header-lede fade-up">
     While the primary canon establishes the theoretical and statutory basis of the complaint, the materials archived here provide the granular documentary evidence of how the matter was processed — or deflected — across the highest levels of the Irish Executive and Parliament. These documents demonstrate the jurisdictional gap where complex strategic signals are absorbed without generating corrective action.
@@ -586,7 +871,7 @@ footer {
   <div class="header-meta fade-up">
     <div class="meta-item">
       <span class="meta-label">Status</span>
-      <span class="meta-value live">Historical snapshot · 2025</span>
+      <span class="meta-value live">Historical Snapshot · 2025</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Record</span>
@@ -607,7 +892,7 @@ footer {
   </div>
 </header>
 
-<!-- ─── MACHOL / OPENING AXIOM ─── -->
+<!-- ─── MACHOL QUOTE ─── -->
 <div class="machol">
   <div class="machol-line"></div>
   <div class="machol-body">
@@ -619,410 +904,500 @@ footer {
   </div>
 </div>
 
-<!-- ─── KEY COMPONENTS ─── -->
-<section class="components-section">
+<!-- ─── FOUR KEY COMPONENTS ─── -->
+<section class="hypotheses">
   <div class="section-label">Four key components of the record</div>
-  <div class="comp-grid">
+  <div class="hyp-grid">
+    <div class="hyp-card" data-letter="I">
+      <div class="hyp-title">I · Finality of Notice</div>
+      <div class="hyp-body">Documentation confirming that the Office of the Tánaiste remained in possession of high-level strategic warnings for over twelve months without initiating any decision pathway. Notice provided; receipt confirmed; action: nil.</div>
+      <div class="hyp-remedy">→ 12 months · No decision pathway</div>
+    </div>
+    <div class="hyp-card" data-letter="II">
+      <div class="hyp-title">II · Designed Forgetting</div>
+      <div class="hyp-body">A chronological mapping showing how evidence submitted in 2024 was systematically lost in the administrative architecture, requiring the 2025 re-submission archived here. Evidence absorbed; retrieval refused; the archive grows; nothing converts.</div>
+      <div class="hyp-remedy">→ Systematic loss · Re-submission required</div>
+    </div>
+    <div class="hyp-card" data-letter="III">
+      <div class="hyp-title">III · Jurisdictional Dead-Ends</div>
+      <div class="hyp-body">Records of the circular referral process, where the enquiry was bounced between departments to avoid substantive engagement — providing a live case study of Séachanachas: the institutional art of avoidance elevated to administrative policy.</div>
+      <div class="hyp-remedy">→ Séachanachas — governance by avoidance</div>
+    </div>
+    <div class="hyp-card" data-letter="IV">
+      <div class="hyp-title">IV · Trigger for Statutory Filing</div>
+      <div class="hyp-body">This file serves as the immediate precursor to the Ethics in Public Office Act filings. It establishes that the State refused to acknowledge the scientific basis of the proposal at all. The defence of substantive disagreement is therefore unavailable.</div>
+      <div class="hyp-remedy">→ The "Policy Disagreement" defence is void</div>
+    </div>
+  </div>
+</section>
 
-    <div class="comp-card" data-num="I">
-      <div class="comp-num">I · Finality of Notice</div>
-      <div class="comp-title">12 months. No decision pathway.</div>
-      <div class="comp-body">Documentation confirming that the Office of the Tánaiste remained in possession of <strong>high-level strategic warnings</strong> for over twelve months without initiating any decision pathway. Notice provided; receipt confirmed; action: nil.</div>
+<!-- ─── AXIOM ─── -->
+<div class="axiom-bar">
+  <div class="axiom-rule"></div>
+  <div class="axiom-body">
+    <div class="axiom-label">Evidentiary function · Burden of proof</div>
+    <div class="axiom-text">Timestamped proof sufficient to shift the burden of proof to the State regarding fiduciary neglect.</div>
+    <div class="axiom-plain">The 2025 Summary of Enquiry transforms a failure to act into a documented refusal to govern. It proves that institutional non-responsiveness was a stable, repeatable, designed feature — not bureaucratic friction. Each component of this archive is a separate and independent basis for the evidentiary record. Together they establish that the Silence Veto operated as policy, not oversight.</div>
+  </div>
+</div>
+
+<!-- ─── SECTION 01 · EXECUTIVE CORRESPONDENCE ─── -->
+<section class="dir-section">
+  <div class="dir-section-header">
+    <div class="dir-section-num">01</div>
+    <div class="dir-section-title">Executive Correspondence &amp; Enquiries</div>
+  </div>
+  <div class="section-label" style="margin-bottom:20px;">Harris · Martin · Chambers · Tánaiste enquiry cycle</div>
+  <div class="star-grid">
+
+    <div class="star-article">
+      <div class="star-glyph">Consolidated Executive Evidence</div>
+      <h3>Harris / Martin / Chambers<br><em>Correspondence</em></h3>
+      <div class="star-plain">Consolidated documentary evidence of formal notice provided to the offices of the <strong>Taoiseach, Tánaiste, and Minister for Finance</strong>, establishing ministerial awareness of the O.R. governance deficit. Timestamped. Unrebutted.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
     </div>
 
-    <div class="comp-card" data-num="II">
-      <div class="comp-num">II · Designed Forgetting</div>
-      <div class="comp-title">Systematic loss. Re-submission required.</div>
-      <div class="comp-body">A chronological mapping showing how evidence submitted in 2024 was <strong>systematically lost</strong> in the administrative architecture, requiring the 2025 re-submission archived here. Evidence absorbed; retrieval refused; the archive grows; nothing converts.</div>
+    <div class="star-article">
+      <div class="star-glyph">Initial Transmission · 2024</div>
+      <h3>Summary of Enquiry<br><em>with the Tánaiste (2024)</em></h3>
+      <div class="star-plain">Detailed record of the initial enquiry cycle regarding national preparedness and the submission of strategic intelligence tools. Captures the <strong>first transmission of intelligence</strong> to the Executive. First activation of the saisine.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
     </div>
 
-    <div class="comp-card" data-num="III">
-      <div class="comp-num">III · Jurisdictional Dead-Ends</div>
-      <div class="comp-title">Séachanachas — governance by avoidance.</div>
-      <div class="comp-body">Records of the circular referral process, where the enquiry was <strong>bounced between departments</strong> to avoid substantive engagement — providing a live case study of <em>Séachanachas</em>: the institutional art of avoidance elevated to administrative policy.</div>
+    <div class="star-article">
+      <div class="star-glyph">End-State · Refusal to Govern</div>
+      <h3>Summary of Enquiry<br><em>with the Tánaiste (2025)</em></h3>
+      <div class="star-plain">The definitive evidentiary <strong>end-state</strong> of the enquiry cycle. Records the final attempt to secure executive oversight before statutory escalation. Proves institutional non-responsiveness was a stable, repeatable, <em>designed feature</em> — not bureaucratic friction.</div>
+      <div class="star-cite">
+        Most significant legally · Transforms failure into documented refusal · <a href="https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
     </div>
 
-    <div class="comp-card" data-num="IV">
-      <div class="comp-num">IV · Trigger for Statutory Filing</div>
-      <div class="comp-title">The "Policy Disagreement" defence is void.</div>
-      <div class="comp-body">This file serves as the immediate precursor to the <em>Ethics in Public Office Act</em> filings. It establishes that the State <strong>refused to acknowledge the scientific basis of the proposal</strong> at all — let alone disagree with it. The defence of substantive disagreement is therefore unavailable.</div>
+    <div class="star-article">
+      <div class="star-glyph">Transmittal Record · Final Escalation</div>
+      <h3>Summary of Enquiry 2025<br><em>Cover Documentation</em></h3>
+      <div class="star-plain">The formal transmittal record for the 2025 consolidation of evidence. Marks the <strong>final attempt at executive engagement</strong> before the matter was escalated to statutory complaint. The procedural threshold crossed.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="star-article">
+      <div class="star-glyph">Interpretive Index · Cross-Reference</div>
+      <h3>Key to the Summary<br><em>of Enquiry with the Tánaiste</em></h3>
+      <div class="star-plain">An interpretive index and navigational aid guiding reviewers through the evidentiary trail of the multi-year Tánaiste enquiry. <strong>Cross-references timestamped contacts</strong> with statutory obligations engaged at each stage.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
     </div>
 
   </div>
 </section>
 
-<!-- ─── DIRECTORY ─── -->
-<section class="directory-section">
-  <div class="dir-header">
-    <div class="dir-title">Directory · Document Record</div>
-    <div class="dir-note">Four sections · CC0 · Open access</div>
+<!-- ─── SECTION 02 · OVERSIGHT & CONSTITUTIONAL ─── -->
+<section class="dir-section">
+  <div class="dir-section-header">
+    <div class="dir-section-num">02</div>
+    <div class="dir-section-title">Oversight &amp; Constitutional Requests</div>
   </div>
+  <div class="section-label" style="margin-bottom:20px;">Cathaoirleach of Seanad Éireann · Council of State</div>
+  <div class="star-grid">
 
-  <!-- 01 -->
-  <div class="dir-block">
-    <div class="dir-block-label">01 · Executive Correspondence &amp; Enquiries</div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Harris / Martin / Chambers Correspondence</div>
-        <div class="doc-desc">Consolidated documentary evidence of formal notice provided to the offices of the <strong>Taoiseach, Tánaiste, and Minister for Finance</strong>, establishing ministerial awareness of the O.R. governance deficit. Timestamped. Unrebutted.</div>
+    <div class="star-article">
+      <div class="star-glyph">Art. 15.10 · Oireachtas Petition</div>
+      <h3>Formal Request for Oversight Review<br><em>Cathaoirleach of Seanad Éireann</em></h3>
+      <div class="star-plain">Petition to the Chairperson of the Senate seeking an audit of how the Houses of the Oireachtas processed — or failed to process — formal expert warnings. Invokes the presiding officer's <strong>independent oversight function</strong> under the Houses of the Oireachtas Act.</div>
+      <div class="star-cite">
+        Art. 15.10 Bunreacht · Independent oversight function · <a href="https://drive.google.com/open?id=1lqqGF2GW9jx8ttV5f-ZhMX11O2i5NGP4&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
       </div>
-      <a href="https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
     </div>
 
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Summary of Enquiry with the Tánaiste (2024)</div>
-        <div class="doc-desc">Detailed record of the initial enquiry cycle regarding national preparedness and the submission of strategic intelligence tools. Captures the first transmission of intelligence to the Executive.</div>
+    <div class="star-article">
+      <div class="star-glyph">Art. 31 · Bunreacht na hÉireann</div>
+      <h3>Do Chomhairle an Stáit<br><em>To the Council of State</em></h3>
+      <div class="star-plain">A formal submission addressing the constitutional implications of <em>Evasocracy</em> and the systematic suppression of applied intelligence in national decision-making. Engages <strong>Article 31</strong> on the Council of State's advisory function.</div>
+      <div class="star-cite">
+        Evasocracy · Constitutional implications · <a href="https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
       </div>
-      <a href="https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
     </div>
 
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Summary of Enquiry with the Tánaiste (2025)</div>
-        <div class="doc-desc">The definitive evidentiary <strong>end-state</strong> of the enquiry cycle. Records the final attempt to secure executive oversight before statutory escalation. Transforms a failure to act into a <em>documented refusal to govern</em>. Proves institutional non-responsiveness was a stable, repeatable, designed feature — not bureaucratic friction.</div>
-      </div>
-      <a href="https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Summary of Enquiry 2025 — Cover Documentation</div>
-        <div class="doc-desc">The formal transmittal record for the 2025 consolidation of evidence. Marks the final attempt at executive engagement before the matter was escalated to statutory complaint.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Key to the Summary of Enquiry with the Tánaiste</div>
-        <div class="doc-desc">An interpretive index and navigational aid guiding reviewers through the evidentiary trail of the multi-year Tánaiste enquiry. Cross-references timestamped contacts with statutory obligations engaged at each stage.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
   </div>
-
-  <!-- 02 -->
-  <div class="dir-block">
-    <div class="dir-block-label">02 · Oversight &amp; Constitutional Requests</div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Formal Request for Oversight Review — Cathaoirleach of Seanad Éireann</div>
-        <div class="doc-desc">Petition to the Chairperson of the Senate seeking an audit of how the Houses of the Oireachtas processed — or failed to process — formal expert warnings. Invokes the presiding officer's independent oversight function under the Houses of the Oireachtas Act.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1lqqGF2GW9jx8ttV5f-ZhMX11O2i5NGP4&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Do Chomhairle an Stáit — To the Council of State</div>
-        <div class="doc-desc">A formal submission addressing the constitutional implications of <em>Evasocracy</em> and the systematic suppression of applied intelligence in national decision-making. Engages Article 31 of Bunreacht na hÉireann on the Council of State's advisory function.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-  </div>
-
-  <!-- 03 -->
-  <div class="dir-block">
-    <div class="dir-block-label">03 · Summaries &amp; Official Statements</div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Abridged Summary of Systemic Failure</div>
-        <div class="doc-desc">A high-level synthesis of the failure to adopt Operations Research, designed for rapid cross-departmental briefing and archival indexing. Suitable for attachment to FOI requests, PETI submissions, and committee evidence packs.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1sd--GFfz5V4cPD8JlE71923pD6ML9LHw&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Brief Introduction to the Formal Complaint</div>
-        <div class="doc-desc">An introductory roadmap outlining the legislative scope of the 2025 Ethics filing and the ethical obligations of the named members. Entry point for legal practitioners and committee staff encountering the corpus for the first time.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1tIbDQl4oyIUDasP1HavRatY3PVxGR_z5&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Ráiteas Oifigiúil maidir le Teip Shistéamach</div>
-        <div class="doc-desc">Record of the complaint provided in the Irish language, asserting the State's failure to integrate strategic intelligence into its core administrative functions. <em>Dualgas bunreachtúil</em> — constitutional duty — stated in the first official language of the State.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=1oJzCRWC2iL2xbnFVQEehsgyzPkyoMyUz&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PDF ↗</a>
-    </div>
-  </div>
-
-  <!-- 04 -->
-  <div class="dir-block">
-    <div class="dir-block-label">04 · Visual Frameworks</div>
-
-    <div class="doc-row">
-      <div>
-        <div class="doc-name">Governance System Dynamics and Misgovernance</div>
-        <div class="doc-desc">A visual mapping of the institutional feedback loops that convert expert signals into bureaucratic static or jurisdictional gaps. Draws on Beer / VSM cybernetic framing to render the Nullification Loop as a systemic diagram. Not rhetoric — an O.R. instrument.</div>
-      </div>
-      <a href="https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb&usp=drive_copy" class="doc-link" target="_blank" rel="noopener">View PNG ↗</a>
-    </div>
-  </div>
-
 </section>
 
-<!-- ─── SVG NODE MAP ─── -->
+<!-- ─── SECTION 03 · SUMMARIES & OFFICIAL STATEMENTS ─── -->
+<section class="dir-section">
+  <div class="dir-section-header">
+    <div class="dir-section-num">03</div>
+    <div class="dir-section-title">Summaries &amp; Official Statements</div>
+  </div>
+  <div class="section-label" style="margin-bottom:20px;">Abridged synthesis · Ráiteas Oifigiúil · Entry points</div>
+  <div class="star-grid">
+
+    <div class="star-article">
+      <div class="star-glyph">Cross-Departmental Briefing</div>
+      <h3>Abridged Summary<br><em>of Systemic Failure</em></h3>
+      <div class="star-plain">A high-level synthesis of the failure to adopt Operations Research, designed for rapid cross-departmental briefing and archival indexing. Suitable for attachment to <strong>FOI requests, PETI submissions, and committee evidence packs</strong>.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=1sd--GFfz5V4cPD8JlE71923pD6ML9LHw&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="star-article">
+      <div class="star-glyph">Legislative Scope · Roadmap</div>
+      <h3>Brief Introduction<br><em>to the Formal Complaint</em></h3>
+      <div class="star-plain">An introductory roadmap outlining the legislative scope of the 2025 Ethics filing and the ethical obligations of the named members. <strong>Entry point</strong> for legal practitioners and committee staff encountering the corpus for the first time.</div>
+      <div class="star-cite">
+        <a href="https://drive.google.com/open?id=1tIbDQl4oyIUDasP1HavRatY3PVxGR_z5&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
+    </div>
+
+    <div class="star-article">
+      <div class="star-glyph">Gaeilge · Dualgas Bunreachtúil</div>
+      <h3>Ráiteas Oifigiúil<br><em>maidir le Teip Shistéamach</em></h3>
+      <div class="star-plain">Record of the complaint provided in the Irish language, asserting the State's failure to integrate strategic intelligence into its core administrative functions. Constitutional duty stated in the <strong>first official language of the State</strong>.</div>
+      <div class="star-cite">
+        Dualgas bunreachtúil · An Ghaeilge · <a href="https://drive.google.com/open?id=1oJzCRWC2iL2xbnFVQEehsgyzPkyoMyUz&usp=drive_copy" target="_blank" rel="noopener">View PDF ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SECTION 04 · VISUAL FRAMEWORKS ─── -->
+<section class="dir-section">
+  <div class="dir-section-header">
+    <div class="dir-section-num">04</div>
+    <div class="dir-section-title">Visual Frameworks</div>
+  </div>
+  <div class="section-label" style="margin-bottom:20px;">Beer / VSM · System Dynamics · O.R. instruments</div>
+  <div class="star-grid">
+
+    <div class="star-article" style="border-right:none;">
+      <div class="star-glyph">Beer / VSM · Cybernetic Framing</div>
+      <h3>Governance System Dynamics<br><em>and Misgovernance</em></h3>
+      <div class="star-plain">A visual mapping of the institutional feedback loops that convert expert signals into bureaucratic static or jurisdictional gaps. Draws on Beer / VSM cybernetic framing to render the Nullification Loop as a systemic diagram. <strong>Not rhetoric — an O.R. instrument.</strong></div>
+      <div class="star-cite">
+        Feedback loops · Nullification Loop · <a href="https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb&usp=drive_copy" target="_blank" rel="noopener">View PNG ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SITE LINK MAP ─── -->
 <section class="map-section">
   <div class="map-header">
     <div class="map-title">Repository Link Map</div>
     <div class="map-note">redundancy-awareness · click nodes to navigate</div>
   </div>
-
-  <div class="svg-container">
-    <svg width="100%" viewBox="0 0 700 560" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Mono',monospace;">
+  <div class="svg-container" id="svgContainer">
+    <svg width="100%" viewBox="0 0 700 760" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Mono',monospace;">
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M2 1L8 5L2 9" fill="none" stroke="#4a4540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
         <style>
-          .node-hub rect    { fill:#1a1830; stroke:#7F77DD; }
+          .node-hub rect { fill:#1a1830; stroke:#7F77DD; }
           .node-hub text.t1 { fill:#b8b3f0; font-size:13px; font-weight:500; }
           .node-hub text.t2 { fill:#7F77DD; font-size:11px; }
-
-          .node-main rect    { fill:#0d1f1a; stroke:#2FA882; }
-          .node-main text.t1 { fill:#7dd9b8; font-size:12px; font-weight:500; }
-          .node-main text.t2 { fill:#2FA882; font-size:10px; }
-
-          .node-exec rect    { fill:#1e1509; stroke:#854f0b; }
-          .node-exec text.t1 { fill:#d4a464; font-size:12px; font-weight:500; }
-          .node-exec text.t2 { fill:#854f0b; font-size:10px; }
-
-          .node-over rect    { fill:#1f1109; stroke:#993d1d; }
-          .node-over text.t1 { fill:#e8856a; font-size:12px; font-weight:500; }
-          .node-over text.t2 { fill:#993d1d; font-size:10px; }
-
-          .node-summ rect    { fill:#0c1929; stroke:#185fa5; }
-          .node-summ text.t1 { fill:#7ab8e8; font-size:12px; font-weight:500; }
-          .node-summ text.t2 { fill:#4a9fe0; font-size:10px; }
-
-          .node-vis rect    { fill:#13121b; stroke:#534ab7; }
-          .node-vis text.t1 { fill:#a8a2e8; font-size:12px; font-weight:500; }
-          .node-vis text.t2 { fill:#534ab7; font-size:10px; }
-
-          .node-drive rect    { fill:#1a1305; stroke:#6b5400; }
-          .node-drive text.t1 { fill:#c9a84c; font-size:12px; font-weight:500; }
-          .node-drive text.t2 { fill:#6b5400; font-size:10px; }
-
+          .node-entry rect { fill:#1e1509; stroke:#854f0b; }
+          .node-entry text.t1 { fill:#d4a464; font-size:13px; font-weight:500; }
+          .node-entry text.t2 { fill:#854f0b; font-size:11px; }
+          .node-exec rect { fill:#1f1109; stroke:#993d1d; }
+          .node-exec text.t1 { fill:#e8856a; font-size:13px; font-weight:500; }
+          .node-exec text.t2 { fill:#993d1d; font-size:11px; }
+          .node-oversight rect { fill:#0c1929; stroke:#185fa5; }
+          .node-oversight text.t1 { fill:#7ab8e8; font-size:13px; font-weight:500; }
+          .node-oversight text.t2 { fill:#4a9fe0; font-size:11px; }
+          .node-summary rect { fill:#0d1f1a; stroke:#2FA882; }
+          .node-summary text.t1 { fill:#7dd9b8; font-size:13px; font-weight:500; }
+          .node-summary text.t2 { fill:#2FA882; font-size:11px; }
+          .node-visual rect { fill:#1a1830; stroke:#534ab7; }
+          .node-visual text.t1 { fill:#9990e8; font-size:13px; font-weight:500; }
+          .node-visual text.t2 { fill:#534ab7; font-size:11px; }
+          .node-main rect { fill:#0d1f1a; stroke:#2FA882; }
+          .node-main text.t1 { fill:#7dd9b8; font-size:13px; font-weight:500; }
+          .node-main text.t2 { fill:#2FA882; font-size:11px; }
+          .node-drive rect { fill:#1e1509; stroke:#854f0b; }
+          .node-drive text.t1 { fill:#d4a464; font-size:13px; font-weight:500; }
+          .node-drive text.t2 { fill:#854f0b; font-size:11px; }
+          .node-nav rect { fill:#191714; stroke:#4a4540; }
+          .node-nav text { fill:#6e6b62; font-size:11px; }
           .node-title rect { fill:#191714; stroke:#4a4540; }
-          .node-title text { fill:#9e9887; font-size:12px; }
-          .connector { stroke:#2a2720; stroke-width:1.5; fill:none; }
+          .node-title text { fill:#9e9887; font-size:13px; font-weight:400; }
+          .legend-text { fill:#6e6b62; font-size:11px; }
+          .section-lbl { fill:#4a4540; font-size:11px; }
           svg g[data-href] { cursor:pointer; }
-          svg g[data-href]:hover rect { filter:brightness(1.3); }
+          svg g[data-href]:hover rect { filter:brightness(1.25); }
           svg g[data-href] rect { transition: all 0.15s; }
-          .sec-label { fill:#4a4540; font-size:10px; letter-spacing:0.1em; }
+          .connector { stroke:#2a2720; stroke-width:1.5; fill:none; }
         </style>
       </defs>
 
       <!-- Title bar -->
       <g class="node-title">
-        <rect x="20" y="14" width="660" height="30" rx="4"/>
-        <text x="350" y="29" text-anchor="middle" dominant-baseline="central">redundancy-awareness — document link map</text>
+        <rect x="20" y="14" width="660" height="32" rx="4"/>
+        <text x="350" y="30" text-anchor="middle" dominant-baseline="central">redundancy-awareness — document link map</text>
       </g>
 
-      <!-- HUB: Redundancy Awareness -->
-      <g class="node-hub" data-href="https://github.com/dr-crunch/redundancy-awareness" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="230" y="68" width="240" height="52" rx="8"/>
+      <!-- HUB -->
+      <g class="node-entry" data-href="https://dr-crunch.github.io/redundancy-awareness" onclick="navigate(this)">
+        <rect x="230" y="68" width="240" height="50" rx="8"/>
         <text x="350" y="86" class="t1" text-anchor="middle" dominant-baseline="central">redundancy-awareness</text>
-        <text x="350" y="106" class="t2" text-anchor="middle" dominant-baseline="central">Secondary Repository · CC0</text>
+        <text x="350" y="104" class="t2" text-anchor="middle" dominant-baseline="central">Secondary Repository · CC0</text>
       </g>
 
-      <!-- connector hub → main record -->
-      <line class="connector" x1="230" y1="94" x2="130" y2="152" marker-end="url(#arrow)"/>
-      <!-- connector hub → full drive -->
-      <line class="connector" x1="470" y1="94" x2="572" y2="152" marker-end="url(#arrow)"/>
-      <!-- connector hub → 4 sections -->
-      <line class="connector" x1="290" y1="120" x2="130" y2="220" marker-end="url(#arrow)"/>
-      <line class="connector" x1="320" y1="120" x2="240" y2="220" marker-end="url(#arrow)"/>
-      <line class="connector" x1="380" y1="120" x2="460" y2="220" marker-end="url(#arrow)"/>
-      <line class="connector" x1="410" y1="120" x2="572" y2="220" marker-end="url(#arrow)"/>
+      <!-- Connectors to sibling repos -->
+      <line class="connector" x1="230" y1="93" x2="150" y2="93" marker-end="url(#arrow)"/>
+      <line class="connector" x1="470" y1="93" x2="550" y2="93" marker-end="url(#arrow)"/>
 
-      <!-- Main Record -->
-      <g class="node-main" data-href="https://dr-crunch.github.io/" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="50" y="152" width="160" height="46" rx="6"/>
-        <text x="130" y="169" class="t1" text-anchor="middle" dominant-baseline="central">dr-crunch.github.io</text>
-        <text x="130" y="186" class="t2" text-anchor="middle" dominant-baseline="central">Primary Record</text>
+      <!-- Main site -->
+      <g class="node-main" data-href="https://dr-crunch.github.io/" onclick="navigate(this)">
+        <rect x="20" y="68" width="120" height="50" rx="8"/>
+        <text x="80" y="86" class="t1" text-anchor="middle" dominant-baseline="central">dr-crunch</text>
+        <text x="80" y="104" class="t2" text-anchor="middle" dominant-baseline="central">Primary Record</text>
       </g>
 
-      <!-- Full Drive Archive -->
-      <g class="node-drive" data-href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="492" y="152" width="180" height="46" rx="6"/>
-        <text x="582" y="169" class="t1" text-anchor="middle" dominant-baseline="central">Full Repository</text>
-        <text x="582" y="186" class="t2" text-anchor="middle" dominant-baseline="central">Google Drive · Archive</text>
+      <!-- Full Drive archive -->
+      <g class="node-drive" data-href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" onclick="navigate(this)">
+        <rect x="560" y="68" width="120" height="50" rx="8"/>
+        <text x="620" y="86" class="t1" text-anchor="middle" dominant-baseline="central">Full Repository</text>
+        <text x="620" y="104" class="t2" text-anchor="middle" dominant-baseline="central">Google Drive</text>
       </g>
 
       <!-- Section labels -->
-      <text x="82" y="216" class="sec-label" text-anchor="middle">§ 01</text>
-      <text x="215" y="216" class="sec-label" text-anchor="middle">§ 02</text>
-      <text x="485" y="216" class="sec-label" text-anchor="middle">§ 03</text>
-      <text x="582" y="216" class="sec-label" text-anchor="middle">§ 04</text>
+      <text x="350" y="148" text-anchor="middle" class="section-lbl">— four sections —</text>
 
-      <!-- 01 Executive Enquiries -->
-      <g class="node-exec" data-href="https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="28" y="224" width="160" height="46" rx="6"/>
-        <text x="108" y="241" class="t1" text-anchor="middle" dominant-baseline="central">Executive Enquiries</text>
-        <text x="108" y="258" class="t2" text-anchor="middle" dominant-baseline="central">Harris · Martin · Chambers</text>
+      <!-- Hub to section connectors -->
+      <line class="connector" x1="260" y1="118" x2="110" y2="188" marker-end="url(#arrow)"/>
+      <line class="connector" x1="310" y1="118" x2="260" y2="188" marker-end="url(#arrow)"/>
+      <line class="connector" x1="390" y1="118" x2="440" y2="188" marker-end="url(#arrow)"/>
+      <line class="connector" x1="440" y1="118" x2="590" y2="188" marker-end="url(#arrow)"/>
+
+      <!-- § 01 Executive -->
+      <g class="node-exec" data-href="#section-01" onclick="document.getElementById('section-01').scrollIntoView({behavior:'smooth'})">
+        <rect x="20" y="188" width="200" height="50" rx="8"/>
+        <text x="120" y="206" class="t1" text-anchor="middle" dominant-baseline="central">§ 01 · Executive</text>
+        <text x="120" y="224" class="t2" text-anchor="middle" dominant-baseline="central">Harris · Martin · Chambers</text>
       </g>
 
-      <!-- 02 Oversight -->
-      <g class="node-over" data-href="https://drive.google.com/open?id=1lqqGF2GW9jx8ttV5f-ZhMX11O2i5NGP4" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="155" y="224" width="160" height="46" rx="6"/>
-        <text x="235" y="241" class="t1" text-anchor="middle" dominant-baseline="central">Oversight Requests</text>
-        <text x="235" y="258" class="t2" text-anchor="middle" dominant-baseline="central">Cathaoirleach · Council of State</text>
+      <!-- § 02 Oversight -->
+      <g class="node-oversight" data-href="#section-02" onclick="document.getElementById('section-02').scrollIntoView({behavior:'smooth'})">
+        <rect x="232" y="188" width="180" height="50" rx="8"/>
+        <text x="322" y="206" class="t1" text-anchor="middle" dominant-baseline="central">§ 02 · Oversight</text>
+        <text x="322" y="224" class="t2" text-anchor="middle" dominant-baseline="central">Cathaoirleach · Council</text>
       </g>
 
-      <!-- 03 Summaries -->
-      <g class="node-summ" data-href="https://drive.google.com/open?id=1sd--GFfz5V4cPD8JlE71923pD6ML9LHw" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="385" y="224" width="180" height="46" rx="6"/>
-        <text x="475" y="241" class="t1" text-anchor="middle" dominant-baseline="central">Summaries &amp; Statements</text>
-        <text x="475" y="258" class="t2" text-anchor="middle" dominant-baseline="central">Abridged · Ráiteas Oifigiúil</text>
+      <!-- § 03 Summaries -->
+      <g class="node-summary" data-href="#section-03" onclick="document.getElementById('section-03').scrollIntoView({behavior:'smooth'})">
+        <rect x="424" y="188" width="140" height="50" rx="8"/>
+        <text x="494" y="206" class="t1" text-anchor="middle" dominant-baseline="central">§ 03 · Summaries</text>
+        <text x="494" y="224" class="t2" text-anchor="middle" dominant-baseline="central">Abridged · GA</text>
       </g>
 
-      <!-- 04 Visual -->
-      <g class="node-vis" data-href="https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="515" y="224" width="160" height="46" rx="6"/>
-        <text x="595" y="241" class="t1" text-anchor="middle" dominant-baseline="central">Visual Frameworks</text>
-        <text x="595" y="258" class="t2" text-anchor="middle" dominant-baseline="central">System Dynamics · PNG</text>
+      <!-- § 04 Visual -->
+      <g class="node-visual" data-href="#section-04" onclick="document.getElementById('section-04').scrollIntoView({behavior:'smooth'})">
+        <rect x="576" y="188" width="104" height="50" rx="8"/>
+        <text x="628" y="206" class="t1" text-anchor="middle" dominant-baseline="central">§ 04 · Visual</text>
+        <text x="628" y="224" class="t2" text-anchor="middle" dominant-baseline="central">System dynamics</text>
       </g>
 
-      <!-- children of 01 -->
-      <line class="connector" x1="108" y1="270" x2="80" y2="316" marker-end="url(#arrow)"/>
-      <line class="connector" x1="128" y1="270" x2="200" y2="316" marker-end="url(#arrow)"/>
+      <!-- Documents label -->
+      <text x="350" y="270" text-anchor="middle" class="section-lbl">— document nodes —</text>
 
-      <g class="node-exec" data-href="https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="22" y="318" width="152" height="42" rx="5"/>
-        <text x="98" y="334" class="t1" text-anchor="middle" dominant-baseline="central">Tánaiste Enquiry 2024</text>
-        <text x="98" y="349" class="t2" text-anchor="middle" dominant-baseline="central">Initial transmission</text>
+      <!-- Exec connectors -->
+      <line class="connector" x1="80" y1="238" x2="80" y2="290" marker-end="url(#arrow)"/>
+      <line class="connector" x1="120" y1="238" x2="200" y2="290" marker-end="url(#arrow)"/>
+      <line class="connector" x1="140" y1="238" x2="340" y2="290" marker-end="url(#arrow)"/>
+
+      <!-- Harris/Martin/Chambers -->
+      <g class="node-exec" data-href="https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB&usp=drive_copy" onclick="navigate(this)">
+        <rect x="20" y="290" width="140" height="50" rx="8"/>
+        <text x="90" y="308" class="t1" text-anchor="middle" dominant-baseline="central">Harris/Martin</text>
+        <text x="90" y="326" class="t2" text-anchor="middle" dominant-baseline="central">Chambers · PDF</text>
       </g>
 
-      <g class="node-exec" data-href="https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="180" y="318" width="152" height="42" rx="5"/>
-        <text x="256" y="334" class="t1" text-anchor="middle" dominant-baseline="central">Tánaiste Enquiry 2025</text>
-        <text x="256" y="349" class="t2" text-anchor="middle" dominant-baseline="central">End-state · Refusal to govern</text>
+      <!-- Tánaiste 2024 -->
+      <g class="node-exec" data-href="https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR&usp=drive_copy" onclick="navigate(this)">
+        <rect x="170" y="290" width="150" height="50" rx="8"/>
+        <text x="245" y="308" class="t1" text-anchor="middle" dominant-baseline="central">Tánaiste Enquiry</text>
+        <text x="245" y="326" class="t2" text-anchor="middle" dominant-baseline="central">2024 · Initial transmission</text>
       </g>
 
-      <!-- children of 02 -->
-      <line class="connector" x1="200" y1="270" x2="170" y2="316" marker-end="url(#arrow)"/>
-
-      <!-- children of 03 -->
-      <line class="connector" x1="460" y1="270" x2="400" y2="316" marker-end="url(#arrow)"/>
-      <line class="connector" x1="490" y1="270" x2="520" y2="316" marker-end="url(#arrow)"/>
-
-      <g class="node-summ" data-href="https://drive.google.com/open?id=1tIbDQl4oyIUDasP1HavRatY3PVxGR_z5" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="348" y="318" width="152" height="42" rx="5"/>
-        <text x="424" y="334" class="t1" text-anchor="middle" dominant-baseline="central">Intro — Formal Complaint</text>
-        <text x="424" y="349" class="t2" text-anchor="middle" dominant-baseline="central">Legislative scope · Roadmap</text>
+      <!-- Tánaiste 2025 -->
+      <g class="node-exec" data-href="https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link" onclick="navigate(this)">
+        <rect x="330" y="290" width="150" height="50" rx="8"/>
+        <text x="405" y="308" class="t1" text-anchor="middle" dominant-baseline="central">Tánaiste Enquiry</text>
+        <text x="405" y="326" class="t2" text-anchor="middle" dominant-baseline="central">2025 · End-state</text>
       </g>
 
-      <g class="node-summ" data-href="https://drive.google.com/open?id=1oJzCRWC2iL2xbnFVQEehsgyzPkyoMyUz" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="510" y="318" width="160" height="42" rx="5"/>
-        <text x="590" y="334" class="t1" text-anchor="middle" dominant-baseline="central">Ráiteas Oifigiúil</text>
-        <text x="590" y="349" class="t2" text-anchor="middle" dominant-baseline="central">Teip Shistéamach · GA</text>
+      <!-- Oversight label connector -->
+      <line class="connector" x1="322" y1="238" x2="510" y2="290" marker-end="url(#arrow)"/>
+      <line class="connector" x1="322" y1="238" x2="600" y2="290" marker-end="url(#arrow)"/>
+
+      <!-- Cover doc -->
+      <g class="node-entry" data-href="https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm&usp=drive_copy" onclick="navigate(this)">
+        <rect x="490" y="290" width="100" height="50" rx="8"/>
+        <text x="540" y="308" class="t1" text-anchor="middle" dominant-baseline="central">Cover Doc</text>
+        <text x="540" y="326" class="t2" text-anchor="middle" dominant-baseline="central">2025 transmittal</text>
       </g>
 
-      <!-- Key/Cover docs from 01 -->
-      <line class="connector" x1="98" y1="360" x2="98" y2="400" marker-end="url(#arrow)"/>
-      <g class="node-exec" data-href="https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="22" y="402" width="152" height="42" rx="5"/>
-        <text x="98" y="418" class="t1" text-anchor="middle" dominant-baseline="central">2025 Cover Doc</text>
-        <text x="98" y="433" class="t2" text-anchor="middle" dominant-baseline="central">Transmittal · Final escalation</text>
+      <!-- Key -->
+      <g class="node-entry" data-href="https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi&usp=drive_copy" onclick="navigate(this)">
+        <rect x="600" y="290" width="80" height="50" rx="8"/>
+        <text x="640" y="308" class="t1" text-anchor="middle" dominant-baseline="central">Key to</text>
+        <text x="640" y="326" class="t2" text-anchor="middle" dominant-baseline="central">Enquiry · Index</text>
       </g>
 
-      <line class="connector" x1="256" y1="360" x2="256" y2="400" marker-end="url(#arrow)"/>
-      <g class="node-exec" data-href="https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="180" y="402" width="152" height="42" rx="5"/>
-        <text x="256" y="418" class="t1" text-anchor="middle" dominant-baseline="central">Key to Enquiry</text>
-        <text x="256" y="433" class="t2" text-anchor="middle" dominant-baseline="central">Interpretive index · Guide</text>
+      <!-- Oversight documents label -->
+      <text x="350" y="370" text-anchor="middle" class="section-lbl">— oversight &amp; summaries —</text>
+
+      <!-- Oversight connectors -->
+      <line class="connector" x1="322" y1="238" x2="160" y2="390" marker-end="url(#arrow)"/>
+      <line class="connector" x1="322" y1="238" x2="300" y2="390" marker-end="url(#arrow)"/>
+
+      <!-- Cathaoirleach -->
+      <g class="node-oversight" data-href="https://drive.google.com/open?id=1lqqGF2GW9jx8ttV5f-ZhMX11O2i5NGP4&usp=drive_copy" onclick="navigate(this)">
+        <rect x="20" y="390" width="270" height="50" rx="8"/>
+        <text x="155" y="408" class="t1" text-anchor="middle" dominant-baseline="central">Intro — Formal Complaint</text>
+        <text x="155" y="426" class="t2" text-anchor="middle" dominant-baseline="central">Legislative scope · Roadmap</text>
       </g>
 
-      <!-- Council of State standalone child -->
-      <g class="node-over" data-href="https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT" onclick="window.open(this.dataset.href,'_blank')">
-        <rect x="22" y="490" width="218" height="42" rx="5"/>
-        <text x="131" y="506" class="t1" text-anchor="middle" dominant-baseline="central">Do Chomhairle an Stáit</text>
-        <text x="131" y="521" class="t2" text-anchor="middle" dominant-baseline="central">Council of State · Evasocracy</text>
+      <!-- Council of State -->
+      <g class="node-oversight" data-href="https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT&usp=drive_copy" onclick="navigate(this)">
+        <rect x="300" y="390" width="190" height="50" rx="8"/>
+        <text x="395" y="408" class="t1" text-anchor="middle" dominant-baseline="central">Ráiteas Oifigiúil</text>
+        <text x="395" y="426" class="t2" text-anchor="middle" dominant-baseline="central">Teip Shistéamach · GA</text>
       </g>
-      <line class="connector" x1="131" y1="360" x2="131" y2="488" marker-end="url(#arrow)"/>
+
+      <!-- Summary connector -->
+      <line class="connector" x1="494" y1="238" x2="530" y2="390" marker-end="url(#arrow)"/>
+      <line class="connector" x1="494" y1="238" x2="628" y2="390" marker-end="url(#arrow)"/>
+
+      <!-- Abridged -->
+      <g class="node-summary" data-href="https://drive.google.com/open?id=1sd--GFfz5V4cPD8JlE71923pD6ML9LHw&usp=drive_copy" onclick="navigate(this)">
+        <rect x="500" y="390" width="80" height="50" rx="8"/>
+        <text x="540" y="408" class="t1" text-anchor="middle" dominant-baseline="central">Abridged</text>
+        <text x="540" y="426" class="t2" text-anchor="middle" dominant-baseline="central">Summary · FOI</text>
+      </g>
+
+      <!-- Do Chomhairle -->
+      <g class="node-oversight" data-href="https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT&usp=drive_copy" onclick="navigate(this)">
+        <rect x="590" y="390" width="90" height="50" rx="8"/>
+        <text x="635" y="408" class="t1" text-anchor="middle" dominant-baseline="central">Do Chomhairle</text>
+        <text x="635" y="426" class="t2" text-anchor="middle" dominant-baseline="central">Council of State</text>
+      </g>
+
+      <!-- Visual connector -->
+      <line class="connector" x1="628" y1="238" x2="628" y2="460" marker-end="url(#arrow)"/>
+
+      <!-- System Dynamics visual -->
+      <g class="node-visual" data-href="https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb&usp=drive_copy" onclick="navigate(this)">
+        <rect x="490" y="460" width="190" height="50" rx="8"/>
+        <text x="585" y="478" class="t1" text-anchor="middle" dominant-baseline="central">System Dynamics</text>
+        <text x="585" y="496" class="t2" text-anchor="middle" dominant-baseline="central">Governance · PNG · Beer/VSM</text>
+      </g>
+
+      <!-- Footer nav label -->
+      <text x="350" y="540" text-anchor="middle" class="section-lbl">— footer navigation —</text>
+
+      <!-- Footer nav nodes -->
+      <g class="node-nav" data-href="https://dr-crunch.github.io/" onclick="navigate(this)">
+        <rect x="20" y="550" width="120" height="36" rx="6"/>
+        <text x="80" y="568" text-anchor="middle" dominant-baseline="central">dr-crunch.github.io</text>
+      </g>
+      <g class="node-nav" data-href="https://github.com/dr-crunch/redundancy-awareness" onclick="navigate(this)">
+        <rect x="152" y="550" width="160" height="36" rx="6"/>
+        <text x="232" y="568" text-anchor="middle" dominant-baseline="central">redundancy-awareness</text>
+      </g>
+      <g class="node-nav" data-href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" onclick="navigate(this)">
+        <rect x="324" y="550" width="160" height="36" rx="6"/>
+        <text x="404" y="568" text-anchor="middle" dominant-baseline="central">Full Repository · Drive</text>
+      </g>
+      <g class="node-nav" data-href="https://dr-crunch.github.io/nullification-loops/" onclick="navigate(this)">
+        <rect x="496" y="550" width="184" height="36" rx="6"/>
+        <text x="588" y="568" text-anchor="middle" dominant-baseline="central">nullification-loops</text>
+      </g>
 
       <!-- Legend -->
-      <g transform="translate(350,464)">
-        <rect x="0" y="0" width="320" height="82" rx="4" fill="#13121b" stroke="rgba(232,227,212,0.08)"/>
-        <text x="12" y="18" class="sec-label">Legend</text>
-        <rect x="12" y="28" width="14" height="10" rx="2" fill="#1a1830" stroke="#7F77DD"/>
-        <text x="30" y="37" class="sec-label">Hub</text>
-        <rect x="80" y="28" width="14" height="10" rx="2" fill="#1e1509" stroke="#854f0b"/>
-        <text x="98" y="37" class="sec-label">Executive</text>
-        <rect x="168" y="28" width="14" height="10" rx="2" fill="#1f1109" stroke="#993d1d"/>
-        <text x="186" y="37" class="sec-label">Oversight</text>
-        <rect x="248" y="28" width="14" height="10" rx="2" fill="#0c1929" stroke="#185fa5"/>
-        <text x="266" y="37" class="sec-label">Summary</text>
-        <rect x="12" y="52" width="14" height="10" rx="2" fill="#0d1f1a" stroke="#2FA882"/>
-        <text x="30" y="61" class="sec-label">Main site</text>
-        <rect x="80" y="52" width="14" height="10" rx="2" fill="#1a1305" stroke="#6b5400"/>
-        <text x="98" y="61" class="sec-label">Drive archive</text>
-        <rect x="168" y="52" width="14" height="10" rx="2" fill="#13121b" stroke="#534ab7"/>
-        <text x="186" y="61" class="sec-label">Visual</text>
-      </g>
+      <rect x="20" y="610" width="12" height="12" rx="2" fill="#1a1830" stroke="#7F77DD" stroke-width="0.5"/>
+      <text x="38" y="616" class="legend-text" dominant-baseline="central">Hub</text>
+      <rect x="75" y="610" width="12" height="12" rx="2" fill="#1f1109" stroke="#993d1d" stroke-width="0.5"/>
+      <text x="93" y="616" class="legend-text" dominant-baseline="central">Executive</text>
+      <rect x="165" y="610" width="12" height="12" rx="2" fill="#0c1929" stroke="#185fa5" stroke-width="0.5"/>
+      <text x="183" y="616" class="legend-text" dominant-baseline="central">Oversight</text>
+      <rect x="255" y="610" width="12" height="12" rx="2" fill="#0d1f1a" stroke="#2FA882" stroke-width="0.5"/>
+      <text x="273" y="616" class="legend-text" dominant-baseline="central">Summary</text>
+      <rect x="345" y="610" width="12" height="12" rx="2" fill="#1e1509" stroke="#854f0b" stroke-width="0.5"/>
+      <text x="363" y="616" class="legend-text" dominant-baseline="central">Drive archive</text>
+      <rect x="455" y="610" width="12" height="12" rx="2" fill="#1a1830" stroke="#534ab7" stroke-width="0.5"/>
+      <text x="473" y="616" class="legend-text" dominant-baseline="central">Visual</text>
+      <rect x="515" y="610" width="12" height="12" rx="2" fill="#191714" stroke="#4a4540" stroke-width="0.5"/>
+      <text x="533" y="616" class="legend-text" dominant-baseline="central">Nav links</text>
 
     </svg>
   </div>
 </section>
 
-<!-- ─── INTER-REPOSITORY ECOSYSTEM ─── -->
+<!-- Add IDs for scroll targets -->
+<script>
+  // Patch section IDs for SVG scroll navigation
+  document.addEventListener('DOMContentLoaded', function() {
+    const sections = document.querySelectorAll('.dir-section');
+    const ids = ['section-01','section-02','section-03','section-04'];
+    sections.forEach((s,i) => { if(ids[i]) s.id = ids[i]; });
+  });
+</script>
+
+<!-- ─── INTER-REPO ECOSYSTEM ─── -->
 <section class="ecosystem-section">
-  <div class="dir-header">
-    <div class="dir-title">Inter-Repository Ecosystem</div>
-    <div class="dir-note">Modular counter to Séachanachas</div>
-  </div>
-  <p style="font-family:'EB Garamond',Georgia,serif;font-size:16px;color:var(--parchment-dim);line-height:1.7;margin-bottom:24px;max-width:700px;">
-    The Governmentality 2025 project is deployed across several thematic repositories. This modular placement is a strategic counter-measure against <em>Séachanachas</em>: by segmenting the evidence into disciplinary pillars, no single administrative dead zone can suppress the entire record.
-  </p>
+  <div class="section-label">Inter-Repository Ecosystem · Modular counter to Séachanachas</div>
+  <div class="axiom-plain" style="margin-bottom:0;">The Governmentality 2025 project is deployed across several thematic repositories. This modular placement is a strategic counter-measure against Séachanachas: by segmenting the evidence into disciplinary pillars, no single administrative dead zone can suppress the entire record.</div>
   <div class="eco-grid">
 
     <div class="eco-card">
-      <div class="eco-tag">Legal</div>
-      <div class="eco-name">Legal Repository</div>
-      <div class="eco-desc">Constitutional and statutory filings, judicial review precedents, mandamus architecture. Primary resource for legal practitioners and human rights observers preparing for litigation.</div>
+      <div class="eco-label">Legal</div>
+      <div class="eco-title">Legal Repository</div>
+      <div class="eco-body">Constitutional and statutory filings, judicial review precedents, mandamus architecture. Primary resource for legal practitioners and human rights observers preparing for litigation.</div>
       <a href="https://dr-wojak.github.io/legal" class="eco-link" target="_blank" rel="noopener">dr-wojak.github.io/legal ↗</a>
     </div>
 
     <div class="eco-card">
-      <div class="eco-tag">Press</div>
-      <div class="eco-name">Press Repository</div>
-      <div class="eco-desc">National Exhibition of Administrative Failure, media kits, and executive summaries formatted for journalistic investigation. Chronological signal-to-silence timeline for public interest reporting.</div>
+      <div class="eco-label">Press</div>
+      <div class="eco-title">Press Repository</div>
+      <div class="eco-body">National Exhibition of Administrative Failure, media kits, and executive summaries formatted for journalistic investigation. Chronological signal-to-silence timeline.</div>
       <a href="https://github.com/dr-wojak/press" class="eco-link" target="_blank" rel="noopener">github.com/dr-wojak/press ↗</a>
     </div>
 
     <div class="eco-card">
-      <div class="eco-tag">Public Relations</div>
-      <div class="eco-name">Public Relations</div>
-      <div class="eco-desc">Interface between civic signals and the State. Documents simulation of engagement; proposes Charters to restore genuine public relations through Substantive Acknowledgment. Social contract and institutional trust by design reform.</div>
+      <div class="eco-label">Public Relations</div>
+      <div class="eco-title">Public Relations</div>
+      <div class="eco-body">Interface between civic signals and the State. Documents simulation of engagement; proposes Charters to restore genuine public relations through Substantive Acknowledgment.</div>
       <a href="https://github.com/dr-wojak/public-relations" class="eco-link" target="_blank" rel="noopener">github.com/dr-wojak/public-relations ↗</a>
     </div>
 
     <div class="eco-card">
-      <div class="eco-tag">Podcasts</div>
-      <div class="eco-name">Redundancy Awareness Podcasts</div>
-      <div class="eco-desc">Quick explainers (8–18 min), technical deep-dives (23–60 min), multilingual versions (EN/ES), solution frameworks. Translates complexity into clarity without assuming background knowledge.</div>
+      <div class="eco-label">Podcasts</div>
+      <div class="eco-title">Redundancy Awareness Podcasts</div>
+      <div class="eco-body">Quick explainers (8–18 min), technical deep-dives (23–60 min), multilingual versions (EN/ES), solution frameworks. Translates complexity into clarity.</div>
       <a href="https://github.com/dr-wojak/redundancy-awareness-podcasts" class="eco-link" target="_blank" rel="noopener">github.com/dr-wojak/redundancy-awareness-podcasts ↗</a>
     </div>
 
     <div class="eco-card">
-      <div class="eco-tag">Economics</div>
-      <div class="eco-name">Econ Repository</div>
-      <div class="eco-desc">Opportunity costs, lost efficiencies, and the fiduciary duty to use data-driven decision tools in fiscal policy. Edge subjects including Greenwald-Stiglitz externalities and Bateson second-order misgovernance.</div>
+      <div class="eco-label">Economics</div>
+      <div class="eco-title">Econ Repository</div>
+      <div class="eco-body">Opportunity costs, lost efficiencies, and the fiduciary duty to use data-driven decision tools in fiscal policy. Greenwald-Stiglitz externalities and Bateson second-order misgovernance.</div>
       <a href="https://github.com/dr-wojak/econ" class="eco-link" target="_blank" rel="noopener">github.com/dr-wojak/econ ↗</a>
     </div>
 
     <div class="eco-card">
-      <div class="eco-tag">Canon</div>
-      <div class="eco-name">Governmentality 2025</div>
-      <div class="eco-desc">The basic canon — structural indictment of the Irish State. Nineteen-year gap between expert submission and state response. Theoretical framework of <em>Séachanachas</em>. Statutory blueprints for institutional recovery through AI/OR Governance Charters.</div>
+      <div class="eco-label">Canon</div>
+      <div class="eco-title">Governmentality 2025</div>
+      <div class="eco-body">The basic canon — structural indictment of the Irish State. Nineteen-year gap between expert submission and state response. Theoretical framework of Séachanachas.</div>
       <a href="https://github.com/dr-wojak/governmentality-2025" class="eco-link" target="_blank" rel="noopener">github.com/dr-wojak/governmentality-2025 ↗</a>
     </div>
 
@@ -1031,107 +1406,148 @@ footer {
 
 <!-- ─── LEGAL FOOTNOTES ─── -->
 <section class="legal-section">
-  <div class="dir-header">
-    <div class="dir-title">Legal Footnotes &amp; Statutory Authorities</div>
-    <div class="dir-note">Four pillars · GDPR-compliant redactions</div>
+  <div class="section-label">Legal Footnotes &amp; Statutory Authorities · Four pillars · GDPR-compliant redactions</div>
+  <div class="legal-grid">
+
+    <div class="legal-card">
+      <div class="legal-card-label">Article 15.10 · Bunreacht na hÉireann</div>
+      <div class="legal-card-title">Constitutional Petitions</div>
+      <div class="legal-card-body">The right to petition the State grounds the formal submissions to the Houses of the Oireachtas archived in this repository.</div>
+    </div>
+
+    <div class="legal-card">
+      <div class="legal-card-label">Article 28 · Bunreacht na hÉireann</div>
+      <div class="legal-card-title">Collective Responsibility</div>
+      <div class="legal-card-body">The requirement for the Government to act on strategic risks known to its members. Once any Cabinet member was formally notified, the duty attached to the collective executive.</div>
+    </div>
+
+    <div class="legal-card">
+      <div class="legal-card-label">Ministers and Secretaries Acts</div>
+      <div class="legal-card-title">Statutory Mandate</div>
+      <div class="legal-card-body">Defines the legal obligation of Ministers to manage the business of their departments with necessary foresight. Provides the mandamus ground for compelling performance of statutory duty.</div>
+    </div>
+
+    <div class="legal-card">
+      <div class="legal-card-label">GDPR · Redacted Personal Dispatches</div>
+      <div class="legal-card-title">Redaction Protocol</div>
+      <div class="legal-card-body">Documents have been redacted to remove sensitive personal identifiers of non-public figures while maintaining evidential integrity. Redactions comply with GDPR while preserving the structural value of the public record regarding ministerial conduct.</div>
+    </div>
+
   </div>
-  <div class="footnote-list">
+</section>
 
-    <div class="footnote-item">
-      <div class="fn-rule"></div>
-      <div class="fn-body">
-        <div class="fn-statute">Article 15.10 · Bunreacht na hÉireann</div>
-        <div class="fn-text">Constitutional petitions. The right to petition the State under Art. 15.10 grounds the formal submissions to the Houses of the Oireachtas archived in this repository.</div>
-      </div>
-    </div>
-
-    <div class="footnote-item">
-      <div class="fn-rule"></div>
-      <div class="fn-body">
-        <div class="fn-statute">Article 28 · Bunreacht na hÉireann</div>
-        <div class="fn-text">Collective responsibility. The requirement for the Government to act on strategic risks known to its members. Once any Cabinet member was formally notified, the duty attached to the collective executive.</div>
-      </div>
-    </div>
-
-    <div class="footnote-item">
-      <div class="fn-rule"></div>
-      <div class="fn-body">
-        <div class="fn-statute">Ministers and Secretaries Acts</div>
-        <div class="fn-text">Defines the legal obligation of Ministers to manage the business of their departments with necessary foresight. The Acts provide the mandamus ground for compelling performance of statutory duty.</div>
-      </div>
-    </div>
-
-    <div class="footnote-item">
-      <div class="fn-rule"></div>
-      <div class="fn-body">
-        <div class="fn-statute">GDPR · Redacted Personal Dispatches</div>
-        <div class="fn-text">Documents within this repository have been redacted to remove sensitive personal identifiers of non-public figures while maintaining evidential integrity. Redactions comply with GDPR and privacy obligations while preserving the structural value of the public record regarding ministerial conduct.</div>
-      </div>
-    </div>
-
+<!-- ─── KEYWORDS ─── -->
+<section class="keywords-section">
+  <div class="section-label">Canonical keyword corpus · Redundancy Awareness · March 2026</div>
+  <div class="keyword-blob">
+    <span class="k-exec">#TairiscintMheinhardt</span> <span class="k-core">#MeinhardtInitiative</span> <span class="k-core">#RedundancyAwareness</span> <span class="k-core">#NullificationLoop</span> <span class="k-irish">#Séachanachas</span> <span class="k-core">#InterregnumNullificans</span> <span class="k-mech">#DesignedForgetting</span> <span class="k-mech">#FinanceOfNotice</span> <span class="k-mech">#JurisdictionalDeadEnd</span> <span class="k-exec">#MinisterialCorrespondence</span> <span class="k-exec">#TaoiseachNotice</span> <span class="k-exec">#TánaisteEnquiry</span> <span class="k-legal">#EthicsInPublicOfficeAct</span> <span class="k-legal">#FiduciaryBreach</span> <span class="k-legal">#ConstitutionalContumacy</span> <span class="k-legal">#BunreachtNaHeireann</span> <span class="k-legal">#WritOfMandamus</span> <span class="k-legal">#SilenceVeto</span> <span class="k-legal">#Article41Charter</span> <span class="k-core">#Evasocracy</span> <span class="k-core">#Phainocracy</span> <span class="k-irish">#Dealraitheachas</span> <span class="k-core">#StructuralNonGovernance</span> <span class="k-mech">#RemitDisplacement</span> <span class="k-mech">#AcknowledgementAsClosure</span> <span class="k-mech">#ProceduralNullification</span> <span class="k-core">#OperationsResearch</span> <span class="k-core">#Governmentality2026</span> <span class="k-legal">#PresidencyParadox</span> <span class="k-legal">#EUCouncilPresidency</span> <span class="k-exec">#PublicAccountsCommittee</span> <span class="k-exec">#SeanadÉireann</span> <span class="k-exec">#CouncilOfState</span>
   </div>
 </section>
 
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="footer-left">
-    <a href="https://dr-crunch.github.io/">dr-crunch.github.io</a> · 
-    <a href="https://github.com/dr-crunch/redundancy-awareness">redundancy-awareness</a> · CC0<br>
-    <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g">Full Repository · Google Drive</a><br>
-    The record is public · The duty has not been discharged
+    <a href="https://dr-crunch.github.io/redundancy-awareness" target="_blank">dr-crunch.github.io/redundancy-awareness</a><br>
+    <a href="https://github.com/dr-crunch/redundancy-awareness" target="_blank">github.com/dr-crunch/redundancy-awareness</a> · CC0 · The record is public<br>
+    <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" target="_blank">Full Repository · Google Drive</a>
   </div>
   <div class="footer-right">
-    Interregnum Nullificans · 2006–2026<br>
-    Redundancy Awareness · Secondary Repository<br>
-    CC0 1.0 Universal
+    Redundancy Awareness · 2006–2026<br>
+    The duty has not been discharged.<br>
+    <span style="opacity:0.4;">Séachanachas documented · Jurisdictional deflection · Evidentiary archive</span>
   </div>
 </footer>
 
+<div class="tooltip" id="tooltip"></div>
+
 <script>
-/* ─── STARFIELD ─── */
-(function () {
-  const canvas = document.getElementById('starfield');
-  const ctx = canvas.getContext('2d');
-  let stars = [];
+  // ─── STARFIELD ───
+  (function() {
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+    const N = 280;
 
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
 
-  function seed() {
-    stars = [];
-    const n = Math.floor((canvas.width * canvas.height) / 5000);
-    for (let i = 0; i < n; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.1 + 0.2,
-        a: Math.random() * 0.7 + 0.15,
-        speed: Math.random() * 0.0003 + 0.0001,
-        phase: Math.random() * Math.PI * 2
+    function seed() {
+      stars = [];
+      for (let i = 0; i < N; i++) {
+        const mag = Math.random();
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: mag < 0.05 ? 1.4 : mag < 0.2 ? 0.9 : 0.5,
+          a: 0.15 + (1 - mag) * 0.65,
+          twinkle: Math.random() * Math.PI * 2,
+          speed: 0.003 + Math.random() * 0.006,
+          color: mag < 0.08 ? '#c9a84c' : mag < 0.15 ? '#b8d4f0' : '#d4cfc0'
+        });
+      }
+    }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        const flicker = 0.85 + 0.15 * Math.sin(s.twinkle + t * s.speed);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.a * flicker;
+        ctx.fill();
       });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    seed();
+    window.addEventListener('resize', () => { resize(); seed(); });
+    requestAnimationFrame(draw);
+  })();
+
+  function navigate(el) {
+    const href = el.getAttribute('data-href');
+    if (href && href.startsWith('http')) {
+      window.open(href, '_blank', 'noopener');
     }
   }
 
-  let t = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    t += 0.016;
-    stars.forEach(s => {
-      const alpha = s.a * (0.6 + 0.4 * Math.sin(t * s.speed * 200 + s.phase));
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(212, 207, 192, ${alpha})`;
-      ctx.fill();
+  const tooltip = document.getElementById('tooltip');
+  const labels = {
+    'https://dr-crunch.github.io/redundancy-awareness': 'Redundancy Awareness · Secondary Repository · CC0',
+    'https://dr-crunch.github.io/': 'dr-crunch.github.io · Primary Record',
+    'https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g': 'Full Repository · Google Drive · Primary archive',
+    'https://drive.google.com/open?id=1eJLDW_DW31d_SMEoEvcuYbPkEukMDcZB&usp=drive_copy': 'Harris / Martin / Chambers · Consolidated executive evidence',
+    'https://drive.google.com/open?id=15QOrPw7TvHG-kqv86C8kD1Ahy9LicBSR&usp=drive_copy': 'Tánaiste Enquiry 2024 · Initial transmission of intelligence',
+    'https://drive.google.com/file/d/12WsItX5jwIQK5Wh3HQTSZfjOAx-sZmxD/view?usp=drive_link': 'Tánaiste Enquiry 2025 · End-state · Documented refusal to govern',
+    'https://drive.google.com/open?id=1Bml1xa9s4vYpQLGsT4MNXly8A3VIOUvm&usp=drive_copy': '2025 Cover Documentation · Final escalation transmittal',
+    'https://drive.google.com/open?id=1UBxLvx8Kr1q0FOsyWOXdXVKSQdjoglNi&usp=drive_copy': 'Key to the Enquiry · Interpretive index · Cross-reference guide',
+    'https://drive.google.com/open?id=1lqqGF2GW9jx8ttV5f-ZhMX11O2i5NGP4&usp=drive_copy': 'Formal Request for Oversight · Cathaoirleach of Seanad Éireann',
+    'https://drive.google.com/open?id=1vUw3BtMxIPlec55fOOrb9GxQ4MlLdLJT&usp=drive_copy': 'Do Chomhairle an Stáit · Council of State · Art. 31',
+    'https://drive.google.com/open?id=1sd--GFfz5V4cPD8JlE71923pD6ML9LHw&usp=drive_copy': 'Abridged Summary · FOI & committee use · Cross-departmental',
+    'https://drive.google.com/open?id=1tIbDQl4oyIUDasP1HavRatY3PVxGR_z5&usp=drive_copy': 'Brief Introduction · Formal Complaint · Legislative scope',
+    'https://drive.google.com/open?id=1oJzCRWC2iL2xbnFVQEehsgyzPkyoMyUz&usp=drive_copy': 'Ráiteas Oifigiúil · Teip Shistéamach · Gaeilge',
+    'https://drive.google.com/open?id=14Otz2C582bvEScGliafbY8yW4slxVzNb&usp=drive_copy': 'Governance System Dynamics · Beer/VSM · Nullification Loop diagram',
+    'https://dr-crunch.github.io/nullification-loops/': 'nullification-loops · Primary public landing',
+    'https://github.com/dr-crunch/redundancy-awareness': 'GitHub · redundancy-awareness repository',
+  };
+
+  document.querySelectorAll('g[data-href]').forEach(g => {
+    g.addEventListener('mouseenter', () => {
+      const href = g.getAttribute('data-href');
+      const label = labels[href];
+      if (label) { tooltip.textContent = label; tooltip.classList.add('visible'); }
     });
-    requestAnimationFrame(draw);
-  }
-
-  resize(); seed(); draw();
-  window.addEventListener('resize', () => { resize(); seed(); });
-})();
+    g.addEventListener('mousemove', e => {
+      tooltip.style.left = (e.clientX + 14) + 'px';
+      tooltip.style.top = (e.clientY - 10) + 'px';
+    });
+    g.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+  });
 </script>
-
 </body>
 </html>
