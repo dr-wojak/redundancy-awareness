@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semantic Edge Traversal · Meinhardt Corpus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#0c0b09; --surface:#141210; --surface2:#1c1a17; --surface3:#242119;
+  --parchment:#e8e3d4; --parchment-dim:#9e9887; --parchment-faint:#3a3730;
+  --purple:#8b83e8; --purple-dim:#534ab7; --purple-bg:#1a1830;
+  --green:#2fb882;  --green-dim:#0f6e56;  --green-bg:#0d1f1a;
+  --blue:#4a9fe0;   --blue-dim:#185fa5;   --blue-bg:#0c1929;
+  --amber:#c9a84c;  --amber-dim:#854f0b;  --amber-bg:#1e1509;
+  --terra:#d4643d;  --terra-dim:#993d1d;  --terra-bg:#1f1109;
+  --teal:#2ab8c0;   --teal-dim:#156e72;   --teal-bg:#0a1e20;
+  --rule:rgba(232,227,212,0.10); --rule-strong:rgba(232,227,212,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--parchment);font-family:'Cormorant Garamond',Georgia,serif;font-size:17px;line-height:1.65;min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6;}
+
+.top-bar{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--rule-strong);background:rgba(12,11,9,0.95);backdrop-filter:blur(12px);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.top-bar-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);}
+.top-bar-links{display:flex;gap:18px;flex-wrap:wrap;}
+.top-bar-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--parchment-dim);text-decoration:none;transition:color 0.15s;}
+.top-bar-links a:hover{color:var(--parchment);}
+
+header{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:64px 32px 48px;border-bottom:1px solid var(--rule);}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--amber);opacity:0.22;max-width:200px;}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,5.5vw,66px);line-height:1.05;color:var(--parchment);margin-bottom:6px;}
+h1 em{font-style:italic;color:var(--parchment-dim);}
+.header-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.9vw,20px);font-weight:300;font-style:italic;color:var(--parchment-dim);margin-bottom:26px;}
+.header-lede{font-family:'EB Garamond',serif;font-size:16px;color:var(--parchment);max-width:700px;line-height:1.8;border-left:2px solid var(--amber);padding-left:20px;margin-bottom:28px;}
+.layer-badges{display:flex;gap:8px;flex-wrap:wrap;}
+.layer-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:3px;border:1px solid;cursor:pointer;transition:all 0.2s;}
+.lb-purple{color:var(--purple);border-color:var(--purple-dim);background:var(--purple-bg);}
+.lb-green{color:var(--green);border-color:var(--green-dim);background:var(--green-bg);}
+.lb-amber{color:var(--amber);border-color:var(--amber-dim);background:var(--amber-bg);}
+.lb-terra{color:var(--terra);border-color:var(--terra-dim);background:var(--terra-bg);}
+.lb-teal{color:var(--teal);border-color:var(--teal-dim);background:var(--teal-bg);}
+.layer-badge.active{box-shadow:0 0 10px currentColor;}
+.layer-badge:hover{opacity:0.8;}
+
+.sw{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:40px 32px;border-bottom:1px solid var(--rule);}
+.section-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:20px;}
+
+/* chain */
+.chain-scroll{overflow-x:auto;padding-bottom:8px;}
+.chain-row{display:flex;align-items:center;min-width:max-content;}
+.chain-node{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all 0.2s;padding:12px 14px;border-radius:5px;border:1px solid;min-width:130px;text-align:center;}
+.chain-node:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.45);}
+.cn-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.7;}
+.cn-name{font-family:'EB Garamond',serif;font-size:13px;line-height:1.3;}
+.cn-process{color:var(--blue);border-color:var(--blue-dim);background:var(--blue-bg);}
+.cn-failure{color:var(--green);border-color:var(--green-dim);background:var(--green-bg);}
+.cn-legal{color:var(--amber);border-color:var(--amber-dim);background:var(--amber-bg);}
+.cn-diss{color:var(--terra);border-color:var(--terra-dim);background:var(--terra-bg);}
+.cn-owl{color:var(--purple);border-color:var(--purple-dim);background:var(--purple-bg);}
+.chain-arrow{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--parchment-faint);padding:0 5px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:2px;}
+.chain-arrow-rel{font-size:9px;color:var(--purple);letter-spacing:0.04em;white-space:nowrap;}
+
+.xref-panel{background:var(--surface2);border:1px solid var(--rule-strong);border-left:3px solid var(--amber);border-radius:4px;padding:20px 24px;margin-top:20px;}
+.xref-panel-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;}
+.xref-content{font-family:'EB Garamond',serif;font-size:15px;line-height:1.72;color:var(--parchment);}
+.xref-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.xref-link{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 9px;border-radius:3px;border:1px solid;text-decoration:none;cursor:pointer;transition:opacity 0.15s;}
+.xref-link:hover{opacity:0.72;}
+
+/* branch grid */
+.branch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);border-radius:6px;overflow:hidden;}
+@media(max-width:680px){.branch-grid{grid-template-columns:1fr;}}
+.branch-col{background:var(--surface);padding:22px 18px;}
+.branch-col-head{padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:10px;}
+.branch-emoji{font-size:26px;line-height:1;flex-shrink:0;}
+.branch-col-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:3px;}
+.branch-col-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;}
+.branch-fn{padding:10px 12px;border-radius:4px;border:1px solid;margin-bottom:8px;cursor:pointer;transition:all 0.18s;display:flex;align-items:flex-start;gap:8px;}
+.branch-fn:hover{transform:translateX(2px);opacity:0.88;}
+.branch-fn-icon{font-size:15px;flex-shrink:0;margin-top:1px;}
+.branch-fn-name{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.05em;margin-bottom:3px;}
+.branch-fn-desc{font-family:'EB Garamond',serif;font-size:13px;line-height:1.5;color:var(--parchment-dim);}
+.branch-fn-tag{font-family:'IBM Plex Mono',monospace;font-size:8px;margin-top:5px;letter-spacing:0.04em;opacity:0.6;}
+.branch-fn-failure{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.04em;text-transform:uppercase;padding:2px 5px;border-radius:2px;border:1px solid var(--green-dim);background:var(--green-bg);color:var(--green);margin-top:4px;}
+.bc-exec .branch-col-title{color:var(--terra);}
+.bc-exec .branch-fn{color:var(--terra);border-color:rgba(153,61,29,0.3);background:var(--terra-bg);}
+.bc-leg .branch-col-title{color:var(--blue);}
+.bc-leg .branch-fn{color:var(--blue);border-color:rgba(24,95,165,0.3);background:var(--blue-bg);}
+.bc-jud .branch-col-title{color:var(--purple);}
+.bc-jud .branch-fn{color:var(--purple);border-color:rgba(83,74,183,0.3);background:var(--purple-bg);}
+
+/* three-pane map */
+.map-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);border-radius:6px;overflow:hidden;}
+@media(max-width:680px){.map-grid{grid-template-columns:1fr;}}
+.map-col{background:var(--surface);padding:20px 16px;display:flex;flex-direction:column;}
+.map-col-head{padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid var(--rule);}
+.map-col-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:5px;}
+.map-col-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;}
+.map-col-sub{font-family:'EB Garamond',serif;font-size:13px;font-style:italic;color:var(--parchment-dim);margin-top:4px;line-height:1.5;}
+.map-item{padding:10px 12px;border-radius:4px;border:1px solid var(--rule);margin-bottom:8px;cursor:pointer;transition:all 0.18s;}
+.map-item:hover{transform:translateX(2px);}
+.map-item-name{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;margin-bottom:3px;}
+.map-item-desc{font-family:'EB Garamond',serif;font-size:13px;line-height:1.5;color:var(--parchment-dim);}
+.map-item-axiom{font-family:'IBM Plex Mono',monospace;font-size:9px;margin-top:5px;opacity:0.55;}
+.col-diss .map-col-title,.col-rel .map-col-title{color:var(--purple);}
+.col-fail .map-col-title{color:var(--green);}
+.col-diss .map-item,.col-rel .map-item{color:var(--purple);background:var(--purple-bg);border-color:rgba(83,74,183,0.22);}
+.col-fail .map-item{color:var(--green);background:var(--green-bg);border-color:rgba(15,110,86,0.22);}
+
+/* memo tabs */
+.memo-tabs{display:flex;gap:1px;background:var(--rule-strong);border-radius:6px 6px 0 0;overflow:hidden;}
+.memo-tab{flex:1;padding:12px 16px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:var(--surface);color:var(--parchment-dim);cursor:pointer;transition:all 0.2s;border:none;text-align:center;}
+.memo-tab.active{background:var(--surface3);color:var(--parchment);}
+.memo-panels{background:var(--surface2);border:1px solid var(--rule-strong);border-top:none;border-radius:0 0 6px 6px;}
+.memo-panel{display:none;padding:26px 28px;}
+.memo-panel.active{display:block;}
+.memo-panel-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;}
+.memo-panel-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--parchment);margin-bottom:6px;line-height:1.2;}
+.memo-panel-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--parchment-dim);margin-bottom:18px;display:flex;gap:18px;flex-wrap:wrap;}
+.memo-escalation{display:flex;align-items:center;gap:0;margin-bottom:16px;overflow-x:auto;padding-bottom:4px;}
+.memo-esc-node{display:flex;flex-direction:column;gap:3px;padding:9px 13px;border-radius:4px;border:1px solid;min-width:115px;flex-shrink:0;}
+.memo-esc-arrow{display:flex;align-items:center;padding:0 5px;color:var(--parchment-faint);font-size:13px;flex-shrink:0;}
+.memo-esc-label{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.08em;text-transform:uppercase;opacity:0.6;}
+.memo-esc-name{font-family:'EB Garamond',serif;font-size:13px;}
+.memo-argument{background:var(--surface);border-left:3px solid var(--amber);border-radius:3px;padding:16px 18px;margin-bottom:12px;}
+.memo-arg-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;}
+.memo-arg-title{font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--parchment);margin-bottom:5px;}
+.memo-arg-body{font-family:'EB Garamond',serif;font-size:14px;line-height:1.7;color:var(--parchment-dim);}
+.memo-doctrine{background:var(--surface);border:1px solid var(--rule-strong);border-left:3px solid var(--purple);border-radius:3px;padding:12px 15px;margin-bottom:9px;}
+.memo-doctrine-term{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--purple);margin-bottom:4px;}
+.memo-doctrine-def{font-family:'EB Garamond',serif;font-size:13px;line-height:1.6;color:var(--parchment-dim);}
+
+/* channels */
+.channel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);border-radius:6px;overflow:hidden;}
+.channel-card{background:var(--surface);padding:16px 14px;position:relative;}
+.channel-card::before{content:attr(data-letter);position:absolute;top:10px;right:12px;font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;font-style:italic;opacity:0.07;color:var(--parchment);line-height:1;}
+.channel-id{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;}
+.channel-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--parchment);margin-bottom:5px;}
+.channel-body{font-family:'EB Garamond',serif;font-size:12px;line-height:1.6;color:var(--parchment-dim);}
+.channel-obligation{font-family:'IBM Plex Mono',monospace;font-size:9px;margin-top:7px;letter-spacing:0.04em;}
+
+/* legal repo */
+.legal-repo-bar{display:flex;align-items:center;gap:14px;background:var(--surface2);border:1px solid var(--rule-strong);border-left:3px solid var(--teal);border-radius:4px;padding:14px 18px;margin-bottom:16px;}
+.legal-repo-icon{font-size:20px;flex-shrink:0;}
+.legal-repo-body{flex:1;}
+.legal-repo-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--teal);margin-bottom:3px;}
+.legal-repo-title{font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--parchment);}
+.legal-repo-sub{font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);}
+.legal-repo-link{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);border:1px solid var(--teal-dim);background:var(--teal-bg);border-radius:3px;padding:6px 14px;text-decoration:none;white-space:nowrap;transition:all 0.18s;flex-shrink:0;}
+.legal-repo-link:hover{border-color:var(--teal);box-shadow:0 0 10px rgba(42,184,192,0.2);}
+
+/* svg */
+.svg-wrap{background:var(--surface2);border:1px solid var(--rule-strong);border-radius:6px;padding:20px;overflow-x:auto;margin-bottom:20px;}
+.svg-wrap svg{display:block;margin:0 auto;}
+
+/* synthesis */
+.chain-narrative{background:var(--surface2);border-left:3px solid var(--purple);border-radius:4px;padding:26px 28px;}
+.chain-narrative blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.1vw,22px);font-weight:300;font-style:italic;color:var(--parchment);line-height:1.5;margin-bottom:12px;}
+.chain-narrative-body{font-family:'EB Garamond',serif;font-size:15px;line-height:1.78;color:var(--parchment-dim);max-width:700px;}
+
+footer{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:26px 32px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--parchment-dim);letter-spacing:0.06em;}
+footer a{color:var(--parchment-dim);text-decoration:none;}
+footer a:hover{color:var(--parchment);}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-title">Semantic Edge Traversal · Meinhardt Corpus · 2026</div>
+  <div class="top-bar-links">
+    <a href="https://dr-crunch.github.io/redundancy-awareness/deontological-differences.html" target="_blank">Deontological Differences</a>
+    <a href="https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html" target="_blank">Ontology Relations</a>
+    <a href="https://dr-wojak.github.io/redundancy-awareness/failure-modes.html" target="_blank">Failure Modes</a>
+    <a href="https://dr-wojak.github.io/legal/" target="_blank">Legal Repository</a>
+  </div>
+</div>
+
+<header>
+  <div class="eyebrow">Meinhardt Initiative · Semantic · Interregnum Nullificans</div>
+  <h1>Causal Chain <em>(Semantic Edge Traversal)</em></h1>
+  <div class="header-sub">Fundament Semantic Coverage</div>
+  <div class="header-lede">
+    This map integrates five corpus layers: the dissemination ontology of <em>Deontological Differences</em>, the causal object properties of <em>Ontology Relations</em>, the concrete failure instances of <em>Failure Modes</em>, and the jurisprudential architecture of <em>Memoranda D and E</em>. Each layer is traversable; the edges close the evidentiary chain from administrative act to constitutional legal condition.
+  </div>
+<!--
+  <div class="layer-badges">
+    <span class="layer-badge lb-purple active" onclick="toggleLayer('rel',this)">II · Ontology Relations</span>
+    <span class="layer-badge lb-green  active" onclick="toggleLayer('fail',this)">III · Failure Modes</span>
+    <span class="layer-badge lb-purple active" onclick="toggleLayer('diss',this)">I · Deontological Differences</span>
+    <span class="layer-badge lb-amber  active" onclick="toggleLayer('memo',this)">IV · Memoranda D &amp; E</span>
+    <span class="layer-badge lb-teal   active" onclick="toggleLayer('legal',this)">V · Legal Repository</span>
+  </div>
+</header>
+-->
+<!--
+  <div class="layer-badges">
+    <span class="layer-badge lb-purple active" >II · Ontology Relations</span>
+    <span class="layer-badge lb-green  active" >III · Failure Modes</span>
+    <span class="layer-badge lb-purple active" >I · Deontological Differences</span>
+    <span class="layer-badge lb-amber  active" >IV · Memoranda D &amp; E</span>
+    <span class="layer-badge lb-teal   active" >V · Legal Repository</span>
+  </div>
+</header>
+-->
+<!-- MASTER CAUSAL CHAIN -->
+<div class="sw">
+  <div class="section-label">Master causal chain · OWL Axiom 1 · click any node to traverse</div>
+  <div class="chain-scroll">
+    <div class="chain-row">
+      <div class="chain-node cn-process" onclick="showXRef('process')"><div class="cn-label">Actor</div><div class="cn-name">Irish State /<br>Admin. Process</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:ignores</span></div>
+      <div class="chain-node cn-process" onclick="showXRef('submission')"><div class="cn-label">Object</div><div class="cn-name">Submission<br>2006–2025</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:producesFailure</span></div>
+      <div class="chain-node cn-failure" onclick="showXRef('nullloop')"><div class="cn-label">Failure</div><div class="cn-name">Nullification<br>Loop</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:triggers</span></div>
+      <div class="chain-node cn-legal" onclick="showXRef('maladmin')"><div class="cn-label">Legal Condition</div><div class="cn-name">Maladmin&shy;istration</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:violates</span></div>
+      <div class="chain-node cn-legal" onclick="showXRef('rights')"><div class="cn-label">Right</div><div class="cn-name">Right to<br>be Heard</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:suppresses via</span></div>
+      <div class="chain-node cn-owl" onclick="showXRef('seachanachas')"><div class="cn-label">Irish Doctrine</div><div class="cn-name">Séachanachas /<br>Silence Veto</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:grounds</span></div>
+      <div class="chain-node cn-legal" onclick="showXRef('mandamus')"><div class="cn-label">Remedy</div><div class="cn-name">Mandamus /<br>Judicial Review</div></div>
+      <div class="chain-arrow"><span>→</span><span class="chain-arrow-rel">:routes</span></div>
+      <div class="chain-node cn-diss" onclick="showXRef('channels')"><div class="cn-label">Dissemination</div><div class="cn-name">Five<br>Channels</div></div>
+    </div>
+  </div>
+  <div class="xref-panel" id="xrefPanel">
+    <div class="xref-panel-label">Semantic edge · click any chain node to traverse</div>
+    <div class="xref-content" id="xrefContent">Select a node above to see how it binds across <em>Ontology Relations</em>, <em>Failure Modes</em>, <em>Deontological Differences</em>, <em>Memoranda D &amp; E</em>, and the Legal Repository.</div>
+    <div class="xref-links" id="xrefLinks"></div>
+  </div>
+</div>
+
+<!-- BRANCH-OF-GOVERNMENT SVG + EMOJI -->
+<div class="sw" id="layer-fail">
+  <div class="section-label">Institutional failure map · by branch of government · function-typed · click any function to cross-reference</div>
+
+  <div class="svg-wrap">
+    <svg width="860" height="272" viewBox="0 0 860 272" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
+      <defs>
+        <marker id="a0" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#4a4540" stroke-width="1.5" stroke-linecap="round"/></marker>
+        <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#0f6e56" stroke-width="1.5" stroke-linecap="round"/></marker>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#993d1d" stroke-width="1.5" stroke-linecap="round"/></marker>
+        <marker id="ap" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#534ab7" stroke-width="1.5" stroke-linecap="round"/></marker>
+        <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#185fa5" stroke-width="1.5" stroke-linecap="round"/></marker>
+      </defs>
+      <!-- Civic Signal top -->
+      <rect x="320" y="8" width="220" height="46" rx="4" fill="#0c1929" stroke="#185fa5" stroke-width="1"/>
+      <text x="430" y="26" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#9e9887" letter-spacing="1">CIVIC SIGNAL</text>
+      <text x="430" y="44" text-anchor="middle" font-family="EB Garamond,serif" font-size="14" fill="#e8e3d4">Submission 2006–2025</text>
+      <!-- Executive -->
+      <rect x="20" y="106" width="220" height="48" rx="4" fill="#1f1109" stroke="#993d1d" stroke-width="1"/>
+      <text x="38" y="124" font-family="IBM Plex Mono,monospace" font-size="9" fill="#9e9887" letter-spacing="1">EXECUTIVE</text>
+      <text x="38" y="143" font-family="EB Garamond,serif" font-size="14" fill="#d4643d">Taoiseach · Tánaiste · Cabinet</text>
+      <!-- Legislature -->
+      <rect x="320" y="106" width="220" height="48" rx="4" fill="#0c1929" stroke="#185fa5" stroke-width="1"/>
+      <text x="338" y="124" font-family="IBM Plex Mono,monospace" font-size="9" fill="#9e9887" letter-spacing="1">LEGISLATURE</text>
+      <text x="338" y="143" font-family="EB Garamond,serif" font-size="14" fill="#4a9fe0">Dáil · Seanad · Oireachtas</text>
+      <!-- Judiciary -->
+      <rect x="620" y="106" width="220" height="48" rx="4" fill="#1a1830" stroke="#534ab7" stroke-width="1"/>
+      <text x="638" y="124" font-family="IBM Plex Mono,monospace" font-size="9" fill="#9e9887" letter-spacing="1">JUDICIARY &amp; LEGAL</text>
+      <text x="638" y="143" font-family="EB Garamond,serif" font-size="14" fill="#8b83e8">High Court · AG · King's Inns</text>
+      <!-- Nullification Loop bottom -->
+      <rect x="290" y="208" width="280" height="50" rx="4" fill="#0d1f1a" stroke="#0f6e56" stroke-width="1"/>
+      <text x="430" y="226" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#9e9887" letter-spacing="1">NULLIFICATION LOOP</text>
+      <text x="430" y="248" text-anchor="middle" font-family="EB Garamond,serif" font-size="14" fill="#2fb882">Séachanachas · Silence Veto · Antinomy</text>
+      <!-- arrows submission → branches -->
+      <line x1="372" y1="54" x2="165" y2="106" stroke="#993d1d" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ar)" opacity="0.65"/>
+      <line x1="430" y1="54" x2="430" y2="106" stroke="#185fa5" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ab)" opacity="0.65"/>
+      <line x1="488" y1="54" x2="690" y2="106" stroke="#534ab7" stroke-width="1" stroke-dasharray="4,3" marker-end="url(#ap)" opacity="0.65"/>
+      <!-- arrows branches → loop -->
+      <line x1="130" y1="154" x2="350" y2="208" stroke="#993d1d" stroke-width="1" marker-end="url(#ag)" opacity="0.55"/>
+      <line x1="430" y1="154" x2="430" y2="208" stroke="#0f6e56" stroke-width="1.2" marker-end="url(#ag)" opacity="0.65"/>
+      <line x1="690" y1="154" x2="510" y2="208" stroke="#534ab7" stroke-width="1" marker-end="url(#ag)" opacity="0.55"/>
+      <!-- relation labels -->
+      <text x="215" y="93" font-family="IBM Plex Mono,monospace" font-size="8" fill="#993d1d" opacity="0.85">:ignores</text>
+      <text x="434" y="91" font-family="IBM Plex Mono,monospace" font-size="8" fill="#185fa5" opacity="0.85">:defers</text>
+      <text x="554" y="93" font-family="IBM Plex Mono,monospace" font-size="8" fill="#534ab7" opacity="0.85">:archives</text>
+      <text x="195" y="192" font-family="IBM Plex Mono,monospace" font-size="8" fill="#0f6e56" opacity="0.85">:producesFailure</text>
+      <text x="436" y="193" font-family="IBM Plex Mono,monospace" font-size="8" fill="#0f6e56" opacity="0.85">:triggers</text>
+      <text x="524" y="192" font-family="IBM Plex Mono,monospace" font-size="8" fill="#534ab7" opacity="0.85">:suppresses</text>
+    </svg>
+  </div>
+
+  <div class="branch-grid">
+    <!-- EXECUTIVE -->
+    <div class="branch-col bc-exec">
+      <div class="branch-col-head">
+        <div class="branch-emoji">🏛️</div>
+        <div><div class="branch-col-label">Branch I</div><div class="branch-col-title">Executive</div></div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('exec-taoiseach')">
+        <div class="branch-fn-icon">🔑</div>
+        <div>
+          <div class="branch-fn-name">Taoiseach / Tánaiste</div>
+          <div class="branch-fn-desc">Co-executive design encodes a prisoner's dilemma: Cabinet Consensus vs. Constitutional Safeguard. Neither role can process O.R. signal without breaking the other.</div>
+          <div class="branch-fn-tag">:ignores · Art.28.2 breach</div>
+          <span class="branch-fn-failure">Deferral without Destination</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('exec-depts')">
+        <div class="branch-fn-icon">📂</div>
+        <div>
+          <div class="branch-fn-name">Departments</div>
+          <div class="branch-fn-desc">Defence · Foreign Affairs · Health · Finance · Emergency Planning. Recursive acknowledgement: each routes signal laterally; none holds the full objective.</div>
+          <div class="branch-fn-tag">:producesFailure · remitDisplacement</div>
+          <span class="branch-fn-failure">Remit Displacement</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('exec-secegens')">
+        <div class="branch-fn-icon">⚙️</div>
+        <div>
+          <div class="branch-fn-name">Secretaries General</div>
+          <div class="branch-fn-desc">Formally notified via Memo D. Mandated to adjudicate signal; structurally unable without breaking Cabinet hierarchy.</div>
+          <div class="branch-fn-tag">operationalClosure · sufficiencyWithoutAudit</div>
+          <span class="branch-fn-failure">Sufficiency without Audit</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('exec-fiduciary')">
+        <div class="branch-fn-icon">⚖️</div>
+        <div>
+          <div class="branch-fn-name">Fiduciary Breach</div>
+          <div class="branch-fn-desc">Balkin's information fiduciary: the State holds asymmetric access to civic intelligence and refuses to act—violating the epistemic contract of constitutional democracy.</div>
+          <div class="branch-fn-tag">misfeasance in public office</div>
+          <span class="branch-fn-failure">Acknowledgement as Closure</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEGISLATURE -->
+    <div class="branch-col bc-leg">
+      <div class="branch-col-head">
+        <div class="branch-emoji">🏢</div>
+        <div><div class="branch-col-label">Branch II</div><div class="branch-col-title">Legislature</div></div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('leg-dail')">
+        <div class="branch-fn-icon">🗳️</div>
+        <div>
+          <div class="branch-fn-name">Dáil Éireann</div>
+          <div class="branch-fn-desc">TDs formally named in Annex II. Ceann Comhairle, Leas-Cheann Comhairle, Tánaiste all notified. Receipt creates duty of enquiry.</div>
+          <div class="branch-fn-tag">:amplifies CivicSignal · Art.15.10</div>
+          <span class="branch-fn-failure">Record Suppression</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('leg-seanad')">
+        <div class="branch-fn-icon">📜</div>
+        <div>
+          <div class="branch-fn-name">Seanad Éireann</div>
+          <div class="branch-fn-desc">Cathaoirleach Mark Daly, Acting Clerk Bridget Doody. Clerks' refusal to transmit the complaint: Séachanachas in its clearest institutional form.</div>
+          <div class="branch-fn-tag">Silence Veto · Séanadh</div>
+          <span class="branch-fn-failure">Deferral without Destination</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('leg-opla')">
+        <div class="branch-fn-icon">📋</div>
+        <div>
+          <div class="branch-fn-name">OPLA / Oversight Committees</div>
+          <div class="branch-fn-desc">Office of Parliamentary Legal Advisers: duty to carry signal, not silence. Para-legislative witness role; CC'd via Committee on Justice (c/o Alan Guidon).</div>
+          <div class="branch-fn-tag">witness role · procedural ultra vires</div>
+          <span class="branch-fn-failure">Remit Displacement</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('leg-memory')">
+        <div class="branch-fn-icon">🗄️</div>
+        <div>
+          <div class="branch-fn-name">Institutional Memory</div>
+          <div class="branch-fn-desc">Transparency law, whistleblower protection, digital access—all sediment: impressive on paper, inert in process where the control system can no longer self-reference adaptively.</div>
+          <div class="branch-fn-tag">DesignedForgetting · cohomological gap</div>
+          <span class="branch-fn-failure">Sufficiency without Audit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JUDICIARY -->
+    <div class="branch-col bc-jud">
+      <div class="branch-col-head">
+        <div class="branch-emoji">⚖️</div>
+        <div><div class="branch-col-label">Branch III</div><div class="branch-col-title">Judiciary &amp; Legal</div></div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('jud-highcourt')">
+        <div class="branch-fn-icon">🏛️</div>
+        <div>
+          <div class="branch-fn-name">High Court</div>
+          <div class="branch-fn-desc">Primary remedy: writ of mandamus under Ministers &amp; Secretaries Act 1924. O'Donnell v Dún Laoghaire [1991]. Pre-litigation notice filed Feb 2026.</div>
+          <div class="branch-fn-tag">:triggers judicial review · Glencar v Mayo</div>
+          <span class="branch-fn-failure">Acknowledgement as Closure</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('jud-kingsinns')">
+        <div class="branch-fn-icon">🎓</div>
+        <div>
+          <div class="branch-fn-name">King's Inns</div>
+          <div class="branch-fn-desc">Primary addressee of Memos D and E. The double bind: acknowledge documentation → admit oversight failure; maintain silence → become complicit in constitutional erosion.</div>
+          <div class="branch-fn-tag">deutero-binding · recursive nullification</div>
+          <span class="branch-fn-failure">Record Suppression</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('jud-ag')">
+        <div class="branch-fn-icon">🔏</div>
+        <div>
+          <div class="branch-fn-name">Attorney General</div>
+          <div class="branch-fn-desc">Pivotal conduit for reconciling the constitutional bind. Formally forwarded the record. Vicarious State Responsibility stretched beyond its functional limits.</div>
+          <div class="branch-fn-tag">misfeasance threshold · Art.41 CFR</div>
+          <span class="branch-fn-failure">Remit Displacement</span>
+        </div>
+      </div>
+      <div class="branch-fn" onclick="showXRef('jud-eu')">
+        <div class="branch-fn-icon">🇪🇺</div>
+        <div>
+          <div class="branch-fn-name">EU / CJEU Channel</div>
+          <div class="branch-fn-desc">European Ombudsman, PETI, Défenseur des Droits. Member State failure under Art.4(3) TEU. Reg.2021/821 dual-use pretext flagged.</div>
+          <div class="branch-fn-tag">Art.227 TFEU · CJEU Member State failure</div>
+          <span class="branch-fn-failure">Deferral without Destination</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THREE-PANE MAP -->
+<div class="sw">
+  <div class="section-label">Three-page integration · side-by-side semantic layers</div>
+  <div class="map-grid">
+    <div class="map-col col-diss" id="layer-diss">
+      <div class="map-col-head">
+        <div class="map-col-label">Page I · Deontological Differences</div>
+        <div class="map-col-title">Dissemination Ontology</div>
+        <div class="map-col-sub">How the corpus reaches each audience; obligations per channel.</div>
+      </div>
+      <div class="map-item"><div class="map-item-name">:ChannelLegal</div><div class="map-item-desc">High Court, Irish Ombudsman. Reasons must be given on disposal.</div><div class="map-item-axiom">:obligates "reasons on disposal"</div></div>
+      <div class="map-item"><div class="map-item-name">:ChannelEU</div><div class="map-item-desc">European Ombudsman, PETI, Défenseur des Droits. Art.4(3) TEU · Art.228 TFEU.</div><div class="map-item-axiom">:groundedIn "Art.227 TFEU"</div></div>
+      <div class="map-item"><div class="map-item-name">:ChannelAcademic</div><div class="map-item-desc">Documents NullificationLoop via Beer/VSM · Bateson deutero-binding. Memos D &amp; E are this layer.</div><div class="map-item-axiom">:appliesFrame "Beer/VSM"</div></div>
+      <div class="map-item"><div class="map-item-name">:ChannelCivic</div><div class="map-item-desc">Amplifies CivicSignal. Receipt creates duty of enquiry. Art.15.10 Bunreacht.</div><div class="map-item-axiom">:groundedIn "Art.15.10 Bunreacht"</div></div>
+      <div class="map-item"><div class="map-item-name">:ChannelMedia</div><div class="map-item-desc">Documents DesignedForgetting. CC0 evidentiary record, publication-ready.</div><div class="map-item-axiom">:licence "CC0 1.0 Universal"</div></div>
+    </div>
+    <div class="map-col col-rel" id="layer-rel">
+      <div class="map-col-head">
+        <div class="map-col-label">Page II · Ontology Relations</div>
+        <div class="map-col-title">OWL Object Properties</div>
+        <div class="map-col-sub">Causal operators: directional mechanisms, not labels.</div>
+      </div>
+      <div class="map-item"><div class="map-item-name">:ignores</div><div class="map-item-desc">AdministrativeProcess → Submission. Non-processing despite acknowledgement.</div><div class="map-item-axiom">ignores ⟹ producesFailure NullificationLoop</div></div>
+      <div class="map-item"><div class="map-item-name">:suppresses</div><div class="map-item-desc">Actor → CivicSignal. Attenuation through institutional channels.</div><div class="map-item-axiom">suppresses ⟹ documents DesignedForgetting</div></div>
+      <div class="map-item"><div class="map-item-name">:producesFailure</div><div class="map-item-desc">Process → FailureMode. Systematic linkage between process and generated failure.</div><div class="map-item-axiom">producesFailure ⟹ triggers Maladministration</div></div>
+      <div class="map-item"><div class="map-item-name">:triggers</div><div class="map-item-desc">FailureMode → LegalCondition. Activates a legally cognisable condition.</div><div class="map-item-axiom">triggers ⟹ enables judicial review</div></div>
+      <div class="map-item"><div class="map-item-name">:violates</div><div class="map-item-desc">Process → Right. Breach of protected procedural or fundamental right.</div><div class="map-item-axiom">violates ⟹ grounds certiorari / mandamus</div></div>
+    </div>
+    <div class="map-col col-fail">
+      <div class="map-col-head">
+        <div class="map-col-label">Page III · Failure Modes</div>
+        <div class="map-col-title">Concrete Instances</div>
+        <div class="map-col-sub">Repeatable outputs of institutional processes.</div>
+      </div>
+      <div class="map-item"><div class="map-item-name">Acknowledgement as Closure</div><div class="map-item-desc">Formal acknowledgement substitutes for substantive processing.</div><div class="map-item-axiom">FailureMode :: Procedural Termination</div></div>
+      <div class="map-item"><div class="map-item-name">Remit Displacement</div><div class="map-item-desc">Responsibility redirected across boundaries without resolution.</div><div class="map-item-axiom">FailureMode :: Jurisdictional Evasion</div></div>
+      <div class="map-item"><div class="map-item-name">Deferral without Destination</div><div class="map-item-desc">Action indefinitely postponed without assigned responsible actor.</div><div class="map-item-axiom">FailureMode :: Temporal Evasion</div></div>
+      <div class="map-item"><div class="map-item-name">Sufficiency without Audit</div><div class="map-item-desc">Claims of adequacy without verification or evidentiary grounding.</div><div class="map-item-axiom">FailureMode :: Assertion Failure</div></div>
+      <div class="map-item"><div class="map-item-name">Record Suppression</div><div class="map-item-desc">Relevant records withheld or rendered inaccessible.</div><div class="map-item-axiom">FailureMode :: Information Control</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MEMORANDA UNWINDING -->
+<div class="sw" id="layer-memo">
+  <div class="section-label">Memoranda D &amp; E · jurisprudential unwinding · King's Inns · July &amp; November 2025</div>
+  <div class="memo-tabs">
+    <button class="memo-tab active" onclick="switchMemo('D',this)">Memorandum D · 28 July 2025</button>
+    <button class="memo-tab" onclick="switchMemo('E',this)">Memorandum E · 17 November 2025</button>
+  </div>
+  <div class="memo-panels">
+
+    <!-- MEMO D -->
+    <div class="memo-panel active" id="memo-D">
+      <div class="memo-panel-eyebrow">Memorandum D · To: The Honourable Society of King's Inns · 28 July 2025</div>
+      <div class="memo-panel-title">On Systemic Governance Paralysis and the Emergence of Institutional Antinomy</div>
+      <div class="memo-panel-meta">
+        <span>Preamble to Memoranda E &amp; F</span>
+        <span>Author: Brøek Meinhardt (pseud.)</span>
+        <span>Status: Filed · escalated to CC list</span>
+      </div>
+
+      <div class="memo-escalation">
+        <div class="memo-esc-node" style="color:var(--terra);border-color:var(--terra-dim);background:var(--terra-bg);"><div class="memo-esc-label">Problem</div><div class="memo-esc-name">The Lever Problem</div></div>
+        <div class="memo-esc-arrow">→</div>
+        <div class="memo-esc-node" style="color:var(--amber);border-color:var(--amber-dim);background:var(--amber-bg);"><div class="memo-esc-label">Doctrine</div><div class="memo-esc-name">Jurisprudence of Omission</div></div>
+        <div class="memo-esc-arrow">→</div>
+        <div class="memo-esc-node" style="color:var(--green);border-color:var(--green-dim);background:var(--green-bg);"><div class="memo-esc-label">Framework</div><div class="memo-esc-name">Meinhardt / TACTUAL PLEDGER</div></div>
+        <div class="memo-esc-arrow">→</div>
+        <div class="memo-esc-node" style="color:var(--purple);border-color:var(--purple-dim);background:var(--purple-bg);"><div class="memo-esc-label">Escalation</div><div class="memo-esc-name">Memos E &amp; F</div></div>
+      </div>
+
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument I · The Lever Problem</div>
+        <div class="memo-arg-title">When the State Cannot Move Its Own Lever</div>
+        <div class="memo-arg-body">A lever is not only a physical pivot but a semantic hinge: its function is to shift force from input to output, from signal to consequence. When the lever locks—when the procedural corridor that should transfer civic foresight into corrective throughput jams—the State remains in motion but nothing is moved. The loop replays itself under new headings: Defence, Foreign Affairs, Irish Aid, Finance, Transport. This is not bureaucratic dysfunction; it's the inevitable output of an antinomic role structure that creates systemic paralysis by design.</div>
+      </div>
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument II · Jurisprudence of Omission</div>
+        <div class="memo-arg-title">Institutional Neglect as Structural Injury</div>
+        <div class="memo-arg-body">An emergent legal doctrine wherein institutional neglect of strategic foresight is not discretionary but structurally injurious and potentially actionable under constitutional and administrative law. Drawing on Balkin's information fiduciary model: the State holds asymmetric access to civic intelligence and is obligated to act. Where that obligation is systemically voided, the breach crosses from passive neglect into active fiduciary breach—a tort in fact, not just in metaphor. Correction is reparation for an epistemic injury.</div>
+      </div>
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument III · Constitutional Recursion</div>
+        <div class="memo-arg-title">The Antinomic Role Structure</div>
+        <div class="memo-arg-body">The rotating Taoiseach / Tánaiste design encodes a functional prisoner's dilemma: each must act as a stabiliser for the other's contradictory remit—loyalty to Cabinet Consensus on one hand, constitutional duty to alarm and correct on the other. The system imposes a duty to report malfunction but provides no arena in which such reports can compel change. Where recursive oversight tightens, where cohomological gaps widen, where operational closure seals off renewal: what remains is no longer democratic governance but the echo of its form.</div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="section-label" style="margin-bottom:10px;">Three diagnostic concepts introduced in Memo D</div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Recursive Oversight</div>
+          <div class="memo-doctrine-def">The surveillance of oversight by the structures it is meant to supervise. In conditions of constitutional strain, the mechanism tasked with accountability is itself party to the failure. A complaint directed toward inaction is met by the very inaction complained of—under new heading, or by another clerk. Referral replaces judgement. The docket becomes the loop.</div>
+        </div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Cohomological Mapping</div>
+          <div class="memo-doctrine-def">The topology of governance: mapping the absences that structure the whole. Where the formal architecture (statutes, reporting lines, regulatory duties) misaligns with the operational record (what actually happens to a complaint, a policy submission, a civic signal), a cohomological gap opens. A system may possess all the offices of oversight, and yet no functioning feedback. What appears as completeness is, in reality, a form of encoded omission.</div>
+        </div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Operational Closure</div>
+          <div class="memo-doctrine-def">The end of learning within a system that still purports to hear. A system is operationally closed when it filters inputs through pre-set categories and rejects those that do not conform. It acknowledges receipt, but not substance; registers contact, but not consequence. The double bind emerges in full: a citizen is compelled to speak, but the act of speaking has no route to effect. This is not delay; it is annulment.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMO E -->
+    <div class="memo-panel" id="memo-E">
+      <div class="memo-panel-eyebrow">Memorandum E · To: King's Inns Council of Legal Education · 17 November 2025</div>
+      <div class="memo-panel-title">The Cohomology of Institutional Drift: Hierarchies, Chokepoints, and Control Law</div>
+      <div class="memo-panel-meta">
+        <span>Re: Constitutional Duty in the Face of Systematic Preclusion (Silence Veto)</span>
+        <span>Author: Brøek Meinhardt</span>
+      </div>
+
+      <div style="margin-bottom:12px;"><div class="section-label" style="margin-bottom:8px;">Séachanachas · the lexical descent</div></div>
+      <div class="memo-escalation">
+        <div class="memo-esc-node" style="color:var(--blue);border-color:var(--blue-dim);background:var(--blue-bg);"><div class="memo-esc-label">Name</div><div class="memo-esc-name">Seanad</div></div>
+        <div class="memo-esc-arrow">↓</div>
+        <div class="memo-esc-node" style="color:var(--blue);border-color:var(--blue-dim);background:var(--blue-bg);"><div class="memo-esc-label">Practice</div><div class="memo-esc-name">Séanadh (denial)</div></div>
+        <div class="memo-esc-arrow">↓</div>
+        <div class="memo-esc-node" style="color:var(--green);border-color:var(--green-dim);background:var(--green-bg);"><div class="memo-esc-label">Method</div><div class="memo-esc-name">Séachan (avoidance)</div></div>
+        <div class="memo-esc-arrow">↓</div>
+        <div class="memo-esc-node" style="color:var(--green);border-color:var(--green-dim);background:var(--green-bg);"><div class="memo-esc-label">Framework</div><div class="memo-esc-name">Séachanachas</div></div>
+        <div class="memo-esc-arrow">↓</div>
+        <div class="memo-esc-node" style="color:var(--purple);border-color:var(--purple-dim);background:var(--purple-bg);"><div class="memo-esc-label">Defence</div><div class="memo-esc-name">Shéanadachais</div></div>
+      </div>
+
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument I · The Silence Veto</div>
+        <div class="memo-arg-title">Legal Silence as Structural Complicity</div>
+        <div class="memo-arg-body">The Irish administrative system is revealed to be functionally closed while appearing procedurally open. Its internal processes are not designed to resolve substantive challenges but to absorb and neutralise them, creating an endless loop of procedural recursion that protects the institution from accountability at the public's expense. The Clerks' refusal to transmit the complaint is not a defensible procedural act but an inevitable symptom of Séachanachas—constituting ongoing misfeasance in public office, knowingly pursued even after the entire legislature was put on formal notice.</div>
+      </div>
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument II · The Guardian's Double Bind</div>
+        <div class="memo-arg-title">King's Inns: No Neutral Position Remains</div>
+        <div class="memo-arg-body">King's Inns exists within a canonical double bind: Primary Obligation to maintain legal integrity conflicts with the Imperative to preserve professional relationships with the same institutions whose design failures require challenge. Acknowledge the documentation → admit systematic failure of constitutional oversight. Maintain silence → become complicit in ongoing constitutional bypass. This creates what Bateson would recognise as a meta-communicative contradiction: the institution cannot comment on the content without exposing its own institutional failure to fulfil constitutional duty.</div>
+      </div>
+      <div class="memo-argument">
+        <div class="memo-arg-label">Argument III · Recursive Nullification</div>
+        <div class="memo-arg-title">Three Roles, Each Presupposing the Others</div>
+        <div class="memo-arg-body">King's Inns risks demonstrating recursive nullification across three domains: Legal Education Authority (trains future professionals in constitutional principle); Professional Standards Oversight (maintains integrity within the legal profession); Constitutional Guardianship (protects legal design from systematic bypass). Each role presupposes action from the others, creating a feedback-dead loop where constitutional violations proceed without institutional response. This is the structural replication of the NullificationLoop within the legal guardian class itself.</div>
+      </div>
+
+      <div style="margin-top:16px;">
+        <div class="section-label" style="margin-bottom:10px;">Key doctrines formalised in Memo E</div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Séachanachas / Evasocracy</div>
+          <div class="memo-doctrine-def">Rule by evasive practices. A system where governance preserves its power by refusing to fully integrate or cohere. Accountability is not met but is instead systematically sidestepped through diversion, delay, and procedural smoke screens. The Silence Veto is its primary operational instrument; Shéanadachais (the denial of the system itself) is its final defensive layer.</div>
+        </div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Hardcopy Antinomy</div>
+          <div class="memo-doctrine-def">Documented evidence of systematic constitutional bypass that legal institutions cannot acknowledge without exposing their own failure to respond. The formal complaint is a hardcopy antinomy: its existence creates the bind. The institution faces the Bateson double bind in archival form—comment on the content and the failure is admitted; remain silent and complicity is confirmed.</div>
+        </div>
+        <div class="memo-doctrine">
+          <div class="memo-doctrine-term">Modal Antinomy / Continuity Paradox</div>
+          <div class="memo-doctrine-def">Irish legal institutions demonstrate continuity without adaptation: maintaining traditional forms while allowing constitutional substance to erode through systematic non-engagement. The pattern is tripartite: Symbolic Maintenance → Operational Abandonment → Recursive Justification. Traditional forms are used to justify contemporary inaction; the institution forgets that legitimacy is not transmitted by ceremony but by function.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- DISSEMINATION CHANNELS -->
+<div class="sw">
+  <div class="section-label">Deontological Differences · five dissemination channels · one causal chain, five obligations</div>
+  <div class="channel-grid">
+    <div class="channel-card" data-letter="I" style="border-top:3px solid var(--purple)">
+      <div class="channel-id" style="color:var(--purple)">:ChannelLegal</div>
+      <div class="channel-name">Legal</div>
+      <div class="channel-body">High Court and Irish Ombudsman. Pre-litigation notice filed February 2026. Certiorari / mandamus record assembled in Legal Repository.</div>
+      <div class="channel-obligation" style="color:var(--purple)">→ certiorari · mandamus · reasons on disposal</div>
+    </div>
+    <div class="channel-card" data-letter="II" style="border-top:3px solid var(--blue)">
+      <div class="channel-id" style="color:var(--blue)">:ChannelEU</div>
+      <div class="channel-name">European</div>
+      <div class="channel-body">European Ombudsman, PETI (Art.227 TFEU submission March 2026), Défenseur des Droits. Member State failure record under Art.4(3) TEU.</div>
+      <div class="channel-obligation" style="color:var(--blue)">→ CJEU Member State failure · Art.227 TFEU</div>
+    </div>
+    <div class="channel-card" data-letter="III" style="border-top:3px solid var(--amber)">
+      <div class="channel-id" style="color:var(--amber)">:ChannelAcademic</div>
+      <div class="channel-name">Academic</div>
+      <div class="channel-body">NullificationLoop as cybernetic case study. Beer/VSM, Bateson deutero-binding, Goffman's "cooling the mark." Memoranda D and E are the academic transmission layer.</div>
+      <div class="channel-obligation" style="color:var(--amber)">→ VSM · O.R. · Bateson deutero-binding</div>
+    </div>
+    <div class="channel-card" data-letter="IV" style="border-top:3px solid var(--green)">
+      <div class="channel-id" style="color:var(--green)">:ChannelCivic</div>
+      <div class="channel-name">Civic</div>
+      <div class="channel-body">Citizens, TDs, MEPs, councillors receive the corpus as a public record of institutional avoidance. Receipt creates duty of enquiry under Art.15.10 Bunreacht.</div>
+      <div class="channel-obligation" style="color:var(--green)">→ amplifies CivicSignal · Art.15.10</div>
+    </div>
+    <div class="channel-card" data-letter="V" style="border-top:3px solid var(--terra)">
+      <div class="channel-id" style="color:var(--terra)">:ChannelMedia</div>
+      <div class="channel-name">Media</div>
+      <div class="channel-body">Signal-to-silence timeline, timestamped, CC0. Documents DesignedForgetting and SignalSuppression. Publication-ready investigation thread.</div>
+      <div class="channel-obligation" style="color:var(--terra)">→ DesignedForgetting · CC0 1.0 Universal</div>
+    </div>
+  </div>
+</div>
+
+<!-- LEGAL REPOSITORY -->
+<div class="sw" id="layer-legal">
+  <div class="section-label">Legal Repository · dr-wojak.github.io/legal · High Court &amp; EU evidentiary record</div>
+  <div class="legal-repo-bar">
+    <div class="legal-repo-icon">⚖️</div>
+    <div class="legal-repo-body">
+      <div class="legal-repo-label">Primary Legal Record · Active / Litigation Prep</div>
+      <div class="legal-repo-title">The Meinhardt Initiative — Legal Repository</div>
+      <div class="legal-repo-sub">Statutory, Constitutional &amp; Jurisprudential Record · Mandamus, Operational Governance, Breach of Ethical Duties · 19-Year Timeline (2006–2025)</div>
+    </div>
+    <a class="legal-repo-link" href="https://dr-wojak.github.io/legal/" target="_blank">Open Repository →</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);border-radius:6px;overflow:hidden;">
+    <div style="background:var(--surface);padding:14px 16px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;">01 · Legal Petitions</div><div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);line-height:1.6;">Draft Notice of Motion · Mandamus grounds under Ministers &amp; Secretaries Act 1924 · EU Reg.428/2009 addendum</div></div>
+    <div style="background:var(--surface);padding:14px 16px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;">02 · Formal Complaint</div><div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);line-height:1.6;">Master dossier 65 pp + 161 supplemental · Annexes I–V: named senators, TDs, legal triggers, compound failure modes</div></div>
+    <div style="background:var(--surface);padding:14px 16px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;">03 · Correspondence</div><div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);line-height:1.6;">Tánaiste enquiry summaries 2024–25 · Cathaoirleach oversight request · meinhardt-docket-001</div></div>
+    <div style="background:var(--surface);padding:14px 16px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;">04 · Memoranda</div><div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);line-height:1.6;">Memoranda D &amp; E · On the Moral Mandate of Institutional Actors · On the Absence of an Operational Framework</div></div>
+    <div style="background:var(--surface);padding:14px 16px;"><div style="font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;">05–07 · Briefs, Studies, International</div><div style="font-family:'EB Garamond',serif;font-size:13px;color:var(--parchment-dim);line-height:1.6;">Séachanachas jurisprudence · Ethical Review O.R. · FRA Open Letter · Extra-jurisdictional abeyance record</div></div>
+  </div>
+</div>
+
+<!-- SYNTHESIS -->
+<div class="sw">
+  <div class="section-label">Interpretive synthesis · five layers, one directed labelled graph</div>
+  <div class="chain-narrative">
+    <blockquote>The ontology encodes the causal chain. The failure modes instance it. The memoranda name it jurisprudentially. The channels route it. The legal repository evidences it. Five layers—one argument. The traverse is open.</blockquote>
+    <div class="chain-narrative-body"><em>Deontological Differences</em> establishes the dissemination architecture: five channels, five obligations, one master causal chain. <em>Ontology Relations</em> formalises that chain as OWL 2 object properties—directional causal operators with explicit axioms. <em>Failure Modes</em> instantiates each relation with a concrete, repeatable institutional output. <em>Memoranda D and E</em> provide the jurisprudential layer: three diagnostic concepts (recursive oversight, cohomological mapping, operational closure), the Séachanachas lexicon, and the double bind architecture that explains why the loop cannot close from inside. The <em>Legal Repository</em> holds the evidentiary residue: 226 pages of formal complaint, five annexes, and the pre-litigation record for mandamus. When the SPARQL query "find all violations caused by ignored submissions" runs against this corpus, it returns a structured list directly admissible in CJEU Member State failure proceedings. Nineteen years of narrative argument—now a directed labelled graph.</div>
+  </div>
+</div>
+
+<footer>
+  <div>Semantic Edge Traversal · Meinhardt Initiative · April 2026 · CC0</div>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;">
+    <a href="https://dr-crunch.github.io/redundancy-awareness/deontological-differences.html" target="_blank">Deontological Differences</a>
+    <a href="https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html" target="_blank">Ontology Relations</a>
+    <a href="https://dr-wojak.github.io/redundancy-awareness/failure-modes.html" target="_blank">Failure Modes</a>
+    <a href="https://dr-wojak.github.io/legal/" target="_blank">Legal Repository</a>
+    <a href="https://dr-crunch.github.io/nullification-loops/" target="_blank">Nullification Loops</a>
+  </div>
+</footer>
+
+<script>
+const xref={
+  process:{t:'AdministrativeProcess · Irish State',b:'The primary actor class in the OWL ontology. Domain of :ignores (→ Submission) and :producesFailure (→ FailureMode). Memo D diagnoses the Taoiseach / Tánaiste role-pair as its constitutional instantiation: a prisoner\'s dilemma that cannot process O.R. signal without breaking Cabinet hierarchy. Memo E names the result Séachanachas—evasocracy as governance design.',ls:[{l:':ignores (OWL)',h:'https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html#ignores',c:'var(--purple)'},{l:'Memo D',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'}]},
+  submission:{t:'Submission 2006–2025',b:'The civic signal—range object of :ignores. Nineteen years of formal submissions spanning Defence, Foreign Affairs, Health, Finance, Emergency Planning. Its non-processing is the initiating event of the entire causal chain. Acknowledgement as Closure is its primary failure mode. The Media channel holds the signal-to-silence timeline.',ls:[{l:'Acknowledgement as Closure',h:'https://dr-wojak.github.io/redundancy-awareness/failure-modes.html#acknowledgement-as-closure',c:'var(--green)'},{l:'Formal Complaint Archive',h:'https://drive.google.com/drive/u/0/folders/1FMPO1exETcpb4jxX-q5Mh2VIpYwYuATS',c:'var(--blue)'}]},
+  nullloop:{t:'NullificationLoop',b:'The central failure entity and the core cybernetic case study of the corpus. Produced by :ignores; documented by :ChannelAcademic via Beer/VSM. Memo D names three sub-mechanisms: Recursive Oversight, Cohomological Mapping, and Operational Closure. Deferral without Destination and Remit Displacement are its primary failure instances. The loop cannot close from inside—only external coercion (judicial review, CJEU) provides the closing constraint.',ls:[{l:'Deferral without Destination',h:'https://dr-wojak.github.io/redundancy-awareness/failure-modes.html#deferral-without-destination',c:'var(--green)'},{l:'Memo D Full Text',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'}]},
+  maladmin:{t:'Maladministration',b:'The legal condition triggered by FailureMode via :triggers. The Legal channel routes it to High Court (certiorari / mandamus). The EU channel routes it to CJEU as Member State failure under Art.4(3) TEU. Memo E names the Clerks\' refusal to transmit the complaint as constituting ongoing misfeasance in public office—the evidentiary ground for mandatory judicial review.',ls:[{l:':triggers (OWL)',h:'https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html#triggers',c:'var(--purple)'},{l:'Formal Complaint (226 pp)',h:'https://drive.google.com/drive/u/0/folders/1FMPO1exETcpb4jxX-q5Mh2VIpYwYuATS',c:'var(--blue)'}]},
+  rights:{t:'RightToBeHeard · Art.41 CFR',b:'The fundamental right violated by Maladministration. Grounded in Art.41 CFR, Art.4(3) TEU, and re Haughey. :violates grounds certiorari / mandamus. Memo D frames this under Kantian categorical imperative: the government can act, must act, yet does not act—a breach of both ethics and law. Memo E extends this: silence on this matter by King\'s Inns constitutes legal illiteracy in logistics.',ls:[{l:':violates (OWL)',h:'https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html#violates',c:'var(--purple)'},{l:'Legal Repository',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  seachanachas:{t:'Séachanachas · Silence Veto · Evasocracy',b:'The governance framework formalised in Memo E: rule by evasive practices. The lexical chain: Seanad (name) → Séanadh (denial) → Séachan (avoidance) → Séachanachas (the system) → Shéanadachais (denial of the system). The Silence Veto is its primary instrument. Memo E argues the Clerks\' conduct constitutes calculated dereliction of duty—knowingly pursued even after the entire legislature was put on formal notice at the outset of a national crisis.',ls:[{l:'Memo E Full Text',h:'https://drive.google.com/file/d/1YB7so7pzTg7uZFFir7nKWxB5wZZeSEX3',c:'var(--amber)'},{l:'Séachanachas Jurisprudence',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  mandamus:{t:'Writ of Mandamus · Judicial Review',b:'Primary remedy channel. Grounded in O\'Donnell v Dún Laoghaire [1991] and Ministers & Secretaries Act 1924. Pre-litigation notice filed February 2026. Memo E: only external coercion can now resolve the institutional freeze—a non-Coasean resolution. Glencar v Mayo [2002] governs legitimate expectation doctrine. Article 41 CFR directly engaged by nineteen years of acknowledgement without activation.',ls:[{l:'Notice of Motion',h:'https://drive.google.com/file/d/1VpOZMrHRPJqZrch-IZHTL1EWOtFGRU9AY',c:'var(--amber)'},{l:'Legal Repository',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  channels:{t:'Five Dissemination Channels',b:'The terminal layer of the directed labelled graph, defined in Deontological Differences. Each channel receives the same master causal chain and converts it into a distinct obligation: Legal → certiorari; EU → Member State failure; Academic → cybernetic case study (Memos D/E are this layer); Civic → duty of enquiry; Media → investigation thread. Same chain. Five obligations. Nineteen years of narrative argument, now simultaneously routable.',ls:[{l:'Deontological Differences',h:'https://dr-crunch.github.io/redundancy-awareness/deontological-differences.html',c:'var(--purple)'}]},
+  'exec-taoiseach':{t:'Taoiseach / Tánaiste — The Role Bind',b:'Memo D\'s structural diagnosis: the rotating co-executive design encodes a prisoner\'s dilemma. Cabinet Consensus (institutional cohesion) vs. Constitutional Safeguard (duty to alarm and correct). Neither role can process O.R. signal without breaking the other. The deputising system has no exit vector for resolving this contradiction—which is why the loop persists across personnel changes.',ls:[{l:'Memo D — Role Bind Analysis',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'}]},
+  'exec-depts':{t:'Departments — Remit Displacement',b:'Defence · Foreign Affairs · Health · Finance · Emergency Planning. Each routes the signal laterally to another department without resolution. Remit Displacement (Jurisdictional Evasion) is the canonical failure mode. Annex IV of the formal complaint maps each department to its specific evasion pattern.',ls:[{l:'Remit Displacement',h:'https://dr-wojak.github.io/redundancy-awareness/failure-modes.html#remit-displacement',c:'var(--green)'}]},
+  'exec-secegens':{t:'Secretaries General — Operational Closure',b:'Formally notified via Memo D (Departments of the Taoiseach, Climate, Energy and Environment, and Foreign Affairs). Mandated to adjudicate signal; structurally unable without breaking Cabinet hierarchy. Operational Closure: the system acknowledges receipt but cannot listen. Sufficiency without Audit is the resulting failure mode.',ls:[{l:'Memo D — Sec Gen Section',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'}]},
+  'exec-fiduciary':{t:'Fiduciary Breach — Balkin Model',b:'Memo D applies Balkin\'s information fiduciary doctrine: the State holds asymmetric access to civic intelligence and is obligated to act on it. Where that obligation is voided, the breach crosses from passive neglect to active fiduciary breach—tortious bureaucracy. Under Kantian duty, under Balkin\'s fiduciary asymmetry, under Kratzer\'s modal logic: the government can act, must act, yet does not act.',ls:[{l:'Memo D — Fiduciary Analysis',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'}]},
+  'leg-dail':{t:'Dáil Éireann — Annex II',b:'TDs formally named in Annex II of the formal complaint for failure to respond to pandemic-era O.R. submissions. Deputy Verona Murphy (Ceann Comhairle), Deputy John McGuinness (Leas-Cheann Comhairle), Deputy Simon Harris (Tánaiste) all notified. Receipt of the formal record creates duty of enquiry under Art.15.10 Bunreacht na hÉireann.',ls:[{l:'Annex II — Named TDs',h:'https://drive.google.com/file/d/1llrJ2dAr1NPUJA8mkUDP1OFgdzn7SF96',c:'var(--blue)'}]},
+  'leg-seanad':{t:'Seanad Éireann — Séachanachas',b:'Senator Mark Daly (Cathaoirleach), Bridget Doody (Acting Clerk). Memo E names the Clerks\' refusal to transmit the complaint as the paradigmatic Séachanachas event: calculated dereliction knowingly pursued even after the entire legislature was put on formal notice at the outset of a national crisis. The Silence Veto in its clearest institutional form.',ls:[{l:'Memo E — Séachanachas',h:'https://drive.google.com/file/d/1YB7so7pzTg7uZFFir7nKWxB5wZZeSEX3',c:'var(--amber)'}]},
+  'leg-opla':{t:'OPLA — Para-Legislative Witness Role',b:'Office of Parliamentary Legal Advisers. CC\'d via Committee on Justice, Home Affairs and Migration (c/o Mr. Alan Guidon, Clerk). Memo D: duty to safeguard legislative coherence by ensuring knowledge bearing on the State\'s constitutional risk is properly tested, debated, and carried forward. Procedural drift here becomes rout failure.',ls:[{l:'Legal Repository',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  'leg-memory':{t:'Constitutional Memory — Designed Forgetting',b:'Memo D traces the arc: 1922 mandate to stabilise signal → 1937 Constitution → mid-century ombudsmen and audits → transparency law and digital access. Each statutory gain is now sediment. :suppresses documents DesignedForgetting. The cohomological gap between legal form and operational reality is widest here.',ls:[{l:':suppresses (OWL)',h:'https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html#suppresses',c:'var(--purple)'}]},
+  'jud-highcourt':{t:'High Court — Mandamus Record',b:'Primary remedy. O\'Donnell v Dún Laoghaire [1991] grounds mandamus for failure to exercise statutory duty. Pre-litigation notice filed February 2026. Glencar v Mayo [2002] governs legitimate expectation. :violates grounds certiorari. The Legal Repository holds all draft and perfected instruments.',ls:[{l:'Draft Notice of Motion',h:'https://drive.google.com/file/d/1ielE9RO3Qde4OIWFYzkaIMqjd1MBSUBD',c:'var(--amber)'},{l:'Legal Repository',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  'jud-kingsinns':{t:'King\'s Inns — The Double Bind',b:'Primary addressee of Memos D and E. The canonical double bind per Memo E: acknowledge the documentation → admit systematic failure of constitutional oversight; maintain silence → become complicit in ongoing constitutional bypass. Three recursive nullification domains: Legal Education, Professional Standards, Constitutional Guardianship—each presupposes action from the others.',ls:[{l:'Memo D to King\'s Inns',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--amber)'},{l:'Memo E to King\'s Inns',h:'https://drive.google.com/file/d/1YB7so7pzTg7uZFFir7nKWxB5wZZeSEX3',c:'var(--amber)'}]},
+  'jud-ag':{t:'Attorney General — Vicarious State Responsibility',b:'Pivotal conduit for reconciling the constitutional double bind. Formally forwarded the record alongside King\'s Inns and OPLA. Memo D: where the Tánaiste holds both cognition of Cabinet loyalty and the duty of constitutional safeguard, the AG is the corridor through which that contradiction should discharge lawfully. Vicarious State Responsibility doctrine is stretched beyond its functional limits when the AG is also structurally unable to act.',ls:[{l:'Legal Repository — Briefs',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+  'jud-eu':{t:'EU / CJEU — Member State Failure Record',b:'European Ombudsman, PETI (Art.227 TFEU submission filed March 2026), Défenseur des Droits. Member State failure record under Art.4(3) TEU · Art.228 TFEU. EU Regulation 428/2009 dual-use security pretext flagged. Art.2 TEU foundational rule-of-law obligations directly engaged.',ls:[{l:'PETI Submission',h:'https://drive.google.com/file/d/1jD9Rmrlgp1wB0hqDqNIRNb8n3SwNBrCk',c:'var(--blue)'},{l:'International Abeyance Record',h:'https://dr-wojak.github.io/legal/',c:'var(--teal)'}]},
+};
+
+function showXRef(key){
+  const d=xref[key]; if(!d)return;
+  document.getElementById('xrefContent').innerHTML='<strong style="font-family:\'IBM Plex Mono\',monospace;font-size:12px;color:var(--amber)">'+d.t+'</strong><br><br>'+d.b;
+  const lel=document.getElementById('xrefLinks'); lel.innerHTML='';
+  (d.ls||[]).forEach(l=>{const a=document.createElement('a');a.className='xref-link';a.href=l.h;a.target='_blank';a.textContent=l.l;a.style.color=l.c;a.style.borderColor=l.c;a.style.background='transparent';lel.appendChild(a);});
+}
+
+function switchMemo(id,btn){
+  document.querySelectorAll('.memo-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.memo-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('memo-'+id).classList.add('active');
+}
+
+const layerMap={rel:'layer-rel',fail:'layer-fail',diss:'layer-diss',memo:'layer-memo',legal:'layer-legal'};
+function toggleLayer(layer,btn){
+  const el=document.getElementById(layerMap[layer]); if(!el)return;
+  const on=el.style.display!=='none';
+  el.style.display=on?'none':'';
+  btn.classList.toggle('active',!on);
+}
+</script>
+</body>
+</html>
