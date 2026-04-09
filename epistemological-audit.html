@@ -25,26 +25,70 @@
 <meta name="description" content="What we know, what we still need to prove, and what needs to happen next. Meinhardt Initiative · March 2026." />
 <style>
 :root {
---ink: #06050a;
---surface: #0e0d14;
---surface2: #13121b;
---parchment: #e8e3d4;
---parchment-dim: #9e9887;
---green: #2fb882;
---green-dim: #0f6e56;
---green-bg: #0d1f1a;
---terra: #d4643d;
---terra-dim: #993d1d;
---terra-bg: #1f1109;
---amber: #c9881f;
---amber-dim: #854f0b;
---amber-bg: #1e1509;
---blue: #4a9fe0;
---blue-bg: #0c1929;
---gold: #c9a84c;
---rule: rgba(232,227,212,0.07);
---rule-strong: rgba(232,227,212,0.13);
---rule-red: #1e0a0a;
+  --ink:#0a0910;
+  --surface:#141018;
+  --surface2:#1c1820;
+  --surface3:#221e2a;
+  --parchment:#e8e3d4;
+  --parchment-dim:#9e9887;
+  --parchment-faint:#38303e;
+  --scarlet:#c8253a;
+  --scarlet-dim:#7a1020;
+  --scarlet-bg:#1a080a;
+  --bordeaux:#b87898;
+  --bordeaux-dim:#4a2838;
+  --bordeaux-bg:#180d12;
+  --dragonfly:#5ab0c8;
+  --dragonfly-dim:#183e4a;
+  --dragonfly-bg:#0a1820;
+  --cosmic:#9898c8;
+  --cosmic-dim:#404068;
+  --cosmic-bg:#10101e;
+  --rivulet:#38c8b8;
+  --rivulet-dim:#187868;
+  --rivulet-bg:#081e1a;
+  --citron:#d4c06a;
+  --citron-dim:#7a6e28;
+  --citron-bg:#1c1a08;
+  --graphite:#a8a040;
+  --graphite-dim:#4a4820;
+  --graphite-bg:#181808;
+  --nantucket:#7ab8d8;
+  --nantucket-dim:#2a5878;
+  --nantucket-bg:#0a1820;
+  --alaskan:#4e8ab0;
+  --alaskan-dim:#205272;
+  --alaskan-bg:#0a1820;
+  --coral:#c87870;
+  --coral-dim:#784038;
+  --coral-bg:#1c0e0c;
+  --satin:#c8bfa8;
+  --satin-dim:#6e6858;
+  --satin-bg:#1e1c18;
+  --rule:rgba(200,180,230,0.09);
+  --rule-strong:rgba(200,180,230,0.16);
+
+  /* ── PORTAL PALETTE: Grape · Gold · Sherwood ── */
+  --grape:#6b2d8b;
+  --grape-lt:#9b58c8;
+  --grape-dim:#3a1050;
+  --grape-bg:#12081a;
+  --grape-glow:rgba(107,45,139,0.18);
+  --gold:#c8a830;
+  --gold-lt:#e8c850;
+  --gold-dim:#7a6218;
+  --gold-bg:#1a1608;
+  --sherwood:#1a7a48;
+  --sherwood-lt:#38c878;
+  --sherwood-dim:#0a3820;
+  --sherwood-bg:#081a10;
+
+  /* ── CLOUD DANCER: luminous white-silver ── */
+  --cloud:#f0ede8;
+  --cloud-bright:#ffffff;
+  --cloud-glow:rgba(240,237,232,0.92);
+  --cloud-bg:rgba(255,255,255,0.07);
+  --cloud-border:rgba(240,237,232,0.22);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
@@ -109,6 +153,16 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
   box-shadow:0 0 12px rgba(194,74,74,.2);
 }
 
+/* CITRON (highlight / escalation) */
+.btn-citron{
+  background:var(--citron-bg);
+  border-color:var(--citron-dim);
+  color:var(--citron);
+}
+.btn-crimson:hover{
+  border-color:var(--citron);
+  box-shadow:0 0 12px rgba(194,74,74,.2);
+}
 
 /* SLATE (neutral / system control) */
 .btn-slate{
@@ -271,7 +325,7 @@ h1{font-size:38px;}
 <div class="sidereal-band">
 <div class="sidereal-coord">
 <span>Epoch 2006.6 → 2026.3</span><span>·</span>
-<span>Knowledge audit · March 31st, 2026</span>
+<span>Selected Elements · April 9th, 2026</span>
 </div>
 </div>
 <!-- ALERT STRIP -->
@@ -286,6 +340,10 @@ What we know<span>·</span>what still needs proving<span>·</span>what comes nex
 <span>✦</span> Deontological Differences
 </a>
 
+<a href="https://dr-crunch.github.io/meinhardt-docket-001" class="btn btn-citron">
+<span>✦</span> Sonrú Breise
+</a>
+  
 <a href="https://dr-crunch.github.io/redundancy-awareness/semantic-map" class="btn btn-violet">
 <span>✦</span> Semantic Map
 </a>
