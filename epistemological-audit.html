@@ -22,99 +22,124 @@
 <meta name="description" content="What we know, what we still need to prove, and what needs to happen next. Meinhardt Initiative · March 2026." />
 <style>
 :root {
-  --ink:#0a0910;
-  --surface:#141018;
-  --surface2:#1c1820;
-  --surface3:#221e2a;
-  --parchment:#e8e3d4;
-  --parchment-dim:#9e9887;
-  --parchment-faint:#38303e;
-  --scarlet:#c8253a;
-  --scarlet-dim:#7a1020;
-  --scarlet-bg:#1a080a;
-  --bordeaux:#b87898;
-  --bordeaux-dim:#4a2838;
-  --bordeaux-bg:#180d12;
-  --dragonfly:#5ab0c8;
-  --dragonfly-dim:#183e4a;
-  --dragonfly-bg:#0a1820;
-  --cosmic:#9898c8;
-  --cosmic-dim:#404068;
-  --cosmic-bg:#10101e;
-  --rivulet:#38c8b8;
-  --rivulet-dim:#187868;
-  --rivulet-bg:#081e1a;
-  --citron:#d4c06a;
-  --citron-dim:#7a6e28;
-  --citron-bg:#1c1a08;
-  --graphite:#a8a040;
-  --graphite-dim:#4a4820;
-  --graphite-bg:#181808;
-  --nantucket:#7ab8d8;
-  --nantucket-dim:#2a5878;
-  --nantucket-bg:#0a1820;
-  --coral:#c87870;
-  --coral-dim:#784038;
-  --coral-bg:#1c0e0c;
-  --satin:#c8bfa8;
-  --satin-dim:#6e6858;
-  --satin-bg:#1e1c18;
-  --rule:rgba(200,180,230,0.09);
-  --rule-strong:rgba(200,180,230,0.16);
+  /* ── BASE SURFACES ── */
+  --ink:#0d0c0b;
+  --surface:#161412;
+  --surface2:#1e1b18;
+  --surface3:#252018;
 
-  --grape:#6b2d8b;
-  --grape-lt:#9b58c8;
-  --grape-dim:#3a1050;
-  --grape-bg:#12081a;
-  --gold:#c8a830;
-  --gold-lt:#e8c850;
-  --gold-dim:#7a6218;
-  --gold-bg:#1a1608;
-  --sherwood:#1a7a48;
-  --sherwood-lt:#38c878;
-  --sherwood-dim:#0a3820;
-  --sherwood-bg:#081a10;
-  --cloud:#f0ede8;
-  --cloud-bright:#ffffff;
+  /* ── CLOUD DANCER / PARCHMENT ── warm, papery whites */
+  --parchment:#ede8df;
+  --parchment-dim:#a09488;
+  --parchment-faint:#3a3028;
+
+  /* ── SATIN SLIPPER (replaces crimson as the "gap / alert" colour) ──
+     Warm rose-nude: PANTONE 20-0020 TPM / Satin Slipper */
+  --slipper:#c8a898;
+  --slipper-dim:#7a5850;
+  --slipper-bg:#1c1210;
+
+  /* ── WOODROSE (primary accent: headers, eyebrows, highlights) ──
+     PANTONE 16-1806 TCX Woodrose */
+  --woodrose:#b87868;
+  --woodrose-dim:#5c3028;
+  --woodrose-bg:#180e0a;
+
+  /* ── AMBERLIGHT (status: "demonstrated / solid") ──
+     PANTONE 14-1217 TCX Amberlight — warm sand gold */
+  --amberlight:#d4b878;
+  --amberlight-dim:#7a6030;
+  --amberlight-bg:#1c1808;
+
+  /* ── CORAL HAZE (status: "needs derivation") ──
+     PANTONE 16-1329 TCX Coral Haze — muted dusty salmon */
+  --coral-haze:#c88870;
+  --coral-haze-dim:#6a4030;
+  --coral-haze-bg:#1a1008;
+
+  /* ── MOUNTAIN TRAIL (structural / glossary terms) ──
+     PANTONE 17-0807 TCX Mountain Trail — warm taupe */
+  --trail:#9a8878;
+  --trail-dim:#4a4038;
+  --trail-bg:#181410;
+
+  /* ── DRAGONFLY (legal/analytical — kept from Glamour & Gleam) ──
+     PANTONE 19-4826 TCX Dragonfly */
+  --dragonfly:#5aa0b8;
+  --dragonfly-dim:#183848;
+  --dragonfly-bg:#0a1820;
+
+  /* ── BORDEAUX (quote lines, structural accents) ──
+     PANTONE 17-1710 TCX Bordeaux */
+  --bordeaux:#a87888;
+  --bordeaux-dim:#48283a;
+  --bordeaux-bg:#180d12;
+
+  /* ── COSMIC / VIOLET (section numbers, nav) — softened */
+  --cosmic:#9090b8;
+  --cosmic-dim:#383858;
+  --cosmic-bg:#10101a;
+
+  /* ── RIVULET / TEAL (demonstrated status) — warm-shifted */
+  --rivulet:#58b8a0;
+  --rivulet-dim:#186858;
+  --rivulet-bg:#081a16;
+
+  /* ── GRAPHITE METALLIC (stretch limo / inert structural) ──
+     PANTONE 20-0188 TPM Graphite */
+  --graphite:#888070;
+  --graphite-dim:#404038;
+  --graphite-bg:#141410;
+
+  /* ── GRAPE FROST (softest highlights) ──
+     PANTONE 20-0070 TPM Grape Frost */
+  --grape-frost:#c8a8b0;
+  --grape-frost-dim:#584058;
+  --grape-frost-bg:#180d14;
+
+  /* ── RULE LINES ── */
+  --rule:rgba(200,168,152,0.09);
+  --rule-strong:rgba(200,168,152,0.16);
 
   /* ── SEMANTIC ALIASES ── */
   --green:      var(--rivulet);
   --green-dim:  var(--rivulet-dim);
   --green-bg:   var(--rivulet-bg);
-  --amber:      var(--citron);
-  --amber-dim:  var(--citron-dim);
-  --amber-bg:   var(--citron-bg);
-  --terra:      var(--scarlet);
-  --terra-dim:  var(--scarlet-dim);
-  --terra-bg:   var(--scarlet-bg);
+  --amber:      var(--amberlight);
+  --amber-dim:  var(--amberlight-dim);
+  --amber-bg:   var(--amberlight-bg);
+  /* GAP / blocking → Satin Slipper (warm, not alarm-red) */
+  --terra:      var(--slipper);
+  --terra-dim:  var(--slipper-dim);
+  --terra-bg:   var(--slipper-bg);
   --blue:       var(--dragonfly);
   --blue-dim:   var(--dragonfly-dim);
   --blue-bg:    var(--dragonfly-bg);
   --violet:     var(--cosmic);
   --violet-dim: var(--cosmic-dim);
   --violet-bg:  var(--cosmic-bg);
-  --slate:      var(--satin);
-  --slate-dim:  var(--satin-dim);
-  --slate-bg:   var(--satin-bg);
+  --slate:      var(--trail);
+  --slate-dim:  var(--trail-dim);
+  --slate-bg:   var(--trail-bg);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--ink);color:var(--parchment);font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;line-height:1.6;min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.3;}
 body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.04) 3px,rgba(0,0,0,0.04) 6px);pointer-events:none;z-index:0;opacity:0.55;}
-#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.45;}
+#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.4;}
 
 /* ─── TICKER ─── */
-.ticker-wrap{background:var(--surface2);border-bottom:1px solid rgba(152,152,200,0.15);padding:.4rem 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10;}
+.ticker-wrap{background:var(--surface2);border-bottom:1px solid rgba(168,136,120,0.15);padding:.4rem 0;overflow:hidden;white-space:nowrap;position:relative;z-index:10;}
 .ticker-inner{display:inline-block;animation:ticker 70s linear infinite;font-family:'IBM Plex Mono',monospace;font-size:.6rem;letter-spacing:.12em;color:var(--parchment-dim);}
 .ticker-inner span{margin:0 2.5rem;}
-.ticker-inner .hi{color:var(--scarlet);}
-.ticker-inner .go{color:var(--citron);}
+.ticker-inner .hi{color:var(--woodrose);}
+.ticker-inner .go{color:var(--amberlight);}
 @keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 /* ─── SIDEREAL ─── */
 .sidereal-band{position:relative;z-index:1;padding:18px 32px 0;max-width:1040px;margin:0 auto;}
-.sidereal-coord{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(184,120,152,.55);text-transform:uppercase;display:flex;gap:24px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid rgba(184,120,152,.08);}
+.sidereal-coord{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.2em;color:rgba(168,120,104,.55);text-transform:uppercase;display:flex;gap:24px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid rgba(168,120,104,.08);}
 
 /* ─── ALERT STRIP ─── */
 .alert-strip{background:var(--cosmic-bg);border-bottom:1px solid var(--cosmic-dim);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:10;flex-wrap:wrap;}
@@ -127,46 +152,46 @@ body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradie
 .btn::before{content:'';position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity .2s;}
 .btn:hover::before{opacity:.08;}
 .btn-green{background:var(--green-bg);border-color:var(--green-dim);color:var(--green);}
-.btn-green:hover{border-color:var(--green);box-shadow:0 0 12px rgba(56,200,184,.15);}
-.btn-amber{background:var(--citron-bg);border-color:var(--citron-dim);color:var(--citron);}
-.btn-amber:hover{border-color:var(--citron);box-shadow:0 0 12px rgba(212,192,106,.18);}
-.btn-blue{background:var(--dragonfly-bg);border-color:var(--dragonfly-dim);color:var(--dragonfly);}
-.btn-blue:hover{border-color:var(--dragonfly);box-shadow:0 0 12px rgba(90,176,200,.18);}
-.btn-violet{background:var(--cosmic-bg);border-color:var(--cosmic-dim);color:var(--cosmic);}
-.btn-violet:hover{border-color:var(--cosmic);box-shadow:0 0 12px rgba(152,152,200,.18);}
-.btn-crimson{background:var(--scarlet-bg);border-color:var(--scarlet-dim);color:var(--scarlet);}
-.btn-crimson:hover{border-color:var(--scarlet);box-shadow:0 0 12px rgba(200,37,58,.2);}
-.btn-citron{background:var(--citron-bg);border-color:var(--citron-dim);color:var(--citron);}
-.btn-citron:hover{border-color:var(--citron);box-shadow:0 0 12px rgba(212,192,106,.18);}
+.btn-green:hover{border-color:var(--green);box-shadow:0 0 12px rgba(88,184,160,.15);}
+.btn-amber{background:var(--amber-bg);border-color:var(--amber-dim);color:var(--amber);}
+.btn-amber:hover{border-color:var(--amber);box-shadow:0 0 12px rgba(212,184,120,.18);}
+.btn-blue{background:var(--blue-bg);border-color:var(--blue-dim);color:var(--blue);}
+.btn-blue:hover{border-color:var(--blue);box-shadow:0 0 12px rgba(90,160,184,.18);}
+.btn-violet{background:var(--violet-bg);border-color:var(--violet-dim);color:var(--violet);}
+.btn-violet:hover{border-color:var(--violet);box-shadow:0 0 12px rgba(144,144,184,.18);}
+.btn-slipper{background:var(--slipper-bg);border-color:var(--slipper-dim);color:var(--slipper);}
+.btn-slipper:hover{border-color:var(--slipper);box-shadow:0 0 12px rgba(200,168,152,.2);}
+.btn-citron{background:var(--amber-bg);border-color:var(--amber-dim);color:var(--amber);}
+.btn-citron:hover{border-color:var(--amber);box-shadow:0 0 12px rgba(212,184,120,.18);}
 .btn-bordeaux{background:var(--bordeaux-bg);border-color:var(--bordeaux-dim);color:var(--bordeaux);}
-.btn-bordeaux:hover{border-color:var(--bordeaux);box-shadow:0 0 10px rgba(184,120,152,.2);}
+.btn-bordeaux:hover{border-color:var(--bordeaux);box-shadow:0 0 10px rgba(168,120,136,.2);}
 .btn-slate{background:var(--slate-bg);border-color:var(--slate-dim);color:var(--slate);}
-.btn-slate:hover{border-color:var(--slate);box-shadow:0 0 10px rgba(180,180,180,.12);}
+.btn-slate:hover{border-color:var(--slate);box-shadow:0 0 10px rgba(154,136,120,.12);}
 
 /* ─── HEADER ─── */
 header{position:relative;z-index:1;padding:60px 32px 48px;max-width:1040px;margin:0 auto;border-bottom:1px solid var(--rule);}
-.header-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--citron);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
-.header-eyebrow::after{content:'';flex:1;height:1px;background:var(--citron);opacity:.22;max-width:200px;}
+.header-eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--amberlight);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.header-eyebrow::after{content:'';flex:1;height:1px;background:var(--amberlight);opacity:.22;max-width:200px;}
 h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:clamp(38px,6vw,76px);line-height:1.02;letter-spacing:-.01em;color:var(--parchment);margin-bottom:6px;}
 h1 em{font-style:italic;color:var(--bordeaux);}
 .header-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(17px,2.2vw,22px);font-weight:300;font-style:italic;color:var(--parchment-dim);margin-bottom:28px;line-height:1.4;}
-.header-lede{font-size:17px;color:var(--parchment);max-width:680px;line-height:1.8;border-left:2px solid var(--scarlet);padding-left:20px;margin-bottom:32px;}
+.header-lede{font-size:17px;color:var(--parchment);max-width:680px;line-height:1.8;border-left:2px solid var(--woodrose);padding-left:20px;margin-bottom:32px;}
 .header-meta{display:flex;gap:28px;flex-wrap:wrap;}
 .meta-item{display:flex;flex-direction:column;gap:3px;}
 .meta-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--parchment-dim);}
 .meta-value{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--parchment);}
-.meta-value.live{color:var(--scarlet);}
-.meta-value.amber{color:var(--citron);}
+.meta-value.live{color:var(--slipper);}
+.meta-value.amber{color:var(--amberlight);}
 
 /* ─── BRAIN SECTION ─── */
 .brain-section{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:56px 32px;border-bottom:1px solid var(--rule);}
 .brain-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:10px;display:flex;align-items:center;gap:12px;}
-.brain-label::before{content:'◈';color:var(--citron);font-size:11px;}
+.brain-label::before{content:'◈';color:var(--amberlight);font-size:11px;}
 .brain-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,32px);font-weight:300;color:var(--parchment);margin-bottom:6px;}
 .brain-sub{font-family:'EB Garamond',serif;font-size:16px;font-style:italic;color:var(--parchment-dim);margin-bottom:32px;max-width:640px;line-height:1.7;}
-.svg-wrapper{background:var(--surface2);border:1px solid var(--rule-strong);border-top:2px solid rgba(152,152,200,0.22);border-radius:4px;padding:32px 24px 28px;overflow-x:auto;animation:pulse-border 6s ease-in-out infinite;}
+.svg-wrapper{background:var(--surface2);border:1px solid var(--rule-strong);border-top:2px solid rgba(168,136,120,0.22);border-radius:4px;padding:32px 24px 28px;overflow-x:auto;animation:pulse-border 6s ease-in-out infinite;}
 .svg-wrapper svg{display:block;max-width:100%;height:auto;}
-@keyframes pulse-border{0%,100%{border-top-color:rgba(152,152,200,.12);}50%{border-top-color:rgba(152,152,200,.42);box-shadow:0 0 18px rgba(120,120,200,.06);}}
+@keyframes pulse-border{0%,100%{border-top-color:rgba(168,136,120,.12);}50%{border-top-color:rgba(168,136,120,.42);box-shadow:0 0 18px rgba(168,120,104,.06);}}
 
 /* ─── MACHOL QUOTE ─── */
 .machol{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:40px 32px;border-bottom:1px solid var(--rule);display:flex;gap:24px;align-items:flex-start;}
@@ -182,8 +207,8 @@ h1 em{font-style:italic;color:var(--bordeaux);}
 .section-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--parchment);}
 .section-title em{font-style:italic;color:var(--bordeaux);}
 .section-sub{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:24px;margin-top:4px;}
-.prompt-line{font-family:'IBM Plex Mono',monospace;font-size:13px;color:rgba(232,227,212,.45);margin-bottom:28px;max-width:78ch;line-height:1.75;padding-left:18px;border-left:2px solid var(--rule-strong);}
-.prompt-line::before{content:'> ';color:var(--citron);}
+.prompt-line{font-family:'IBM Plex Mono',monospace;font-size:13px;color:rgba(232,232,222,.45);margin-bottom:28px;max-width:78ch;line-height:1.75;padding-left:18px;border-left:2px solid var(--rule-strong);}
+.prompt-line::before{content:'> ';color:var(--amberlight);}
 
 /* ─── STATUS CARDS ─── */
 .status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:0;border:1px solid var(--rule-strong);border-radius:2px;}
@@ -191,45 +216,45 @@ h1 em{font-style:italic;color:var(--bordeaux);}
 .status-card:hover{background:var(--surface2);}
 .status-pip{display:flex;align-items:center;gap:9px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;}
 .status-pip::before{content:'';width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-/* Demonstrated → rivulet (teal-green) */
+/* Demonstrated → rivulet (warm teal) */
 .pip-done{color:var(--rivulet);}
-.pip-done::before{background:var(--rivulet);box-shadow:0 0 7px rgba(56,200,184,.55);}
-/* Needs derivation → citron (lemon gold) */
-.pip-needs{color:var(--citron);}
-.pip-needs::before{background:var(--citron);box-shadow:0 0 7px rgba(212,192,106,.5);}
-/* Gap / blocking → scarlet (vivid red) */
-.pip-gap{color:var(--scarlet);}
-.pip-gap::before{background:var(--scarlet);box-shadow:0 0 7px rgba(200,37,58,.55);}
+.pip-done::before{background:var(--rivulet);box-shadow:0 0 7px rgba(88,184,160,.55);}
+/* Needs derivation → coral haze (warm salmon) */
+.pip-needs{color:var(--coral-haze);}
+.pip-needs::before{background:var(--coral-haze);box-shadow:0 0 7px rgba(200,136,112,.5);}
+/* Gap / blocking → satin slipper (warm rose-nude) */
+.pip-gap{color:var(--slipper);}
+.pip-gap::before{background:var(--slipper);box-shadow:0 0 7px rgba(200,168,152,.55);}
 .status-card h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--parchment);line-height:1.25;margin-bottom:10px;}
 .status-card h3 em{font-style:italic;color:var(--parchment-dim);}
 .status-card-body{font-family:'EB Garamond',serif;font-size:15px;color:var(--parchment-dim);line-height:1.72;margin-bottom:12px;}
 .status-card-body strong{color:var(--parchment);font-weight:500;}
 .status-card-note{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;border-top:1px solid var(--rule);padding-top:10px;margin-top:8px;line-height:1.65;}
-.note-done{color:rgba(56,200,184,.65);}
-.note-needs{color:rgba(212,192,106,.65);}
-.note-gap{color:rgba(200,37,58,.65);}
+.note-done{color:rgba(88,184,160,.65);}
+.note-needs{color:rgba(200,136,112,.65);}
+.note-gap{color:rgba(200,168,152,.65);}
 
 /* ─── TASK LIST ─── */
 .task-list{display:flex;flex-direction:column;gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);border-radius:2px;}
 .task-item{background:var(--surface);padding:20px 24px;display:grid;grid-template-columns:80px 1fr;gap:20px;align-items:start;transition:background .15s;}
 .task-item:hover{background:var(--surface2);}
 .task-id{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;padding-top:2px;line-height:1;}
-/* Blocking → scarlet */
-.task-id.blocking{color:var(--scarlet);}
-/* Needs → dragonfly (legal/analytical) */
+/* Blocking → slipper (warm rose-nude) */
+.task-id.blocking{color:var(--slipper);}
+/* Needs → dragonfly (blue-teal) */
 .task-id.needs{color:var(--dragonfly);}
 .task-tag{display:inline-block;margin-top:8px;font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px;border:1px solid;}
-.tag-blocking{color:var(--scarlet);border-color:rgba(200,37,58,.3);background:var(--scarlet-bg);}
-.tag-needs{color:var(--dragonfly);border-color:rgba(24,62,74,.55);background:var(--dragonfly-bg);}
+.tag-blocking{color:var(--slipper);border-color:rgba(200,168,152,.3);background:var(--slipper-bg);}
+.tag-needs{color:var(--dragonfly);border-color:rgba(24,56,72,.55);background:var(--dragonfly-bg);}
 .task-name{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--parchment);margin-bottom:7px;display:block;}
 .task-plain{font-family:'EB Garamond',serif;font-size:15px;color:var(--parchment-dim);line-height:1.7;}
 .task-plain strong{color:var(--parchment);font-weight:500;}
 
 /* ─── AXIOM BAR ─── */
 .axiom-bar{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:40px 32px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:3px 1fr;gap:24px;align-items:start;}
-.axiom-rule{width:3px;align-self:stretch;background:linear-gradient(to bottom,var(--bordeaux) 0%,rgba(184,120,152,.05) 100%);border-radius:2px;min-height:80px;}
+.axiom-rule{width:3px;align-self:stretch;background:linear-gradient(to bottom,var(--bordeaux) 0%,rgba(168,120,136,.05) 100%);border-radius:2px;min-height:80px;}
 .axiom-body{display:flex;flex-direction:column;gap:10px;}
-.axiom-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(184,120,152,.45);}
+.axiom-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(168,120,136,.45);}
 .axiom-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.5vw,26px);font-weight:300;font-style:italic;color:var(--parchment);line-height:1.45;}
 .axiom-plain{font-family:'EB Garamond',serif;font-size:16px;color:var(--parchment-dim);line-height:1.72;max-width:640px;}
 
@@ -238,41 +263,36 @@ h1 em{font-style:italic;color:var(--bordeaux);}
 .net-cell{background:var(--surface);padding:28px 24px;text-align:center;display:block;text-decoration:none;color:inherit;}
 .net-cell:hover{transform:translateY(-2px);transition:transform .15s ease;}
 .net-n{font-family:'Cormorant Garamond',serif;font-size:62px;font-weight:300;line-height:1;margin-bottom:8px;}
-/* Demonstrated → rivulet */
 .net-n.done{color:var(--rivulet);}
-/* Needs → citron */
-.net-n.needs{color:var(--citron);}
-/* Gap → scarlet */
-.net-n.gap{color:var(--scarlet);}
-/* Info (emoji) */
+.net-n.needs{color:var(--coral-haze);}
+.net-n.gap{color:var(--slipper);}
 .net-n.info{font-size:48px;margin-top:7px;}
 .net-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;line-height:1.55;}
-.net-label.done{color:rgba(56,200,184,.55);}
-.net-label.needs{color:rgba(212,192,106,.55);}
-.net-label.gap{color:rgba(200,37,58,.55);}
+.net-label.done{color:rgba(88,184,160,.55);}
+.net-label.needs{color:rgba(200,136,112,.55);}
+.net-label.gap{color:rgba(200,168,152,.55);}
 
 /* ─── GLOSSARY ─── */
 .glossary-table{width:100%;border-collapse:collapse;margin-top:24px;}
 .glossary-table tr{border-bottom:1px solid var(--rule);transition:background .18s;}
 .glossary-table tr:hover{background:var(--surface2);}
 .glossary-table td{padding:14px 12px;vertical-align:top;line-height:1.6;}
-/* Term column → dragonfly (legal-instrumental) */
 .glossary-table td:first-child{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;color:var(--dragonfly);white-space:nowrap;padding-right:24px;width:200px;}
 .glossary-table td:last-child{font-family:'EB Garamond',serif;font-size:15px;color:var(--parchment-dim);}
 .glossary-table td:last-child strong{color:var(--parchment);font-weight:500;}
-.gloss-corr{display:block;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:rgba(90,176,200,.3);}
+.gloss-corr{display:block;margin-top:4px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;color:rgba(90,160,184,.3);}
 
 /* ─── WARN BOX ─── */
-.warn-box{border:1px solid var(--scarlet-dim);background:rgba(200,37,58,.04);padding:1.2rem 1.5rem;margin:28px 0 0;}
-.warn-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--scarlet);display:block;margin-bottom:8px;}
-.warn-box p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(200,37,58,.6);line-height:1.65;}
+.warn-box{border:1px solid var(--slipper-dim);background:rgba(200,168,152,.04);padding:1.2rem 1.5rem;margin:28px 0 0;}
+.warn-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--slipper);display:block;margin-bottom:8px;}
+.warn-box p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:rgba(200,168,152,.6);line-height:1.65;}
 
 /* ─── FOOTER ─── */
 footer{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
 .footer-left{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.07em;color:var(--parchment-dim);line-height:1.8;}
 .footer-left a{color:var(--parchment-dim);text-decoration:none;transition:color .15s;}
 .footer-left a:hover{color:var(--parchment);}
-.footer-right{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(158,152,135,.35);text-align:right;line-height:1.8;}
+.footer-right{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(160,148,136,.35);text-align:right;line-height:1.8;}
 
 /* ─── ANIMATION ─── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
@@ -352,7 +372,7 @@ Nineteen years of submissions, five discourse clusters, and not a single formal 
 <section class="brain-section">
 <div class="brain-label">Epistemological map · the audit diagram</div>
 <div class="brain-title">The case at a glance</div>
-<p class="brain-sub">Every claim plotted against what it has actually demonstrated. Green means it's solid. Citron means it's there but not yet argued from the source documents. Red means it must be resolved before anything is filed.</p>
+<p class="brain-sub">Every claim plotted against what it has actually demonstrated. Teal means it's solid. Warm sand means it's there but not yet argued from source. Dusty rose means it must be resolved before anything is filed.</p>
 <div class="svg-wrapper">
 <svg width="100%" viewBox="0 0 680 870" xmlns="http://www.w3.org/2000/svg">
 <defs>
@@ -361,124 +381,124 @@ Nineteen years of submissions, five discourse clusters, and not a single formal 
 </marker>
 </defs>
 <!-- header -->
-<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(152,152,200,0.65)" letter-spacing="2.5" x="340" y="26" text-anchor="middle">EPISTEMOLOGICAL AUDIT — MEINHARDT CORPUS · MARCH 2026</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(158,152,135,0.5)" x="340" y="42" text-anchor="middle">knowledge state · claim vs demonstration · gap register</text>
-<line x1="40" y1="52" x2="640" y2="52" stroke="rgba(232,227,212,0.08)" stroke-width="0.5"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(168,136,120,0.65)" letter-spacing="2.5" x="340" y="26" text-anchor="middle">EPISTEMOLOGICAL AUDIT — MEINHARDT CORPUS · MARCH 2026</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(160,148,136,0.5)" x="340" y="42" text-anchor="middle">knowledge state · claim vs demonstration · gap register</text>
+<line x1="40" y1="52" x2="640" y2="52" stroke="rgba(232,222,210,0.08)" stroke-width="0.5"/>
 <!-- legend -->
-<rect x="40" y="62" width="10" height="10" rx="2" fill="#38c8b8" opacity="0.9"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(56,200,184,0.75)" x="56" y="71">Demonstrated</text>
-<rect x="178" y="62" width="10" height="10" rx="2" fill="#d4c06a" opacity="0.9"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(212,192,106,0.75)" x="194" y="71">Needs derivation</text>
-<rect x="340" y="62" width="10" height="10" rx="2" fill="#c8253a" opacity="0.9"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(200,37,58,0.75)" x="356" y="71">Gap — must close before filing</text>
-<line x1="40" y1="83" x2="640" y2="83" stroke="rgba(232,227,212,0.06)" stroke-width="0.5"/>
+<rect x="40" y="62" width="10" height="10" rx="2" fill="#58b8a0" opacity="0.9"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(88,184,160,0.75)" x="56" y="71">Demonstrated</text>
+<rect x="178" y="62" width="10" height="10" rx="2" fill="#c88870" opacity="0.9"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(200,136,112,0.75)" x="194" y="71">Needs derivation</text>
+<rect x="340" y="62" width="10" height="10" rx="2" fill="#c8a898" opacity="0.9"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9.5" fill="rgba(200,168,152,0.75)" x="356" y="71">Gap — must close before filing</text>
+<line x1="40" y1="83" x2="640" y2="83" stroke="rgba(232,222,210,0.06)" stroke-width="0.5"/>
 <!-- ══ SECTION 1 ══ -->
-<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(152,152,200,0.55)" letter-spacing="2" x="40" y="102">1 · LEGAL ARGUMENT ARCHITECTURE</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(144,144,184,0.55)" letter-spacing="2" x="40" y="102">1 · LEGAL ARGUMENT ARCHITECTURE</text>
 <!-- card: Foreclosure — DEMONSTRATED -->
-<rect x="40" y="110" width="4" height="60" rx="2" fill="#38c8b8" opacity="0.75"/>
-<rect x="44" y="110" width="276" height="60" rx="0" fill="rgba(13,31,26,0.75)" stroke="#0f6e56" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.7)" letter-spacing="1.5" x="54" y="127">DEMONSTRATED</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="146">The February 2026 closure</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="163">finally makes the case actionable</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="125">✓ Three legal grounds named</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="139">✓ Both writs now available at once</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="153">✓ The chain is stated, not implied</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="332" y="167"> McEntee Foreclosure · DOD-MO-01201-2025</text>
+<rect x="40" y="110" width="4" height="60" rx="2" fill="#58b8a0" opacity="0.75"/>
+<rect x="44" y="110" width="276" height="60" rx="0" fill="rgba(8,26,22,0.75)" stroke="#186858" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.7)" letter-spacing="1.5" x="54" y="127">DEMONSTRATED</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="146">The February 2026 closure</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="163">finally makes the case actionable</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="125">✓ Three legal grounds named</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="139">✓ Both writs now available at once</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="153">✓ The chain is stated, not implied</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="332" y="167"> McEntee Foreclosure · DOD-MO-01201-2025</text>
 <!-- card: Three courts — NEEDS DERIVATION -->
-<rect x="40" y="184" width="4" height="60" rx="2" fill="#d4c06a" opacity="0.75"/>
-<rect x="44" y="184" width="276" height="60" rx="0" fill="rgba(28,26,8,0.85)" stroke="#7a6e28" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.7)" letter-spacing="1.5" x="54" y="201">NEEDS DERIVATION</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="220">Three courts — no overlap</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="237">each can do what the others cannot</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="199">△ Described from diagram</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="213">△ Not yet shown from the law itself</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="227"> Irish Ombudsman Act s.7 · Art.228</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.5)" x="332" y="241"> TFEU · Défenseur mandate → OI-03</text>
+<rect x="40" y="184" width="4" height="60" rx="2" fill="#c88870" opacity="0.75"/>
+<rect x="44" y="184" width="276" height="60" rx="0" fill="rgba(26,16,8,0.85)" stroke="#6a4030" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.7)" letter-spacing="1.5" x="54" y="201">NEEDS DERIVATION</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="220">Three courts — no overlap</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="237">each can do what the others cannot</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="199">△ Described from diagram</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="213">△ Not yet shown from the law itself</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="227"> Irish Ombudsman Act s.7 · Art.228</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.5)" x="332" y="241"> TFEU · Défenseur mandate → OI-03</text>
 <!-- card: Did agency fail? — GAP -->
-<rect x="40" y="258" width="4" height="60" rx="2" fill="#c8253a" opacity="0.85"/>
-<rect x="44" y="258" width="276" height="60" rx="0" fill="rgba(26,8,10,0.9)" stroke="#7a1020" stroke-width="0.7"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.75)" letter-spacing="1.5" x="54" y="275">GAP — MUST CLOSE</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="294">Did the agency fail, or just disagree?</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="311">2009 vs 2025: two positions, one is wrong</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="273">✗ Conclusion stated, not built</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="287">✗ Legal breach limb not yet written</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="301"> O'Keeffe irrationality standard</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.5)" x="332" y="315"> → OI-01 · Blocking</text>
+<rect x="40" y="258" width="4" height="60" rx="2" fill="#c8a898" opacity="0.85"/>
+<rect x="44" y="258" width="276" height="60" rx="0" fill="rgba(28,18,16,0.9)" stroke="#7a5850" stroke-width="0.7"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.75)" letter-spacing="1.5" x="54" y="275">GAP — MUST CLOSE</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="294">Did the agency fail, or just disagree?</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="311">2009 vs 2025: two positions, one is wrong</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="273">✗ Conclusion stated, not built</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="287">✗ Legal breach limb not yet written</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="301"> O'Keeffe irrationality standard</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.5)" x="332" y="315"> → OI-01 · Blocking</text>
 <!-- card: Ombudsman conflict — GAP -->
-<rect x="40" y="332" width="4" height="60" rx="2" fill="#c8253a" opacity="0.85"/>
-<rect x="44" y="332" width="276" height="60" rx="0" fill="rgba(26,8,10,0.9)" stroke="#7a1020" stroke-width="0.7"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.75)" letter-spacing="1.5" x="54" y="349">GAP — MUST CLOSE</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="368">Ombudsman complaint: structural flaw</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="385">one body is respondent and overseer</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="347">✗ Tension identified, not resolved</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="361">✗ Fix: annual report as remedy</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="375"> One paragraph resolves this entirely</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.5)" x="332" y="389"> → OI-02 · Blocking</text>
+<rect x="40" y="332" width="4" height="60" rx="2" fill="#c8a898" opacity="0.85"/>
+<rect x="44" y="332" width="276" height="60" rx="0" fill="rgba(28,18,16,0.9)" stroke="#7a5850" stroke-width="0.7"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.75)" letter-spacing="1.5" x="54" y="349">GAP — MUST CLOSE</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="368">Ombudsman complaint: structural flaw</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="385">one body is respondent and overseer</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="347">✗ Tension identified, not resolved</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="361">✗ Fix: annual report as remedy</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="375"> One paragraph resolves this entirely</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.5)" x="332" y="389"> → OI-02 · Blocking</text>
 <!-- card: July 2026 deadline — DEMONSTRATED -->
-<rect x="40" y="406" width="4" height="60" rx="2" fill="#38c8b8" opacity="0.75"/>
-<rect x="44" y="406" width="276" height="60" rx="0" fill="rgba(13,31,26,0.75)" stroke="#0f6e56" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.7)" letter-spacing="1.5" x="54" y="423">DEMONSTRATED</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="442">July 2026 deadline is leverage</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="459">not a legal claim in its own right</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="421">✓ Overstatement corrected</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="435">✓ Institutional cost for silence confirmed</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="449">✓ Closes system from outside (K.3 logic)</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="332" y="463"> Presidency Paradox · strategic pressure</text>
+<rect x="40" y="406" width="4" height="60" rx="2" fill="#58b8a0" opacity="0.75"/>
+<rect x="44" y="406" width="276" height="60" rx="0" fill="rgba(8,26,22,0.75)" stroke="#186858" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.7)" letter-spacing="1.5" x="54" y="423">DEMONSTRATED</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="442">July 2026 deadline is leverage</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="459">not a legal claim in its own right</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="421">✓ Overstatement corrected</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="435">✓ Institutional cost for silence confirmed</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="449">✓ Closes system from outside (K.3 logic)</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="332" y="463"> Presidency Paradox · strategic pressure</text>
 <!-- card: Domestic routes exhausted — DEMONSTRATED -->
-<rect x="40" y="480" width="4" height="60" rx="2" fill="#38c8b8" opacity="0.75"/>
-<rect x="44" y="480" width="276" height="60" rx="0" fill="rgba(13,31,26,0.75)" stroke="#0f6e56" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.7)" letter-spacing="1.5" x="54" y="497">DEMONSTRATED</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="516">Every domestic door has been tried</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="533">sequence complete and documented</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="495">✓ Pre-Litigation Notice · Feb 10</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="509">✓ Gunn Letter · Feb 24 · Seanad · Mar 12</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="523">✓ Tairiscint + Ombudsman filed</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="332" y="537"> Each act independently reviewable</text>
-<line x1="40" y1="556" x2="640" y2="556" stroke="rgba(232,227,212,0.06)" stroke-width="0.5"/>
+<rect x="40" y="480" width="4" height="60" rx="2" fill="#58b8a0" opacity="0.75"/>
+<rect x="44" y="480" width="276" height="60" rx="0" fill="rgba(8,26,22,0.75)" stroke="#186858" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.7)" letter-spacing="1.5" x="54" y="497">DEMONSTRATED</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="516">Every domestic door has been tried</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="533">sequence complete and documented</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="495">✓ Pre-Litigation Notice · Feb 10</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="509">✓ Gunn Letter · Feb 24 · Seanad · Mar 12</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="523">✓ Tairiscint + Ombudsman filed</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="332" y="537"> Each act independently reviewable</text>
+<line x1="40" y1="556" x2="640" y2="556" stroke="rgba(232,222,210,0.06)" stroke-width="0.5"/>
 <!-- ══ SECTION 2 ══ -->
-<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(152,152,200,0.55)" letter-spacing="2" x="40" y="574">2 · DOCUMENT AND TOOLCHAIN STATUS</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(144,144,184,0.55)" letter-spacing="2" x="40" y="574">2 · DOCUMENT AND TOOLCHAIN STATUS</text>
 <!-- card: glossary — DEMONSTRATED -->
-<rect x="40" y="582" width="4" height="60" rx="2" fill="#38c8b8" opacity="0.75"/>
-<rect x="44" y="582" width="276" height="60" rx="0" fill="rgba(13,31,26,0.75)" stroke="#0f6e56" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.7)" letter-spacing="1.5" x="54" y="599">DEMONSTRATED</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="618">11 terms defined with legal anchors</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="635">usable everywhere without re-explaining</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="597">✓ Legal correlate per term</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="611">✓ Nullification Loop → Martin Timeline</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.6)" x="332" y="625">✓ Defined once · usable corpus-wide</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="332" y="639"> Operative Glossary · 11 terms</text>
+<rect x="40" y="582" width="4" height="60" rx="2" fill="#58b8a0" opacity="0.75"/>
+<rect x="44" y="582" width="276" height="60" rx="0" fill="rgba(8,26,22,0.75)" stroke="#186858" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.7)" letter-spacing="1.5" x="54" y="599">DEMONSTRATED</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="618">11 terms defined with legal anchors</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="635">usable everywhere without re-explaining</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="597">✓ Legal correlate per term</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="611">✓ Nullification Loop → Martin Timeline</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.6)" x="332" y="625">✓ Defined once · usable corpus-wide</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="332" y="639"> Operative Glossary · 11 terms</text>
 <!-- card: Lint gate — GAP -->
-<rect x="40" y="656" width="4" height="60" rx="2" fill="#c8253a" opacity="0.85"/>
-<rect x="44" y="656" width="276" height="60" rx="0" fill="rgba(26,8,10,0.9)" stroke="#7a1020" stroke-width="0.7"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.75)" letter-spacing="1.5" x="54" y="673">GAP — PUBLICATION GATE</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="692">Primary document not yet proofed</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="709">must run before next transmission</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="671">✗ Tairiscint not lint-cleared yet</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="685">✗ Tool is live · pass not yet run</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.65)" x="332" y="699"> lint-em-dash-prep v1.0 · five rules</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.5)" x="332" y="713"> → OI-06 · Blocking</text>
+<rect x="40" y="656" width="4" height="60" rx="2" fill="#c8a898" opacity="0.85"/>
+<rect x="44" y="656" width="276" height="60" rx="0" fill="rgba(28,18,16,0.9)" stroke="#7a5850" stroke-width="0.7"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.75)" letter-spacing="1.5" x="54" y="673">GAP — PUBLICATION GATE</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="692">Primary document not yet proofed</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="709">must run before next transmission</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="671">✗ Tairiscint not lint-cleared yet</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="685">✗ Tool is live · pass not yet run</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.65)" x="332" y="699"> lint-em-dash-prep v1.0 · five rules</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.5)" x="332" y="713"> → OI-06 · Blocking</text>
 <!-- card: Grammar tools — NEEDS DERIVATION -->
-<rect x="40" y="730" width="4" height="60" rx="2" fill="#d4c06a" opacity="0.75"/>
-<rect x="44" y="730" width="276" height="60" rx="0" fill="rgba(28,26,8,0.85)" stroke="#7a6e28" stroke-width="0.6"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.7)" letter-spacing="1.5" x="54" y="747">NEEDS DERIVATION</text>
-<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#e8e3d4" x="54" y="766">Lint tool spec'd, not yet coded</text>
-<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#9e9887" font-style="italic" x="54" y="783">enforcement still manual</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="745">△ key-grammar v1.1 · live ✓</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="759">△ lint-em-dash-prep v1.0 · live ✓</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.6)" x="332" y="773"> Python script → OI-05 not written</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.5)" x="332" y="787"> Manual enforcement until complete</text>
+<rect x="40" y="730" width="4" height="60" rx="2" fill="#c88870" opacity="0.75"/>
+<rect x="44" y="730" width="276" height="60" rx="0" fill="rgba(26,16,8,0.85)" stroke="#6a4030" stroke-width="0.6"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.7)" letter-spacing="1.5" x="54" y="747">NEEDS DERIVATION</text>
+<text font-family="'Cormorant Garamond',serif" font-size="14" fill="#ede8df" x="54" y="766">Lint tool spec'd, not yet coded</text>
+<text font-family="'Cormorant Garamond',serif" font-size="13" fill="#a09488" font-style="italic" x="54" y="783">enforcement still manual</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="745">△ key-grammar v1.1 · live ✓</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="759">△ lint-em-dash-prep v1.0 · live ✓</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.6)" x="332" y="773"> Python script → OI-05 not written</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.5)" x="332" y="787"> Manual enforcement until complete</text>
 <!-- NET -->
-<line x1="40" y1="806" x2="640" y2="806" stroke="rgba(232,227,212,0.08)" stroke-width="0.5"/>
-<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(152,152,200,0.55)" letter-spacing="2" x="40" y="825">NET EPISTEMIC STATUS · SESSION CLOSE · MARCH 2026</text>
-<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#38c8b8" x="40" y="860" font-weight="300">3</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="82" y="848">claims</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(56,200,184,0.5)" x="82" y="860">demonstrated</text>
-<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#d4c06a" x="250" y="860" font-weight="300">3</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.5)" x="292" y="848">need derivation</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(212,192,106,0.5)" x="292" y="860">from instruments</text>
-<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#c8253a" x="460" y="860" font-weight="300">2</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.5)" x="502" y="848">gaps block</text>
-<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,37,58,0.5)" x="502" y="860">next transmission</text>
+<line x1="40" y1="806" x2="640" y2="806" stroke="rgba(232,222,210,0.08)" stroke-width="0.5"/>
+<text font-family="'IBM Plex Mono',monospace" font-size="10" fill="rgba(144,144,184,0.55)" letter-spacing="2" x="40" y="825">NET EPISTEMIC STATUS · SESSION CLOSE · MARCH 2026</text>
+<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#58b8a0" x="40" y="860" font-weight="300">3</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="82" y="848">claims</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(88,184,160,0.5)" x="82" y="860">demonstrated</text>
+<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#c88870" x="250" y="860" font-weight="300">3</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.5)" x="292" y="848">need derivation</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,136,112,0.5)" x="292" y="860">from instruments</text>
+<text font-family="'Cormorant Garamond',serif" font-size="34" fill="#c8a898" x="460" y="860" font-weight="300">2</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.5)" x="502" y="848">gaps block</text>
+<text font-family="'IBM Plex Mono',monospace" font-size="9" fill="rgba(200,168,152,0.5)" x="502" y="860">next transmission</text>
 </svg>
 </div>
 </section>
@@ -594,7 +614,7 @@ An audit like this one doesn't score arguments for how clever they sound. It ask
 <div class="section-title">Four things that need to happen next</div>
 </div>
 <div class="section-sub">Two are urgent before any document leaves. Two are important but not blocking.</div>
-<p class="prompt-line">All four are discrete. Each is completable in a single working session. The two red items must happen before the Tairiscint or the Ombudsman complaint is transmitted anywhere.</p>
+<p class="prompt-line">All four are discrete. Each is completable in a single working session. The two slipper-coded items must happen before the Tairiscint or the Ombudsman complaint is transmitted anywhere.</p>
 <div class="task-list">
 <div class="task-item">
 <div>
@@ -737,7 +757,7 @@ An audit like this one doesn't score arguments for how clever they sound. It ask
 </a>
 <a class="net-cell" href="https://dr-crunch.github.io/redundancy-awareness/semantic-map#ob4">
   <div class="net-n info" style="color:var(--dragonfly);">📡</div>
-  <div class="net-label" style="color:rgba(90,176,200,.55);">informational<br>ingress</div>
+  <div class="net-label" style="color:rgba(90,160,184,.55);">informational<br>ingress</div>
 </a>
 <a class="net-cell" href="https://dr-crunch.github.io/redundancy-awareness/semantic-map#ob5">
   <div class="net-n gap">⚠</div>
@@ -779,7 +799,7 @@ function seed(){
 s=[];
 for(let i=0;i<N;i++){
 const m=Math.random();
-s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:m<.05?1.4:m<.2?.9:.45,a:.12+(1-m)*.6,tw:Math.random()*Math.PI*2,sp:.003+Math.random()*.006,col:m<.08?'#b87898':m<.15?'#9898c8':'#d0cbc0'});
+s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:m<.05?1.4:m<.2?.9:.45,a:.10+(1-m)*.5,tw:Math.random()*Math.PI*2,sp:.003+Math.random()*.006,col:m<.08?'#c8a898':m<.15?'#a87888':'#d8d0c4'});
 }
 }
 function draw(t){
