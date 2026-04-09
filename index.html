@@ -7,36 +7,44 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=Cormorant:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-
 <meta property="og:title" content="Redundancy Awareness · Ministerial Correspondence · Meinhardt Initiative" />
 <meta property="og:description" content="Secondary repository of ministerial correspondence, jurisdictional deflection, and executive enquiries. The granular documentary evidence of how the Meinhardt Initiative was processed — or deflected — across the highest levels of the Irish Executive and Parliament." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://dr-crunch.github.io/redundancy-awareness/" />
 <meta property="og:image" content="https://dr-crunch.github.io/redundancy-awareness/og-image.jpg" />
-<meta property="og:site_name" content="Meinhardt Initiative Redundancy Awareness />
+<meta property="og:site_name" content="Meinhardt Initiative Redundancy Awareness" />
 <meta name="description" content="Secondary repository of ministerial correspondence, jurisdictional deflection, and executive enquiries. Interregnum Nullificans 2006–2026." />
-
-<!-- Twitter / X Cards -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Interregnum Nullificans 2006–2026" />
 <meta name="twitter:description" content="Secondary repository of ministerial correspondence, jurisdictional deflection, and executive enquiries. Interregnum Nullificans 2006–2026." />
 <meta name="twitter:image" content="https://dr-crunch.github.io/redundancy-awareness/og-image.jpg" />
-<meta name="description" content="Pre-litigation public evidentiary record on the 19-year administrative non-decision by the Irish State under the Meinhardt Initiative. EU Council Presidency deadline: 1 July 2026." />
 
 <style>
   :root {
-    --ink: #06050a;
-    --surface: #0e0d14;
-    --surface2: #13121b;
+    /* ── backgrounds (DD values) ── */
+    --ink: #0c0b09;
+    --surface: #141210;
+    --surface2: #1c1a17;
     --parchment: #e8e3d4;
     --parchment-dim: #9e9887;
     --parchment-faint: #2a2720;
-    --purple: #8b83e8;
-    --purple-dim: #534ab7;
-    --purple-bg: #1a1830;
-    --green: #2fb882;
-    --green-dim: #0f6e56;
-    --green-bg: #0d1f1a;
+    /* ── regatta  ·  primary accent (replaces amber) ── */
+    --regatta: #7faad4;
+    --regatta-dim: #2a4060;
+    --regatta-bg: #171e28;
+    /* ── purple  ·  secondary accent ── */
+    --purple: #9098b0;
+    --purple-dim: #303848;
+    --purple-bg: #1e1f24;
+    /* ── green ── */
+    --green: #5e9e9a;
+    --green-dim: #2a3e3d;
+    --green-bg: #1a1e20;
+    /* ── citron  ·  warm/archive accent ── */
+    --citron: #c8b87a;
+    --citron-dim: #3a3420;
+    --citron-bg: #1e1e20;
+    /* ── terra / amber / blue / teal retained ── */
     --terra: #d4643d;
     --terra-dim: #993d1d;
     --terra-bg: #1f1109;
@@ -46,9 +54,13 @@
     --blue: #4a9fe0;
     --blue-dim: #185fa5;
     --blue-bg: #0c1929;
+    --teal: #2ab8c0;
+    --teal-dim: #156e72;
+    --teal-bg: #0a1e20;
     --gold: #c9a84c;
-    --rule: rgba(232, 227, 212, 0.08);
-    --rule-strong: rgba(232, 227, 212, 0.15);
+    /* ── rules (DD values) ── */
+    --rule: rgba(232, 227, 212, 0.1);
+    --rule-strong: rgba(232, 227, 212, 0.18);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,7 +83,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.35;
+    opacity: 0.5;
   }
 
   #starfield {
@@ -82,11 +94,11 @@
     opacity: 0.55;
   }
 
-  /* ─── SIDEREAL BAND ─── */
+  /* ─── SIDEREAL BAND  ·  gold/citron retained — astronomical register ─── */
   .sidereal-band {
     position: relative;
     z-index: 1;
-    background: linear-gradient(to bottom, rgba(6,5,10,0) 0%, rgba(6,5,10,0.85) 100%);
+    background: linear-gradient(to bottom, rgba(12,11,9,0) 0%, rgba(12,11,9,0.85) 100%);
     padding: 20px 32px 0;
     max-width: 960px;
     margin: 0 auto;
@@ -96,21 +108,21 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
-    color: rgba(220,182,96,0.8);
+    color: rgba(200,184,122,0.75);
     text-transform: uppercase;
     display: flex;
     gap: 24px;
     flex-wrap: wrap;
     padding-bottom: 16px;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
+    border-bottom: 1px solid rgba(200,184,122,0.1);
   }
 
-  .sidereal-coord span { color: rgba(220,182,96,0.8); margin: 0 4px; }
+  .sidereal-coord span { color: rgba(200,184,122,0.75); margin: 0 4px; }
 
-  /* ─── ALERT STRIP ─── */
+  /* ─── ALERT STRIP  ·  regatta ─── */
   .alert-strip {
-    background: var(--amber-bg);
-    border-bottom: 1px solid var(--amber-dim);
+    background: var(--regatta-bg);
+    border-bottom: 1px solid var(--regatta-dim);
     padding: 10px 32px;
     display: flex;
     align-items: center;
@@ -124,14 +136,14 @@
   .alert-strip-text {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    color: var(--amber);
+    color: var(--regatta);
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
   .alert-strip-text span { color: var(--parchment-dim); margin: 0 6px; }
 
-  .hot-buttons { display: flex; gap: 10px; flex-shrink: 0; }
+  .hot-buttons { display: flex; gap: 10px; flex-shrink: 0; flex-wrap: wrap; }
 
   .btn {
     display: inline-flex;
@@ -163,26 +175,28 @@
 
   .btn:hover::before { opacity: 0.08; }
 
+  /* Main Record  ·  regatta ─── */
   .btn-main {
-    background: var(--green-bg);
-    border-color: var(--green-dim);
-    color: var(--green);
+    background: var(--regatta-bg);
+    border-color: var(--regatta-dim);
+    color: var(--regatta);
   }
 
   .btn-main:hover {
-    border-color: var(--green);
-    box-shadow: 0 0 12px rgba(47,184,130,0.15);
+    border-color: var(--regatta);
+    box-shadow: 0 0 10px rgba(127,170,212,0.15);
   }
 
+  /* Full Repository  ·  purple (secondary) ─── */
   .btn-drive {
-    background: var(--amber-bg);
-    border-color: var(--amber-dim);
-    color: var(--amber);
+    background: var(--purple-bg);
+    border-color: var(--purple-dim);
+    color: var(--purple);
   }
 
   .btn-drive:hover {
-    border-color: var(--amber);
-    box-shadow: 0 0 12px rgba(201,136,31,0.2);
+    border-color: var(--purple);
+    box-shadow: 0 0 10px rgba(144,152,176,0.15);
   }
 
   .btn-icon { font-size: 13px; }
@@ -202,7 +216,7 @@
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--regatta);
     margin-bottom: 20px;
     display: flex;
     align-items: center;
@@ -213,7 +227,7 @@
     content: '';
     flex: 1;
     height: 1px;
-    background: var(--amber);
+    background: var(--regatta);
     opacity: 0.3;
     max-width: 200px;
   }
@@ -228,10 +242,7 @@
     margin-bottom: 8px;
   }
 
-  h1 em {
-    font-style: italic;
-    color: var(--parchment-dim);
-  }
+  h1 em { font-style: italic; color: var(--parchment-dim); }
 
   .header-subtitle {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -249,17 +260,12 @@
     color: var(--parchment);
     max-width: 680px;
     line-height: 1.75;
-    border-left: 2px solid var(--amber);
+    border-left: 2px solid var(--regatta);
     padding-left: 20px;
     margin-bottom: 32px;
   }
 
-  .header-meta {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-
+  .header-meta { display: flex; gap: 32px; flex-wrap: wrap; }
   .meta-item { display: flex; flex-direction: column; gap: 3px; }
 
   .meta-label {
@@ -277,9 +283,9 @@
   }
 
   .meta-value.live { color: var(--terra); }
-  .meta-value.amber { color: var(--amber); }
+  .meta-value.purple { color: var(--regatta); }
 
-  /* ─── MACHOL-STYLE QUOTE ─── */
+  /* ─── MACHOL QUOTE  ·  regatta ─── */
   .machol {
     position: relative;
     z-index: 1;
@@ -294,7 +300,7 @@
 
   .machol-line {
     width: 3px;
-    background: linear-gradient(to bottom, var(--amber), transparent);
+    background: linear-gradient(to bottom, var(--regatta), transparent);
     flex-shrink: 0;
     align-self: stretch;
     min-height: 60px;
@@ -314,7 +320,7 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.1em;
-    color: var(--amber);
+    color: var(--regatta);
     text-transform: uppercase;
   }
 
@@ -324,6 +330,7 @@
     color: var(--parchment-dim);
     max-width: 580px;
     line-height: 1.7;
+    font-family: 'EB Garamond', serif;
   }
 
   /* ─── FOUR COMPONENTS ─── */
@@ -359,7 +366,10 @@
     background: var(--surface);
     padding: 24px;
     position: relative;
+    transition: background 0.2s;
   }
+
+  .hyp-card:hover { background: var(--surface2); }
 
   .hyp-card::before {
     content: attr(data-letter);
@@ -389,13 +399,15 @@
     font-weight: 400;
     color: var(--parchment);
     line-height: 1.6;
+    font-family: 'EB Garamond', serif;
   }
 
+  /* regatta  ·  hyp-remedy */
   .hyp-remedy {
     margin-top: 10px;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
-    color: var(--amber);
+    color: var(--regatta);
     letter-spacing: 0.05em;
   }
 
@@ -417,12 +429,13 @@
     flex-wrap: wrap;
   }
 
+  /* regatta  ·  section numbers */
   .dir-section-num {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--regatta);
     opacity: 0.7;
   }
 
@@ -452,11 +465,12 @@
 
   .star-article:hover { background: var(--surface2); }
 
+  /* regatta  ·  glyph labels */
   .star-glyph {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.25em;
-    color: var(--amber);
+    color: var(--regatta);
     opacity: 0.7;
     margin-bottom: 12px;
     display: flex;
@@ -467,7 +481,7 @@
   .star-glyph::before {
     content: '✦';
     font-size: 8px;
-    color: var(--amber);
+    color: var(--regatta);
     opacity: 0.5;
   }
 
@@ -492,11 +506,12 @@
 
   .star-plain strong { color: var(--parchment); font-weight: 500; }
 
+  /* regatta  ·  cite line */
   .star-cite {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.1em;
-    color: rgba(201,168,76,0.5);
+    color: rgba(127,170,212,0.4);
     text-transform: uppercase;
     border-top: 1px solid var(--rule);
     padding-top: 10px;
@@ -504,13 +519,14 @@
   }
 
   .star-cite a {
-    color: rgba(201,136,31,0.8);
+    color: rgba(127,170,212,0.8);
     text-decoration: none;
+    transition: color 0.15s;
   }
 
-  .star-cite a:hover { color: var(--amber); }
+  .star-cite a:hover { color: var(--regatta); }
 
-  /* ─── AXIOM BAR ─── */
+  /* ─── AXIOM BAR  ·  regatta ─── */
   .axiom-bar {
     position: relative;
     z-index: 1;
@@ -527,7 +543,7 @@
   .axiom-rule {
     width: 3px;
     align-self: stretch;
-    background: linear-gradient(to bottom, var(--amber) 0%, rgba(201,136,31,0.1) 100%);
+    background: linear-gradient(to bottom, var(--regatta) 0%, rgba(127,170,212,0.06) 100%);
     border-radius: 2px;
     min-height: 80px;
   }
@@ -539,7 +555,7 @@
     font-size: 9px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(201,136,31,0.5);
+    color: rgba(127,170,212,0.35);
   }
 
   .axiom-text {
@@ -602,6 +618,8 @@
   }
 
   .svg-container svg { display: block; max-width: 100%; height: auto; }
+  .svg-container g[data-href] { cursor: pointer; transition: opacity 0.15s; }
+  .svg-container g[data-href]:hover { opacity: 0.82; filter: brightness(1.12); }
 
   /* ─── ECOSYSTEM ─── */
   .ecosystem-section {
@@ -657,19 +675,20 @@
     margin-bottom: 12px;
   }
 
+  /* regatta  ·  eco-link */
   .eco-link {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.06em;
-    color: rgba(201,136,31,0.7);
+    color: rgba(127,170,212,0.7);
     text-decoration: none;
-    border-bottom: 1px solid rgba(201,136,31,0.2);
+    border-bottom: 1px solid rgba(127,170,212,0.2);
     transition: color 0.15s, border-color 0.15s;
   }
 
   .eco-link:hover {
-    color: var(--amber);
-    border-color: var(--amber);
+    color: var(--regatta);
+    border-color: var(--regatta);
   }
 
   /* ─── LEGAL FOOTNOTES ─── */
@@ -689,20 +708,22 @@
     margin-top: 24px;
   }
 
+  /* regatta  ·  legal card top border */
   .legal-card {
     padding: 20px;
     border: 1px solid var(--rule-strong);
-    border-top: 3px solid rgba(201,136,31,0.4);
+    border-top: 3px solid rgba(127,170,212,0.3);
     background: var(--surface);
     border-radius: 2px;
   }
 
+  /* regatta  ·  legal card label */
   .legal-card-label {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--amber);
+    color: var(--regatta);
     margin-bottom: 8px;
   }
 
@@ -744,11 +765,12 @@
     word-break: break-word;
   }
 
-  .keyword-blob .k-core { color: var(--purple); }
+  /* k-core → regatta  (DD: .k-core = var(--regatta)) */
+  .keyword-blob .k-core  { color: var(--regatta); }
   .keyword-blob .k-legal { color: var(--blue); }
   .keyword-blob .k-irish { color: var(--green); }
-  .keyword-blob .k-mech { color: var(--amber); }
-  .keyword-blob .k-exec { color: var(--terra); }
+  .keyword-blob .k-mech  { color: var(--amber); }   /* mechanism — warm amber retained */
+  .keyword-blob .k-exec  { color: var(--terra); }   /* executive — terra retained */
 
   /* ─── FOOTER ─── */
   footer {
@@ -791,7 +813,7 @@
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .fade-up { animation: fadeUp 0.6s ease forwards; opacity: 0; }
@@ -851,10 +873,10 @@
     Séachanachas documented<span>·</span>2006–2026<span>·</span>Historical snapshot · 2025<span>·</span>EU Council Presidency deadline: 1 July 2026
   </div>
   <div class="hot-buttons">
-    <a href="https://dr-crunch.github.io/" class="btn btn-main" >
+    <a href="https://dr-crunch.github.io/" class="btn btn-main">
       <span class="btn-icon">◎</span> Main Record
     </a>
-    <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" class="btn btn-drive" >
+    <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" class="btn btn-drive">
       <span class="btn-icon">▤</span> Full Repository
     </a>
   </div>
@@ -923,8 +945,8 @@
       <div class="hyp-body">Records of the circular referral process, where the enquiry was bounced between departments to avoid substantive engagement — providing a live case study of Séachanachas: the institutional art of avoidance elevated to administrative policy.</div>
       <div class="hyp-remedy">→ Séachanachas — governance by avoidance</div>
     </div>
-  <div class="hyp-card" data-letter="IV" style="grid-column: 1 / -1;">
-  <div class="hyp-title">IV · Trigger for Statutory Filing</div>
+    <div class="hyp-card" data-letter="IV" style="grid-column: 1 / -1;">
+      <div class="hyp-title">IV · Trigger for Statutory Filing</div>
       <div class="hyp-body">This file serves as the immediate precursor to the Ethics in Public Office Act filings. It establishes that the State refused to acknowledge the scientific basis of the proposal at all. The defence of substantive disagreement is therefore unavailable.</div>
       <div class="hyp-remedy">→ The "Policy Disagreement" defence is void</div>
     </div>
@@ -1098,39 +1120,49 @@
     <svg width="100%" viewBox="0 0 700 760" xmlns="http://www.w3.org/2000/svg" style="font-family:'IBM Plex Mono',monospace;">
       <defs>
         <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-          <path d="M2 1L8 5L2 9" fill="none" stroke="#4a4540" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#3a3828" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
         <style>
-          .node-hub rect { fill:#1a1830; stroke:#7F77DD; }
-          .node-hub text.t1 { fill:#b8b3f0; font-size:13px; font-weight:500; }
-          .node-hub text.t2 { fill:#7F77DD; font-size:11px; }
-          .node-entry rect { fill:#1e1509; stroke:#854f0b; }
-          .node-entry text.t1 { fill:#d4a464; font-size:13px; font-weight:500; }
-          .node-entry text.t2 { fill:#854f0b; font-size:11px; }
-          .node-exec rect { fill:#1f1109; stroke:#993d1d; }
+          /* ── hub  ·  regatta (primary accent) ── */
+          .node-hub rect  { fill:#171e28; stroke:#2a4060; }
+          .node-hub text.t1 { fill:#9ec4e8; font-size:13px; font-weight:500; }
+          .node-hub text.t2 { fill:#2a4060; font-size:11px; }
+          /* ── entry/RA hub  ·  regatta ── */
+          .node-entry rect  { fill:#171e28; stroke:#2a4060; }
+          .node-entry text.t1 { fill:#9ec4e8; font-size:13px; font-weight:500; }
+          .node-entry text.t2 { fill:#4a7aaa; font-size:11px; }
+          /* ── executive documents  ·  terra ── */
+          .node-exec rect  { fill:#1f1109; stroke:#993d1d; }
           .node-exec text.t1 { fill:#e8856a; font-size:13px; font-weight:500; }
           .node-exec text.t2 { fill:#993d1d; font-size:11px; }
-          .node-oversight rect { fill:#0c1929; stroke:#185fa5; }
+          /* ── oversight documents  ·  blue ── */
+          .node-oversight rect  { fill:#0c1929; stroke:#185fa5; }
           .node-oversight text.t1 { fill:#7ab8e8; font-size:13px; font-weight:500; }
           .node-oversight text.t2 { fill:#4a9fe0; font-size:11px; }
-          .node-summary rect { fill:#0d1f1a; stroke:#2FA882; }
-          .node-summary text.t1 { fill:#7dd9b8; font-size:13px; font-weight:500; }
-          .node-summary text.t2 { fill:#2FA882; font-size:11px; }
-          .node-visual rect { fill:#1a1830; stroke:#534ab7; }
-          .node-visual text.t1 { fill:#9990e8; font-size:13px; font-weight:500; }
-          .node-visual text.t2 { fill:#534ab7; font-size:11px; }
-          .node-main rect { fill:#0d1f1a; stroke:#2FA882; }
-          .node-main text.t1 { fill:#7dd9b8; font-size:13px; font-weight:500; }
-          .node-main text.t2 { fill:#2FA882; font-size:11px; }
-          .node-drive rect { fill:#1e1509; stroke:#854f0b; }
-          .node-drive text.t1 { fill:#d4a464; font-size:13px; font-weight:500; }
-          .node-drive text.t2 { fill:#854f0b; font-size:11px; }
-          .node-nav rect { fill:#191714; stroke:#4a4540; }
-          .node-nav text { fill:#6e6b62; font-size:11px; }
-          .node-title rect { fill:#191714; stroke:#4a4540; }
+          /* ── summaries  ·  green/teal ── */
+          .node-summary rect  { fill:#1a1e20; stroke:#2a3e3d; }
+          .node-summary text.t1 { fill:#8ecfcb; font-size:13px; font-weight:500; }
+          .node-summary text.t2 { fill:#5e9e9a; font-size:11px; }
+          /* ── visual  ·  purple ── */
+          .node-visual rect  { fill:#1e1f24; stroke:#303848; }
+          .node-visual text.t1 { fill:#b0b8d0; font-size:13px; font-weight:500; }
+          .node-visual text.t2 { fill:#9098b0; font-size:11px; }
+          /* ── main (dr-crunch)  ·  green/teal ── */
+          .node-main rect  { fill:#1a1e20; stroke:#2a3e3d; }
+          .node-main text.t1 { fill:#8ecfcb; font-size:13px; font-weight:500; }
+          .node-main text.t2 { fill:#5e9e9a; font-size:11px; }
+          /* ── drive archive  ·  citron (warm archive) ── */
+          .node-drive rect  { fill:#1e1e20; stroke:#3a3420; }
+          .node-drive text.t1 { fill:#d4c490; font-size:13px; font-weight:500; }
+          .node-drive text.t2 { fill:#7a6a2a; font-size:11px; }
+          /* ── nav ── */
+          .node-nav rect  { fill:#191714; stroke:#3a3828; }
+          .node-nav text  { fill:#6e6b62; font-size:11px; }
+          /* ── title ── */
+          .node-title rect { fill:#141210; stroke:#2a2720; }
           .node-title text { fill:#9e9887; font-size:13px; font-weight:400; }
-          .legend-text { fill:#6e6b62; font-size:11px; }
-          .section-lbl { fill:#4a4540; font-size:11px; }
+          .legend-text  { fill:#6e6b62; font-size:11px; }
+          .section-lbl  { fill:#3a3828; font-size:11px; }
           svg g[data-href] { cursor:pointer; }
           svg g[data-href]:hover rect { filter:brightness(1.25); }
           svg g[data-href] rect { transition: all 0.15s; }
@@ -1324,28 +1356,27 @@
       </g>
 
       <!-- Legend -->
-      <rect x="20" y="610" width="12" height="12" rx="2" fill="#1a1830" stroke="#7F77DD" stroke-width="0.5"/>
-      <text x="38" y="616" class="legend-text" dominant-baseline="central">Hub</text>
-      <rect x="75" y="610" width="12" height="12" rx="2" fill="#1f1109" stroke="#993d1d" stroke-width="0.5"/>
-      <text x="93" y="616" class="legend-text" dominant-baseline="central">Executive</text>
-      <rect x="165" y="610" width="12" height="12" rx="2" fill="#0c1929" stroke="#185fa5" stroke-width="0.5"/>
-      <text x="183" y="616" class="legend-text" dominant-baseline="central">Oversight</text>
-      <rect x="255" y="610" width="12" height="12" rx="2" fill="#0d1f1a" stroke="#2FA882" stroke-width="0.5"/>
-      <text x="273" y="616" class="legend-text" dominant-baseline="central">Summary</text>
-      <rect x="345" y="610" width="12" height="12" rx="2" fill="#1e1509" stroke="#854f0b" stroke-width="0.5"/>
-      <text x="363" y="616" class="legend-text" dominant-baseline="central">Drive archive</text>
-      <rect x="455" y="610" width="12" height="12" rx="2" fill="#1a1830" stroke="#534ab7" stroke-width="0.5"/>
-      <text x="473" y="616" class="legend-text" dominant-baseline="central">Visual</text>
-      <rect x="515" y="610" width="12" height="12" rx="2" fill="#191714" stroke="#4a4540" stroke-width="0.5"/>
-      <text x="533" y="616" class="legend-text" dominant-baseline="central">Nav links</text>
+      <rect x="20"  y="610" width="12" height="12" rx="2" fill="#171e28" stroke="#2a4060" stroke-width="0.5"/>
+      <text x="38"  y="616" class="legend-text" dominant-baseline="central">Hub / RA node</text>
+      <rect x="130" y="610" width="12" height="12" rx="2" fill="#1f1109" stroke="#993d1d" stroke-width="0.5"/>
+      <text x="148" y="616" class="legend-text" dominant-baseline="central">Executive</text>
+      <rect x="220" y="610" width="12" height="12" rx="2" fill="#0c1929" stroke="#185fa5" stroke-width="0.5"/>
+      <text x="238" y="616" class="legend-text" dominant-baseline="central">Oversight</text>
+      <rect x="310" y="610" width="12" height="12" rx="2" fill="#1a1e20" stroke="#2a3e3d" stroke-width="0.5"/>
+      <text x="328" y="616" class="legend-text" dominant-baseline="central">Summary</text>
+      <rect x="400" y="610" width="12" height="12" rx="2" fill="#1e1e20" stroke="#3a3420" stroke-width="0.5"/>
+      <text x="418" y="616" class="legend-text" dominant-baseline="central">Drive archive</text>
+      <rect x="505" y="610" width="12" height="12" rx="2" fill="#1e1f24" stroke="#303848" stroke-width="0.5"/>
+      <text x="523" y="616" class="legend-text" dominant-baseline="central">Visual</text>
+      <rect x="570" y="610" width="12" height="12" rx="2" fill="#191714" stroke="#3a3828" stroke-width="0.5"/>
+      <text x="588" y="616" class="legend-text" dominant-baseline="central">Nav links</text>
 
     </svg>
   </div>
 </section>
 
-<!-- Add IDs for scroll targets -->
+<!-- Patch section IDs for SVG scroll navigation -->
 <script>
-  // Patch section IDs for SVG scroll navigation
   document.addEventListener('DOMContentLoaded', function() {
     const sections = document.querySelectorAll('.dir-section');
     const ids = ['section-01','section-02','section-03','section-04'];
@@ -1450,8 +1481,8 @@
     <a href="https://dr-crunch.github.io" target="_blank">dr-crunch.github.io</a><br>
     <a href="https://github.com/dr-crunch/redundancy-awareness" target="_blank">github.com/dr-crunch/redundancy-awareness</a><br>
     <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" target="_blank">Full Repository · Google Drive · CC0 · The record is public</a><br>
-    <a href="https://dr-crunch.github.io/sitemap.html" target="_blank">Sitemap</a><br>
-   </div>
+    <a href="https://dr-crunch.github.io/sitemap.html" target="_blank">Sitemap</a>
+  </div>
   <div class="footer-right">
     Redundancy Awareness · 2006–2026<br>
     The duty has not been discharged.<br>
@@ -1462,7 +1493,7 @@
 <div class="tooltip" id="tooltip"></div>
 
 <script>
-  // ─── STARFIELD ───
+  /* ─── STARFIELD ─── */
   (function() {
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
@@ -1485,7 +1516,11 @@
           a: 0.15 + (1 - mag) * 0.65,
           twinkle: Math.random() * Math.PI * 2,
           speed: 0.003 + Math.random() * 0.006,
-          color: mag < 0.08 ? '#c9a84c' : mag < 0.15 ? '#b8d4f0' : '#d4cfc0'
+          /* regatta-tinted stars alongside the classic gold/blue/warm */
+          color: mag < 0.06 ? '#7faad4'
+               : mag < 0.12 ? '#c8b87a'
+               : mag < 0.20 ? '#b8d4f0'
+               : '#d4cfc0'
         });
       }
     }
@@ -1538,6 +1573,7 @@
   };
 
   document.querySelectorAll('g[data-href]').forEach(g => {
+    g.addEventListener('click', () => navigate(g));
     g.addEventListener('mouseenter', () => {
       const href = g.getAttribute('data-href');
       const label = labels[href];
