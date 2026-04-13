@@ -124,8 +124,9 @@ header{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:64px 3
 .eyebrow::after{content:'';flex:1;height:1px;background:var(--citron);opacity:0.22;max-width:200px;}
 h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(34px,5.5vw,66px);line-height:1.05;color:var(--parchment);margin-bottom:6px;}
 h1 em{font-style:italic;color:var(--bordeaux);}
-.header-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.9vw,20px);font-weight:300;font-style:italic;color:var(--parchment-dim);margin-bottom:26px;gap: 0.6em;}
-.header-lede{font-family:'EB Garamond',serif;font-size:16px;color:var(--parchment);max-width:700px;line-height:1.8;border-left:2px solid var(--scarlet);padding-left:20px;margin-bottom:28px;gap: 1em;}
+.header-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.9vw,20px);font-weight:300;font-style:italic;color:var(--parchment-dim);margin-bottom:26px;}
+.header-lede{font-family:'EB Garamond',serif;font-size:16px;color:var(--parchment);max-width:700px;line-height:1.8;border-left:2px solid var(--scarlet);padding-left:20px;margin-bottom:28px;}
+.header-lede p + p{margin-top:1.4em;}
 .layer-badges{display:flex;gap:8px;flex-wrap:wrap;}
 .layer-badge{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:3px;border:1px solid;}
 .lb-cosmic{color:var(--cosmic);border-color:var(--cosmic-dim);background:var(--cosmic-bg);}
@@ -266,7 +267,6 @@ h1 em{font-style:italic;color:var(--bordeaux);}
 .cloud-rule{height:1px;background:linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);margin:20px 0;}
 .cloud-mono{font-family:'IBM Plex Mono',monospace;color:var(--cloud);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;}
 
-.p{gap: 1em;}
 /* ══════════════════════════════════════════
    PORTAL — Grape · Gold · Sherwood
 ══════════════════════════════════════════ */
@@ -1333,7 +1333,7 @@ footer a:hover{color:var(--parchment);}
           <tr><td style="color:var(--scarlet);font-weight:500;">JCPP — Cathaoirleach Louise O'Reilly (×5)</td><td>—</td><td>June 2025 – Feb 2026</td><td><span class="status-none">0 replies</span></td></tr>
           <tr><td style="color:var(--scarlet);font-weight:500;">JCPP — Leas-Chathaoirleach Albert Dolan (×8)</td><td>—</td><td>Aug 2025 – Feb 2026</td><td><span class="status-none">0 replies</span></td></tr>
           <tr><td style="color:var(--scarlet);font-weight:500;">JCPP — Clerk Martha Dowling (×1)</td><td>—</td><td>Dec 2025</td><td><span class="status-none">0 replies</span></td></tr>
-          <tr><td style="color:var(--scarlet);font-weight:500;">JCPP — <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1e747d6e6e5e71776c7b7f7d766a7f6d30777b">[email&#160;protected]</a> (×4)</td><td>—</td><td>July 2025 – Dec 2025</td><td><span class="status-none">0 replies</span></td></tr>
+          <tr><td style="color:var(--scarlet);font-weight:500;">JCPP — oireachtas@oireachtas.ie (×4)</td><td>—</td><td>July 2025 – Dec 2025</td><td><span class="status-none">0 replies</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -1373,7 +1373,7 @@ footer a:hover{color:var(--parchment);}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 const xref={
   process:{t:'AdministrativeProcess · Irish State',b:'The primary actor class in the OWL ontology. Domain of :ignores (→ Submission) and :producesFailure (→ FailureMode). Memo D diagnoses the Taoiseach / Tánaiste role-pair as its constitutional instantiation: a prisoner\'s dilemma that cannot process O.R. signal without breaking Cabinet hierarchy. Memo E names the result Séachanachas—evasocracy as governance design.',ls:[{l:':ignores (OWL)',h:'https://dr-wojak.github.io/redundancy-awareness/ontology-relations.html#ignores',c:'var(--cosmic)'},{l:'Memo D',h:'https://drive.google.com/file/d/1-vETFPyMCzLWE1vm4T6Xse29cjC_SjUC',c:'var(--citron)'}]},
   submission:{t:'Submission 2006–2025',b:'The civic signal—range object of :ignores. Nineteen years of formal submissions spanning Defence, Foreign Affairs, Health, Finance, Emergency Planning. Its non-processing is the initiating event of the entire causal chain. Acknowledgement as Closure is its primary failure mode.',ls:[{l:'Acknowledgement as Closure',h:'https://dr-wojak.github.io/redundancy-awareness/failure-modes.html',c:'var(--rivulet)'},{l:'Formal Complaint Archive',h:'https://drive.google.com/drive/u/0/folders/1FMPO1exETcpb4jxX-q5Mh2VIpYwYuATS',c:'var(--dragonfly)'}]},
@@ -1415,7 +1415,7 @@ function switchMemo(id,btn){
 (function(){
   const chip = document.querySelector('.deadline-chip');
   if(!chip) return;
-  const target = new Date('2026-07-01T08:00:00Z'); // 09:00 IST (UTC+1, summer)
+  const target = new Date('2026-07-01T08:00:00Z');
 
   function tick(){
     const diff = target - Date.now();
