@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compound Failure Modes · Annexes III & IV · Meinhardt Initiative</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0c0b09;
+  --surface: #141210;
+  --surface2: #1c1a17;
+  --surface3: #211e1a;
+  --parchment: #e8e3d4;
+  --parchment-dim: #9e9887;
+  --rule: rgba(232,227,212,0.07);
+  --rule-strong: rgba(232,227,212,0.14);
+
+  /* Fault-type palette */
+  --ia:  #d4643d; --ia-bg:  #1f1109; --ia-dim:  #7a3010;  /* I-A  · Executive Unresponsiveness */
+  --iiil:#c9881f; --iiil-bg:#1e1509; --iiil-dim:#7a5008;  /* III-L · Strategic Obstruction     */
+  --ivb: #c8b87a; --ivb-bg: #1e1e20; --ivb-dim: #6a5e30;  /* IV-B · Latent Inhibition           */
+  --vir: #7faad4; --vir-bg: #0d1a28; --vir-dim: #284060;  /* VI-R · Recursive Command           */
+  --via: #9098b0; --via-bg: #141620; --via-dim: #303848;  /* VI-A · Symbolic Convergence        */
+  --vib: #5e9e9a; --vib-bg: #0e1818; --vib-dim: #1e4040;  /* VI-B · Instrumental Convergence    */
+  --viid:#c084fc; --viid-bg:#18082a; --viid-dim:#602080;  /* VII-D · Omnibus Dispersion         */
+
+  /* Framework echoes */
+  --lnd: #4a9fe0; --hab: #a090c8; --ric: #d4b86a; --syn: #82c8b0;
+  --terra: #d4643d; --amber: #c9881f; --citron: #c8b87a; --regatta: #7faad4;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--ink);
+  color:var(--parchment);
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:18px;
+  line-height:1.65;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* grain */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:0.45;
+}
+
+/* subtle grid overlay for schematic sections */
+.schematic-bg::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(232,227,212,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,227,212,0.02) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;z-index:0;
+}
+
+canvas#starfield{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.32;}
+
+#progress-bar{
+  position:fixed;top:0;left:0;height:2px;z-index:300;
+  background:linear-gradient(to right,var(--ia),var(--ivb),var(--vir),var(--viid),var(--syn));
+  width:0;transition:width 0.1s linear;
+}
+
+/* ── FAULT SPINE ── */
+.fault-spine{
+  position:fixed;left:0;top:0;bottom:0;width:5px;z-index:100;
+  background:linear-gradient(to bottom,
+    var(--ia) 0 14.3%,var(--iiil) 14.3% 28.6%,var(--ivb) 28.6% 42.9%,
+    var(--vir) 42.9% 57.1%,var(--via) 57.1% 71.4%,var(--vib) 71.4% 85.7%,var(--viid) 85.7% 100%
+  );
+  opacity:0.2;
+}
+
+/* ── WRAPPER ── */
+.wrapper{
+  position:relative;z-index:1;
+  max-width:960px;margin:0 auto;padding:0 36px 0 52px;
+}
+
+/* ── TYPOGRAPHY ── */
+.mono{font-family:'IBM Plex Mono',monospace;}
+.garamond{font-family:'Cormorant Garamond',serif;}
+.eb{font-family:'EB Garamond',serif;}
+.playfair{font-family:'Playfair Display',serif;}
+
+/* ── COVER ── */
+.cover{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:88px 0 64px;border-bottom:1px solid var(--rule-strong);
+}
+
+.cover-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;
+  letter-spacing:0.22em;text-transform:uppercase;color:var(--parchment-dim);
+  margin-bottom:32px;display:flex;align-items:center;gap:14px;
+}
+.cover-eyebrow::after{content:'';height:1px;width:100px;background:var(--rule-strong);}
+
+.cover-h1{
+  font-family:'Playfair Display',serif;font-weight:400;
+  font-size:clamp(30px,5vw,60px);line-height:1.08;
+  color:var(--parchment);margin-bottom:14px;letter-spacing:-0.01em;
+}
+.cover-h1 em{font-style:italic;}
+
+.fault-badge-row{display:flex;gap:8px;flex-wrap:wrap;margin:28px 0;}
+
+.fbadge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border:1px solid currentColor;border-radius:2px;
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;opacity:0.6;transition:opacity 0.2s;cursor:default;
+}
+.fbadge:hover{opacity:1;}
+.fbadge .fd{width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0;}
+
+.cover-lede{
+  max-width:640px;font-family:'EB Garamond',serif;font-size:17px;
+  color:var(--parchment-dim);line-height:1.9;
+}
+.cover-lede strong{color:var(--parchment);font-weight:500;}
+
+/* ── SECTION SHELL ── */
+.doc-section{
+  padding:80px 0 60px;border-bottom:1px solid var(--rule);position:relative;
+}
+
+.sec-eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.22em;
+  text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:12px;
+}
+.sec-eyebrow::after{content:'';height:1px;width:160px;background:currentColor;opacity:0.22;}
+
+.sec-title{
+  font-family:'Playfair Display',serif;font-weight:400;
+  font-size:clamp(26px,4vw,50px);line-height:1.1;color:var(--parchment);
+  letter-spacing:-0.01em;margin-bottom:8px;
+}
+.sec-title em{font-style:italic;}
+
+.sec-sub{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:44px;
+}
+
+/* ── PROSE ── */
+.prose{
+  font-family:'EB Garamond',serif;font-size:17px;color:var(--parchment-dim);
+  line-height:1.9;max-width:700px;margin-bottom:28px;
+}
+.prose strong{color:var(--parchment);font-weight:500;}
+.prose em{font-style:italic;}
+
+/* ── ANNEX III TABLE ── */
+.trigger-filters{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;
+}
+.tf-btn{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.14em;
+  text-transform:uppercase;padding:5px 12px;border:1px solid var(--rule-strong);
+  border-radius:2px;cursor:pointer;color:var(--parchment-dim);background:transparent;
+  transition:all 0.2s;
+}
+.tf-btn:hover,.tf-btn.active{color:var(--parchment);border-color:var(--parchment-dim);}
+.tf-btn.active{background:var(--surface2);}
+
+.trigger-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);
+  border-radius:3px;overflow:hidden;
+}
+
+.trig-card{
+  background:var(--surface);padding:22px;transition:background 0.2s;
+  cursor:default;
+}
+.trig-card:hover{background:var(--surface2);}
+.trig-card.hidden{display:none;}
+
+.tc-domain{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.tc-title{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;
+  color:var(--parchment);line-height:1.25;margin-bottom:6px;
+}
+.tc-provision{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--parchment-dim);
+  margin-bottom:10px;line-height:1.5;
+}
+.tc-breach{
+  font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);
+  line-height:1.7;border-top:1px solid var(--rule);padding-top:10px;margin-top:4px;
+}
+.tc-breach strong{color:var(--parchment);}
+
+/* domain color overrides */
+.trig-card[data-domain="constitutional"]  .tc-domain{color:var(--ia);}
+.trig-card[data-domain="legislative"]     .tc-domain{color:var(--iiil);}
+.trig-card[data-domain="administrative"]  .tc-domain{color:var(--ivb);}
+.trig-card[data-domain="eu"]              .tc-domain{color:var(--vir);}
+.trig-card[data-domain="scientific"]      .tc-domain{color:var(--vib);}
+.trig-card[data-domain="legal"]           .tc-domain{color:var(--viid);}
+.trig-card[data-domain="ethical"]         .tc-domain{color:var(--ric);}
+
+/* ── FAULT TAXONOMY ── */
+.fault-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:1px;background:var(--rule-strong);border:1px solid var(--rule-strong);
+  border-radius:3px;overflow:hidden;margin:36px 0;
+}
+
+.fault-card{background:var(--surface);padding:24px;transition:background 0.2s;position:relative;}
+.fault-card:hover{background:var(--surface2);}
+.fault-card:hover .fc-desc{max-height:200px;opacity:1;}
+.fault-card:hover .fc-hint{opacity:0;}
+
+.fc-code{
+  font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500;
+  line-height:1;margin-bottom:10px;letter-spacing:0.02em;
+}
+.fc-name{
+  font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;
+  color:var(--parchment);margin-bottom:6px;line-height:1.3;
+}
+.fc-sector{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:8px;
+}
+.fc-desc{
+  font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);
+  line-height:1.72;max-height:0;overflow:hidden;opacity:0;
+  transition:max-height 0.45s ease,opacity 0.35s;
+  border-top:1px solid var(--rule);padding-top:10px;margin-top:6px;
+}
+.fc-desc strong{color:var(--parchment);}
+.fc-hint{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--parchment-dim);opacity:0.3;transition:opacity 0.2s;}
+
+.fault-card[data-type="ia"]  .fc-code{color:var(--ia);}
+.fault-card[data-type="iiil"].fc-code{color:var(--iiil);}
+.fault-card[data-type="ivb"] .fc-code{color:var(--ivb);}
+.fault-card[data-type="vir"] .fc-code{color:var(--vir);}
+.fault-card[data-type="via"] .fc-code{color:var(--via);}
+.fault-card[data-type="vib"] .fc-code{color:var(--vib);}
+.fault-card[data-type="viid"].fc-code{color:var(--viid);}
+
+/* ── DOUBLE-BIND LEVELS ── */
+.bind-levels{margin:36px 0;}
+
+.bind-level{
+  display:flex;gap:20px;align-items:flex-start;
+  padding:20px 24px;margin-bottom:2px;
+  background:var(--surface);border-left:3px solid;
+  transition:background 0.2s;
+}
+.bind-level:hover{background:var(--surface2);}
+.bind-level:nth-child(1){border-color:var(--ia);}
+.bind-level:nth-child(2){border-color:var(--ivb);}
+.bind-level:nth-child(3){border-color:var(--viid);}
+
+.bl-num{
+  font-family:'Playfair Display',serif;font-size:36px;font-weight:400;font-style:italic;
+  line-height:1;flex-shrink:0;margin-top:2px;
+}
+.bind-level:nth-child(1) .bl-num{color:var(--ia);opacity:0.4;}
+.bind-level:nth-child(2) .bl-num{color:var(--ivb);opacity:0.4;}
+.bind-level:nth-child(3) .bl-num{color:var(--viid);opacity:0.4;}
+
+.bl-content{}
+.bl-label{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:6px;
+}
+.bl-injunction{
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;font-style:italic;
+  color:var(--parchment);line-height:1.4;margin-bottom:6px;
+}
+.bl-body{
+  font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);line-height:1.7;
+}
+.bl-body strong{color:var(--parchment);}
+
+/* ── GESTALT FRAMEWORK ROW ── */
+.gestalt-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin:32px 0;
+}
+
+.gr-card{
+  background:var(--surface);border:1px solid var(--rule-strong);padding:22px;border-radius:2px;
+}
+.gr-author{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:6px;
+}
+.gr-concept{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:400;font-style:italic;
+  color:var(--parchment);margin-bottom:8px;line-height:1.25;
+}
+.gr-body{
+  font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);line-height:1.7;
+}
+.gr-body strong{color:var(--parchment);}
+.gr-apply{
+  margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;
+  color:var(--hab);line-height:1.6;
+}
+
+/* ── MINISTERIAL CASE CARDS ── */
+.case-accordion{margin:36px 0;}
+
+.case-card{
+  background:var(--surface);border:1px solid var(--rule-strong);border-radius:3px;
+  margin-bottom:3px;overflow:hidden;
+}
+
+.case-header{
+  padding:20px 24px;cursor:pointer;display:flex;align-items:center;
+  gap:20px;transition:background 0.2s;
+}
+.case-header:hover{background:var(--surface2);}
+
+.ch-fault{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.12em;
+  text-transform:uppercase;flex-shrink:0;
+  padding:4px 10px;border:1px solid currentColor;border-radius:2px;
+}
+
+.ch-name{
+  font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;
+  color:var(--parchment);flex:1;line-height:1.3;
+}
+.ch-name em{font-style:italic;opacity:0.7;}
+
+.ch-arrow{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--parchment-dim);
+  flex-shrink:0;transition:transform 0.3s;
+}
+
+.case-card.open .ch-arrow{transform:rotate(90deg);}
+.case-card.open .case-body{max-height:1400px;opacity:1;}
+
+.case-body{
+  max-height:0;overflow:hidden;opacity:0;
+  transition:max-height 0.6s ease,opacity 0.4s;
+  border-top:1px solid var(--rule);
+}
+
+.case-inner{padding:28px 28px 32px;}
+
+.ci-label{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:12px;
+}
+
+.ci-prose{
+  font-family:'EB Garamond',serif;font-size:15px;color:var(--parchment-dim);
+  line-height:1.8;margin-bottom:16px;max-width:680px;
+}
+.ci-prose strong{color:var(--parchment);font-weight:500;}
+.ci-prose em{font-style:italic;}
+
+.ci-faults{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;}
+
+.cf-chip{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.1em;
+  text-transform:uppercase;padding:4px 10px;border:1px solid currentColor;
+  border-radius:1px;
+}
+
+.ci-verdict{
+  background:var(--surface3);border-left:2px solid currentColor;
+  padding:14px 20px;margin-top:20px;border-radius:0 2px 2px 0;
+}
+.ci-verdict .cv-label{
+  font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.2em;
+  text-transform:uppercase;opacity:0.6;margin-bottom:6px;
+}
+.ci-verdict .cv-body{
+  font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;font-style:italic;
+  color:var(--parchment);line-height:1.55;
+}
+
+/* ── ACCENT BLOCK ── */
+.accent-block{
+  border-left:3px solid currentColor;padding:20px 26px;margin:32px 0;
+  border-radius:0 3px 3px 0;
+}
+.ab-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.2em;
+  text-transform:uppercase;opacity:0.6;margin-bottom:10px;}
+.ab-italic{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:300;
+  font-style:italic;color:var(--parchment);line-height:1.5;margin-bottom:10px;}
+.ab-body{font-family:'EB Garamond',serif;font-size:15px;color:var(--parchment-dim);
+  line-height:1.8;}
+.ab-body strong{color:var(--parchment);font-weight:500;}
+
+/* ── FORMULA STRIP ── */
+.fstrip{
+  background:var(--surface2);border:1px solid var(--rule-strong);border-radius:3px;
+  padding:18px 22px;margin:24px 0;display:flex;align-items:flex-start;gap:18px;flex-wrap:wrap;
+}
+.fs-label{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--parchment-dim);flex-shrink:0;min-width:90px;padding-top:2px;}
+.fs-eq{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--parchment);
+  flex:1;min-width:180px;line-height:1.6;}
+.fs-note{font-family:'EB Garamond',serif;font-style:italic;font-size:14px;
+  color:var(--parchment-dim);flex:2;min-width:200px;line-height:1.65;}
+
+/* ── RECALL SECTION ── */
+.recall-section{
+  margin-top:52px;padding-top:40px;border-top:1px solid var(--rule-strong);
+}
+.recall-label{
+  font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--parchment-dim);margin-bottom:20px;
+}
+.recall-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.rc{background:var(--surface);border:1px solid var(--rule-strong);padding:20px;
+  cursor:pointer;border-radius:2px;transition:background 0.2s;}
+.rc:hover{background:var(--surface2);}
+.rc.open .rc-ans{max-height:300px;opacity:1;}
+.rc.open .rc-hint{display:none;}
+.rc-q{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:var(--parchment);
+  line-height:1.55;margin-bottom:8px;}
+.rc-hint{font-family:'IBM Plex Mono',monospace;font-size:8px;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--parchment-dim);opacity:0.35;}
+.rc-ans{font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);
+  line-height:1.75;max-height:0;overflow:hidden;opacity:0;
+  transition:max-height 0.45s ease,opacity 0.35s;
+  border-top:1px solid var(--rule);margin-top:10px;padding-top:10px;}
+.rc-ans strong{color:var(--parchment);}
+
+/* ── SYNTHESIS TABLE ── */
+.synth-table{width:100%;border-collapse:collapse;margin:32px 0;min-width:540px;}
+.synth-table th{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.16em;text-transform:uppercase;
+  padding:10px 14px;border:1px solid var(--rule-strong);background:var(--surface2);text-align:left;
+}
+.synth-table td{
+  font-family:'EB Garamond',serif;font-size:14px;color:var(--parchment-dim);
+  padding:13px 14px;border:1px solid var(--rule);vertical-align:top;line-height:1.65;
+}
+.synth-table td.row-label{
+  font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--parchment-dim);background:var(--surface);white-space:nowrap;
+  border-right:1px solid var(--rule-strong);
+}
+.synth-table td strong{color:var(--parchment);}
+.synth-table tr:nth-child(even) td{background:rgba(255,255,255,0.01);}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--rule-strong),transparent);margin:40px 0;}
+
+/* ── CODA ── */
+.coda{padding:80px 0 60px;}
+.coda-title{
+  font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,44px);
+  font-weight:400;font-style:italic;color:var(--parchment);
+  line-height:1.15;max-width:600px;margin-bottom:40px;
+}
+.coda-row{display:flex;gap:18px;align-items:flex-start;margin-bottom:24px;
+  padding-bottom:24px;border-bottom:1px solid var(--rule);}
+.coda-n{
+  font-family:'Playfair Display',serif;font-size:44px;font-weight:400;font-style:italic;
+  line-height:1;flex-shrink:0;margin-top:-4px;
+}
+.coda-body{font-family:'EB Garamond',serif;font-size:17px;color:var(--parchment-dim);line-height:1.85;}
+.coda-body strong{color:var(--parchment);}
+.coda-body em{font-style:italic;}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;max-width:960px;margin:0 auto;
+  padding:40px 36px 40px 52px;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:24px;flex-wrap:wrap;border-top:1px solid var(--rule);
+}
+.footer-left{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parchment-dim);line-height:1.9;}
+.footer-left a{color:var(--regatta);text-decoration:none;}
+.footer-left a:hover{color:var(--parchment);}
+.footer-right{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--parchment-dim);text-align:right;line-height:1.9;}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ── OVERFLOW FOR TABLES ── */
+.table-wrap{overflow-x:auto;}
+</style>
+</head>
+<body>
+<div id="progress-bar"></div>
+<canvas id="starfield"></canvas>
+<div class="fault-spine"></div>
+
+<div class="wrapper">
+
+<!-- ── COVER ── -->
+<section class="cover" id="cover">
+  <div class="cover-eyebrow">Annexes III & IV · Formal Complaint · Meinhardt Initiative 2006–2026</div>
+  <h1 class="cover-h1">Compound Failure Modes<br><em>& Legal Triggers</em></h1>
+
+  <div class="fault-badge-row">
+    <div class="fbadge" style="color:var(--ia)"><span class="fd"></span>I-A · Executive</div>
+    <div class="fbadge" style="color:var(--iiil)"><span class="fd"></span>III-L · Obstruction</div>
+    <div class="fbadge" style="color:var(--ivb)"><span class="fd"></span>IV-B · Latent Inhibition</div>
+    <div class="fbadge" style="color:var(--vir)"><span class="fd"></span>VI-R · Recursive</div>
+    <div class="fbadge" style="color:var(--via)"><span class="fd"></span>VI-A · Symbolic</div>
+    <div class="fbadge" style="color:var(--vib)"><span class="fd"></span>VI-B · Instrumental</div>
+    <div class="fbadge" style="color:var(--viid)"><span class="fd"></span>VII-D · Dispersion</div>
+  </div>
+
+  <p class="cover-lede">
+    Ireland's public governance does not suffer from a sequence of individual oversights.
+    It suffers from <strong>recurring fault patterns</strong> — structural, epistemic, and operational —
+    whose recurrence is now observable, classifiable, and predictable. Annex III maps the legal and ethical
+    triggers for denunciation. Annex IV maps the compound architecture of those faults
+    through Bateson's double-bind theory, the ECRM cohomological schema, and five ministerial case studies.
+    This document deploys everything.
+  </p>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION I · ANNEX III · LEGAL TRIGGERS
+══════════════════════════════════════════ -->
+<section class="doc-section" id="s1">
+  <div class="sec-eyebrow reveal" style="color:var(--ia)">Section I · Annex III</div>
+  <h2 class="sec-title reveal">The Legal <em>Architecture</em></h2>
+  <div class="sec-sub reveal">Twelve triggers for denunciation — constitutional, legislative, EU, ethical</div>
+
+  <p class="prose reveal">
+    Every structural failure documented in the complaint has a legal correlate. Annex III provides the
+    reference table — twelve trigger types, each specifying the provision breached and the nature of the
+    breach. Together they constitute a <strong>multi-jurisdictional case</strong>: constitutional,
+    statutory, EU Charter, common law tort, and ombudsman standards are simultaneously engaged.
+    Filter by domain to navigate.
+  </p>
+
+  <div class="trigger-filters reveal">
+    <button class="tf-btn active" onclick="filterTriggers('all',this)">All</button>
+    <button class="tf-btn" onclick="filterTriggers('constitutional',this)" style="color:var(--ia)">Constitutional</button>
+    <button class="tf-btn" onclick="filterTriggers('legislative',this)" style="color:var(--iiil)">Legislative</button>
+    <button class="tf-btn" onclick="filterTriggers('administrative',this)" style="color:var(--ivb)">Administrative</button>
+    <button class="tf-btn" onclick="filterTriggers('eu',this)" style="color:var(--vir)">EU</button>
+    <button class="tf-btn" onclick="filterTriggers('scientific',this)" style="color:var(--vib)">Scientific</button>
+    <button class="tf-btn" onclick="filterTriggers('legal',this)" style="color:var(--viid)">Common Law</button>
+    <button class="tf-btn" onclick="filterTriggers('ethical',this)" style="color:var(--ric)">Ethical</button>
+  </div>
+
+  <div class="trigger-grid reveal" id="trigger-grid">
+
+    <div class="trig-card" data-domain="constitutional">
+      <div class="tc-domain">Constitutional Duty</div>
+      <div class="tc-title">Failure of Executive Governance</div>
+      <div class="tc-provision">Bunreacht na hÉireann, Article 28</div>
+      <div class="tc-breach">Failure of executive to uphold <strong>coordinated, transparent governance</strong> as mandated by the Constitution. Once any Cabinet member was formally notified, duty attached to the collective executive.</div>
+    </div>
+
+    <div class="trig-card" data-domain="legislative">
+      <div class="tc-domain">Legislative Ethics</div>
+      <div class="tc-title">Code of Conduct Breach</div>
+      <div class="tc-provision">Code of Conduct for Members of Dáil Éireann §§ 2(a), 4, 5</div>
+      <div class="tc-breach">Sections on <strong>integrity, public interest, and accountability</strong> repeatedly breached by sustained inaction. The code's requirements are not discharged by the performance of engagement.</div>
+    </div>
+
+    <div class="trig-card" data-domain="administrative">
+      <div class="tc-domain">Administrative Law</div>
+      <div class="tc-title">Dereliction of Coordination Duty</div>
+      <div class="tc-provision">Ministers and Secretaries Act 1924; Public Service Management Act 1997</div>
+      <div class="tc-breach">Dereliction in the duty to ensure <strong>interdepartmental coordination and oversight of emergent risks</strong>. Knowledge of the submission does not discharge the duty — only operational response does.</div>
+    </div>
+
+    <div class="trig-card" data-domain="eu">
+      <div class="tc-domain">Good Administration · EU</div>
+      <div class="tc-title">Right to Good Administration</div>
+      <div class="tc-provision">Charter of Fundamental Rights of the EU, Article 41</div>
+      <div class="tc-breach">Denial of the right to good administration: <strong>failure to evaluate submitted material in good faith</strong>. Acknowledgement does not constitute evaluation. The right is to genuine assessment, not to routing.</div>
+    </div>
+
+    <div class="trig-card" data-domain="eu">
+      <div class="tc-domain">Access to Remedy · EU</div>
+      <div class="tc-title">Effective Remedy Denied</div>
+      <div class="tc-provision">Charter of Fundamental Rights, Article 47</div>
+      <div class="tc-breach">Refusal to admit the complaint into process <strong>negates the right to an effective remedy</strong>. The Silence Veto is not a form of process — it is the deliberate foreclosure of it.</div>
+    </div>
+
+    <div class="trig-card" data-domain="scientific">
+      <div class="tc-domain">Scientific Duty</div>
+      <div class="tc-title">Precautionary Principle Breach</div>
+      <div class="tc-provision">Precautionary Principle in EU governance and ECHR jurisprudence</div>
+      <div class="tc-breach">Disregard of submitted risk models contradicts obligations under <strong>precautionary governance</strong>. Where risk is formally notified, the burden of inaction shifts to the state.</div>
+    </div>
+
+    <div class="trig-card" data-domain="eu">
+      <div class="tc-domain">Export and Dual-Use Law</div>
+      <div class="tc-title">Dual-Use Obligations Unmet</div>
+      <div class="tc-provision">EU Regulation 428/2009</div>
+      <div class="tc-breach">Failure to integrate <strong>dual-use systems knowledge into the national risk framework</strong> violates EU obligations. The submission's dual-use dimension was not assessed or redirected.</div>
+    </div>
+
+    <div class="trig-card" data-domain="administrative">
+      <div class="tc-domain">Ombudsman Standards</div>
+      <div class="tc-title">Pre-Registration Displacement</div>
+      <div class="tc-provision">Ombudsman Act 1980, as amended</div>
+      <div class="tc-breach">Complaint displaced <strong>before registration</strong> — impairs review by oversight bodies. A complaint that never enters the formal register cannot be reviewed by the body tasked with oversight.</div>
+    </div>
+
+    <div class="trig-card" data-domain="legal">
+      <div class="tc-domain">Common Law Tort</div>
+      <div class="tc-title">Misfeasance in Public Office</div>
+      <div class="tc-provision">Misfeasance in Public Office (Common Law)</div>
+      <div class="tc-breach">Pattern of refusal constitutes either <strong>recklessness or wilful blindness</strong> to a known public harm. Fax receipts acknowledged by ministerial secretaries constitute legally sufficient proof of awareness.</div>
+    </div>
+
+    <div class="trig-card" data-domain="legal">
+      <div class="tc-domain">Judicial Activation</div>
+      <div class="tc-title">Mandamus Petition Active</div>
+      <div class="tc-provision">Order 84, Rules of the Superior Courts (Ireland)</div>
+      <div class="tc-breach"><strong>Mandamus petition now activated</strong> due to procedural foreclosure. Where all administrative channels have been exhausted and duty remains undischarged, judicial compulsion is available.</div>
+    </div>
+
+    <div class="trig-card" data-domain="ethical">
+      <div class="tc-domain">Ethical Duty of Care</div>
+      <div class="tc-title">Structured Foresight Disregarded</div>
+      <div class="tc-provision">Normative standard in public service and governance charters</div>
+      <div class="tc-breach">Repeated disregard of structured foresight <strong>violates the duty of care to public welfare</strong>. A system that receives expert risk modelling and files it has not discharged — it has recorded — its failure.</div>
+    </div>
+
+    <div class="trig-card" data-domain="administrative">
+      <div class="tc-domain">Memory & Traceability</div>
+      <div class="tc-title">Deliberate Record Degradation</div>
+      <div class="tc-provision">Archival and Record-Keeping Duties, Houses of the Oireachtas Service</div>
+      <div class="tc-breach">Procedural memory <strong>deliberately allowed to degrade</strong> via non-registration of critical signals. The Hardcopy Antinomy: knowledge formalised in documents, filed instead of activated.</div>
+    </div>
+
+  </div><!-- /trigger-grid -->
+
+  <div class="recall-section reveal">
+    <div class="recall-label">Section I · Recall</div>
+    <div class="recall-grid">
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">Which two EU Charter Articles are engaged, and what distinguishes their scope?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans"><strong>Article 41</strong> (right to good administration) concerns the quality of the process — requiring impartial evaluation in good faith, not merely routing and acknowledgement. <strong>Article 47</strong> (right to effective remedy) concerns access to a corrective mechanism — which is negated when complaints are displaced before registration or addressed through channels that produce no binding outcome.</div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">Why does a fax acknowledged by a ministerial secretary constitute legally sufficient proof of awareness?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">The <strong>Interpretation Act 2005</strong> defines writing to include facsimile transmissions. Rules of the Superior Courts (Order 121A) permit service by fax where followed by acknowledgement. In <em>McDowell v. Roscommon County Council [2004]</em>, faxed records were admissible to establish institutional knowledge and timeline. A ministerial secretary's acknowledgement is <strong>binding proof of ministerial awareness</strong> for tort liability, misfeasance, and judicial review purposes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION II · ECRM FAULT TAXONOMY
+══════════════════════════════════════════ -->
+<section class="doc-section schematic-bg" id="s2">
+  <div class="sec-eyebrow reveal" style="color:var(--vir)">Section II · ECRM Schema</div>
+  <h2 class="sec-title reveal">The Fault <em>Taxonomy</em></h2>
+  <div class="sec-sub reveal">Seven fault types — the Accountability-Ireland cohomological framework</div>
+
+  <p class="prose reveal">
+    The Accountability-Ireland ECRM (Ethical-Constitutional Responsibility Mapping) schema provides a
+    topology of institutional failure. Each fault type is not a label for incompetence but a
+    <strong>structural diagnosis</strong> — a precise description of the design condition that makes
+    the failure not just possible but probable. Hover each card to expand.
+  </p>
+
+  <div class="fault-grid reveal">
+
+    <div class="fault-card" data-type="ia">
+      <div class="fc-code">I-A</div>
+      <div class="fc-name">Executive Unresponsiveness to Institutional Alert</div>
+      <div class="fc-sector">Chief Executive level · Article 28 · Direct notice received</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">The executive receives formal, documented notice of systemic failure and produces no operational response. <strong>Knowledge is present; agency is absent.</strong> This is not ignorance — it is the deliberate non-conversion of information into action at the level where the duty to act is constitutionally located. Applies to: Harris (as Taoiseach), Varadkar, all recipients of the formal notices.</div>
+    </div>
+
+    <div class="fault-card" data-type="iiil">
+      <div class="fc-code">III-L</div>
+      <div class="fc-name">Strategic Obstruction through Diplomatic Silence</div>
+      <div class="fc-sector">Trade · Intergovernmental coordination · DFA</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">The diplomatic apparatus — formally equipped to coordinate, to initiate, to signal — produces nothing. Trade and intergovernmental capacity is <strong>present in form, absent in function</strong>. Silence is weaponised as a coordination veto. The DFA becomes the bottleneck of Foreign Trade. The structural effect: no mechanism can initiate without the gateway that refuses to open.</div>
+    </div>
+
+    <div class="fault-card" data-type="ivb">
+      <div class="fc-code">IV-B</div>
+      <div class="fc-name">Latent Inhibition by Political Clearance Requirement</div>
+      <div class="fc-sector">Pandemic readiness · HSE · Taoiseach's Office</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">Operational bodies — the HSE, departments, technical units — possess the capacity to model, coordinate, and respond, but await <strong>political permission to act</strong>. The clearance requirement is not statutory; it is a learned inhibition. Systems that should be semi-autonomous become passive. Signal activation requires political blessing; politics provides none. The fault is the clearance gate, not the body behind it.</div>
+    </div>
+
+    <div class="fault-card" data-type="vir">
+      <div class="fc-code">VI-R</div>
+      <div class="fc-name">Recursive Command Structure without Distributed Feedback</div>
+      <div class="fc-sector">Emergency response · Storm Éowyn · DFA + Defence</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">A single actor holds authority across multiple critical vectors simultaneously. Rather than enabling coordination, the convergence <strong>collapses into a self-blocking loop</strong>: all sub-roles presuppose clearance or action from others that the same actor must also provide. The signal loops back on itself. No channel for urgent engagement can function. Control without feedback is simulation; the quad-bound vortex is its architecture.</div>
+    </div>
+
+    <div class="fault-card" data-type="via">
+      <div class="fc-code">VI-A</div>
+      <div class="fc-name">Symbolic Convergence without Operational Interface</div>
+      <div class="fc-sector">AI · Digital Transformation · Trade Promotion</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">Three policy domains — symbolic, technical, systemic — assigned to a single office without shared operational language, feedback mechanism, or epistemic continuity. <strong>Governance by metaphor.</strong> The role is visible; its operational capacity is ambiguous. AI strategy is interpreted rather than architected. Digitalisation is described in press releases but not governed through feedback loops. Trade operates independently of the digital platforms supposedly transforming it.</div>
+    </div>
+
+    <div class="fault-card" data-type="vib">
+      <div class="fc-code">VI-B</div>
+      <div class="fc-name">Instrumental Convergence with Strategic Dissociation</div>
+      <div class="fc-sector">Small Business · Retail · Circular Economy</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">A role that must simultaneously <strong>facilitate market throughput and impose ecological constraint</strong> on the same actors. Circular economy mandates limit throughput; retail survival requires it. No operational bridge exists. The minister must convince retailers to act like ecologists, ask entrepreneurs to forecast supply chains they do not control, and deliver growth by reducing throughput. Sustainability becomes branding; reform becomes narrative.</div>
+    </div>
+
+    <div class="fault-card" data-type="viid">
+      <div class="fc-code">VII-D</div>
+      <div class="fc-name">Omnibus Dispersion Fault</div>
+      <div class="fc-sector">Health · Housing · Local Government · Heritage</div>
+      <div class="fc-hint">hover to expand</div>
+      <div class="fc-desc">A single junior minister assigned to four domains operating on <strong>incompatible temporal scales and epistemic frameworks</strong>: crisis response (Health), generational investment (Housing), electoral cycles (Local Government), deep time (Heritage). No unifying operational logic. The result is a dispersion vortex: multiple governance circuits converge but cannot integrate, creating permanent institutional stress. Governance by delegation of impossibility.</div>
+    </div>
+
+  </div>
+
+  <div class="recall-section reveal">
+    <div class="recall-label">Section II · Recall</div>
+    <div class="recall-grid">
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What distinguishes a Type VI-R fault from a Type VI-A fault?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans"><strong>VI-R</strong> is about command structure: a single actor holds multiple critical authority vectors simultaneously, creating a recursive self-blocking loop where no sub-role can initiate without clearance from the same actor who also holds the other sub-roles. <strong>VI-A</strong> is about epistemic regime: three policy domains are symbolically converged without shared operational language, feedback mechanism, or epistemic continuity. VI-R blocks command propagation; VI-A blocks meaningful governance without command ever being attempted.</div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What is the Type IV-B "clearance dependency" and why is it structurally distinct from simple bureaucratic delay?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Simple bureaucratic delay is accidental — it occurs when processes take longer than expected. Type IV-B is <strong>structural</strong>: operational bodies have the technical capacity to act but have been conditioned to await political permission before activating. The fault is in the <em>clearance gate itself</em>, not in the body behind it. When the gate is permanently shut, semi-autonomous bodies become passive, and the system loses its redundancy — its ability to respond without political initiation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION III · THE DOUBLE BIND
+══════════════════════════════════════════ -->
+<section class="doc-section" id="s3">
+  <div class="sec-eyebrow reveal" style="color:var(--hab)">Section III · Bateson · Gestalt · Hirschman</div>
+  <h2 class="sec-title reveal">The <em>Double Bind</em></h2>
+  <div class="sec-sub reveal">Three interlocking levels of contradiction · Five psychological frameworks</div>
+
+  <p class="prose reveal">
+    Gregory Bateson's double bind theory — developed in the Palo Alto cybernetics movement of the 1950s,
+    emerging from his 1942 essay on deutero-learning — identifies a specific communication structure that
+    creates inescapable logical traps through contradictory messages at different logical levels.
+    The Formal Complaint applies this framework not to family systems (its original domain) but to
+    <strong>institutional design</strong>: ministerial architectures that systematically encode logical
+    impossibility into constitutional roles.
+  </p>
+
+  <div class="accent-block reveal" style="color:var(--hab);background:var(--hab-bg,#14101e);border-color:var(--hab);">
+    <div class="ab-label">Bateson's Canonical Structure</div>
+    <div class="ab-italic">The double bind is not simple contradiction. It is logical imprisonment: all available responses are by definition wrong, yet response is still demanded. Escape requires changing either the preconditions or the behaviour patterns — which constitutes self-learning.</div>
+  </div>
+
+  <div class="bind-levels reveal">
+    <div class="bind-level">
+      <div class="bl-num">1</div>
+      <div class="bl-content">
+        <div class="bl-label">Primary negative injunction</div>
+        <div class="bl-injunction">"Don't do X" — Don't challenge Cabinet solidarity</div>
+        <div class="bl-body">The first constraint is institutional and cultural: <strong>collective Cabinet responsibility</strong> forbids public dissent from agreed policy. The role demands loyalty as its baseline condition.</div>
+      </div>
+    </div>
+    <div class="bind-level">
+      <div class="bl-num">2</div>
+      <div class="bl-content">
+        <div class="bl-label">Secondary negative injunction (meta-level)</div>
+        <div class="bl-injunction">"Don't see this as a contradiction" — But you must independently safeguard constitutional norms</div>
+        <div class="bl-body">The second constraint operates at a higher logical level and contradicts the first: the same role <strong>simultaneously requires independent constitutional vigilance</strong> — the duty to detect and correct failure. Any attempt to resolve the contradiction violates the fundamental architecture of the position.</div>
+      </div>
+    </div>
+    <div class="bind-level">
+      <div class="bl-num">3</div>
+      <div class="bl-content">
+        <div class="bl-label">Tertiary negative injunction</div>
+        <div class="bl-injunction">"You cannot leave this relationship" — The role is constitutionally mandated</div>
+        <div class="bl-body">The third constraint removes the escape: the role cannot be abandoned. <strong>Exit is constitutionally impossible; voice is structurally contradictory; loyalty is epistemically insufficient.</strong> Hirschman's triangle is fully closed. What remains is not loyalty — it is learned helplessness.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gestalt extensions -->
+  <div class="divider reveal"></div>
+  <div class="reveal" style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--parchment-dim);margin-bottom:22px;">
+    Five Psychological Frameworks — Cross-Referenced
+  </div>
+
+  <div class="gestalt-row reveal">
+    <div class="gr-card">
+      <div class="gr-author">Festinger · Cognitive Dissonance</div>
+      <div class="gr-concept">The Internal Architecture of the Bind</div>
+      <div class="gr-body">The actor holds two irreconcilable cognitions simultaneously: loyalty to Cabinet consensus AND independent constitutional duty to warn. <strong>Lacking a protected epistemic corridor, the role loops dissonance back on itself</strong> through forced rationalisation. Correction becomes symbolic; tension is managed, not resolved.</div>
+      <div class="gr-apply">→ Applies to: Tánaiste's role; all ministers in antinomic portfolios</div>
+    </div>
+    <div class="gr-card">
+      <div class="gr-author">Lewin · Field Theory</div>
+      <div class="gr-concept">The Frozen Life Space</div>
+      <div class="gr-body">The role creates approach-avoidance conflict in all directions simultaneously. Approach Cabinet loyalty: violates constitutional duty. Approach independent dissent: violates collective responsibility. Avoid the field entirely: constitutionally impossible. <strong>A frozen field where all movement is blocked.</strong></div>
+      <div class="gr-apply">→ Applies to: every actor in a structurally antinomic role</div>
+    </div>
+    <div class="gr-card">
+      <div class="gr-author">Zeigarnik · Interrupted Tasks</div>
+      <div class="gr-concept">The Permanent Decisional Residue</div>
+      <div class="gr-body">Unresolved tasks create persistent psychological tension until completed. The constitutional task (safeguarding against failure) can never be completed because the act of completion (dissent) violates the role's primary constraint (loyalty). <strong>The result: permanent institutionalised tension with no legitimate discharge mechanism.</strong></div>
+      <div class="gr-apply">→ Applies to: the 19-year accumulation of undischarged obligation</div>
+    </div>
+    <div class="gr-card">
+      <div class="gr-author">Hirschman · Exit/Voice/Loyalty</div>
+      <div class="gr-concept">The Totalitarian Relationship</div>
+      <div class="gr-body">Exit is constitutionally impossible. Voice is structurally contradictory. Loyalty is epistemically insufficient — it fails to discharge constitutional duty. All three are systematically blocked. <strong>Hirschman's triangle fully closed</strong> — what remains is not loyalty but the performance of loyalty entrained to absorb shock.</div>
+      <div class="gr-apply">→ Applies to: the Tánaiste bind; the petitioner's 19-year Voice loop</div>
+    </div>
+    <div class="gr-card">
+      <div class="gr-author">Argyris & Senge · Systems Learning</div>
+      <div class="gr-concept">Anti-Learning as Institutional Technique</div>
+      <div class="gr-body">Institutions that block feedback and disguise contradiction under the rubric of control ultimately collapse their adaptive function. <strong>What cannot self-correct becomes path-dependent; what cannot learn becomes brittle.</strong> When institutional self-learning is procedurally available but structurally foreclosed, breach is crossed by architecture, not accident.</div>
+      <div class="gr-apply">→ Applies to: the Nullification Loop; deutero-binding generally</div>
+    </div>
+  </div>
+
+  <div class="fstrip reveal">
+    <div class="fs-label">Deutero-Binding</div>
+    <div class="fs-eq">Healthy system: Learning I → Learning II → Learning III (adaptive capacity)<br>Irish system: Binding I → Binding II → Binding III (contradiction compounds)</div>
+    <div class="fs-note">Bateson's deutero-learning is the capacity to learn about one's own learning. The Irish governance system demonstrates its systematic inversion: deutero-binding — the structural prevention of learning-about-learning, encoded at the level of role design itself.</div>
+  </div>
+
+  <div class="recall-section reveal">
+    <div class="recall-label">Section III · Recall</div>
+    <div class="recall-grid">
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What distinguishes deutero-binding from simple institutional inertia?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Simple inertia is the failure to act due to organisational momentum or resource constraint. <strong>Deutero-binding</strong> is structurally active: the system encodes contradictions at the level of role design that <em>prevent the recognition of fault itself</em>. It is not that the system fails to correct — it is that the structure prevents actors from being able to see the correction as possible. The meta-communicative channel is blocked by the same structure that creates the need for it.</div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">Why does Lewin's "frozen field" explain why piecemeal reform cannot address the Tánaiste's bind?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Lewin's field theory shows that the Tánaiste's life space has <strong>negative valences in all directions simultaneously</strong> — not just in one. Piecemeal reform changes one valence at a time (e.g. adding a protected dissent channel) but leaves the underlying field topology intact. The Gestalt tradition's insistence on the <em>irreducible wholeness</em> of experience is the point: the contradiction cannot be resolved by addressing any single element. The architecture must be refounded, not patched.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION IV · FIVE MINISTERIAL CASES
+══════════════════════════════════════════ -->
+<section class="doc-section schematic-bg" id="s4">
+  <div class="sec-eyebrow reveal" style="color:var(--citron)">Section IV · Five Case Studies</div>
+  <h2 class="sec-title reveal">The Ministerial <em>Double Binds</em></h2>
+  <div class="sec-sub reveal">Five portfolios — five compound failure architectures — click to open each case</div>
+
+  <p class="prose reveal">
+    These are not critiques of individual office-holders. Each represents a
+    <strong>functional impossibility encoded at the level of portfolio construction</strong>.
+    The minister is not the fault — the minister is the site where the fault is made visible.
+    The ECRM subgraph maps the topology; the cases below map the human experience of the trap.
+  </p>
+
+  <div class="case-accordion reveal">
+
+    <!-- HARRIS -->
+    <div class="case-card" id="case-harris">
+      <div class="case-header" onclick="toggleCase('case-harris')">
+        <div class="ch-fault" style="color:var(--ia)">I-A · VI-R · IV-B · III-L</div>
+        <div class="ch-name">Simon Harris <em>· Quad-Bound Vortex · Recursive Executive Nullification</em></div>
+        <div class="ch-arrow">▶</div>
+      </div>
+      <div class="case-body">
+        <div class="case-inner">
+          <div class="ci-label">ECRM Node: Convergence Vortex · Four simultaneous executive remits</div>
+          <div class="ci-prose">
+            In the Accountability-Ireland topology, Simon Harris constitutes a canonical instance of
+            <strong>recursive nullification</strong>: four simultaneous executive remits — Foreign Affairs, Defence,
+            Trade, and Emergency Planning — unified under a single political actor across overlapping tenures.
+            Rather than streamlining coordination, this collapsed the control system into a <strong>self-blocking loop</strong>.
+          </div>
+          <div class="ci-prose">
+            <strong>2020 Pandemic (Fault IV-B):</strong> The Department of Foreign Affairs received direct O.R. correspondence
+            and failed to engage. The HSE awaited political permission to model or acknowledge system feedback logic.
+            Governance latency due to misplaced control authority.
+          </div>
+          <div class="ci-prose">
+            <strong>Storm Éowyn 2025 (Fault VI-R):</strong> Harris held dual responsibility for DFA and Defence.
+            No proper liaison with the Office of Emergency Planning was made possible. A closed ministerial loop —
+            no channel for urgent systems engagement could function. A recursive ministry without distributed feedback.
+          </div>
+          <div class="ci-prose">
+            <strong>As Taoiseach (Fault I-A):</strong> Multiple direct formal notices received concerning O.R. governance failure.
+            Non-responsiveness constitutes breach of executive duty under Article 28 and the Ministers and Secretaries Acts.
+          </div>
+          <div class="ci-faults">
+            <div class="cf-chip" style="color:var(--ia)">I-A · Executive Non-Response</div>
+            <div class="cf-chip" style="color:var(--vir)">VI-R · Recursive Command</div>
+            <div class="cf-chip" style="color:var(--ivb)">IV-B · Clearance Dependency</div>
+            <div class="cf-chip" style="color:var(--iiil)">III-L · Diplomatic Silence</div>
+          </div>
+          <div class="ci-verdict" style="color:var(--ia)">
+            <div class="cv-label">Systemic effect</div>
+            <div class="cv-body">Simulated command without operative action. Control signals failed to propagate. Responsibility pooled at a single node and disappeared within it. Four edges of state function unified and rendered inert.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SMYTH -->
+    <div class="case-card" id="case-smyth">
+      <div class="case-header" onclick="toggleCase('case-smyth')">
+        <div class="ch-fault" style="color:var(--via)">VI-A</div>
+        <div class="ch-name">Niamh Smyth <em>· Epistemic Overload · Symbolic Ministry without Operational Interface</em></div>
+        <div class="ch-arrow">▶</div>
+      </div>
+      <div class="case-body">
+        <div class="case-inner">
+          <div class="ci-label">ECRM Node: Porte-Parole ↔ Systèmes Anticipés · Edge: Symbolic Convergence without Operational Interface</div>
+          <div class="ci-prose">
+            Deputy Smyth's portfolio — Trade Promotion, Artificial Intelligence, and Digital Transformation —
+            traverses three <strong>partially orthogonal fields</strong> that share no operational language or feedback mechanism:
+            Trade is relational-symbolic; AI is technical-simulative (strongly anchored in O.R.); Digital Transformation
+            is institutional-infrastructural. There is no bridging mechanism that links these mandates into a cohesive control schema.
+          </div>
+          <div class="ci-prose">
+            The result is <strong>epistemic overload</strong>: AI strategy is interpreted rather than architected.
+            Digitalisation is described in press releases but not governed through feedback loops.
+            Trade operates independently of the digital platforms supposedly transforming it.
+            <em>This is governance by metaphor.</em>
+          </div>
+          <div class="ci-prose">
+            Crucially: Deputy Smyth is not structurally at fault. She is placed in an epistemic overload condition
+            by a portfolio that <strong>asks one person to bridge gaps that haven't been connected</strong>.
+          </div>
+          <div class="ci-faults">
+            <div class="cf-chip" style="color:var(--via)">VI-A · Symbolic Convergence</div>
+            <div class="cf-chip" style="color:var(--via)">Epistemic Overload</div>
+            <div class="cf-chip" style="color:var(--via)">Governance Latency</div>
+          </div>
+          <div class="ci-verdict" style="color:var(--via)">
+            <div class="cv-label">Systemic effect</div>
+            <div class="cv-body">A symbolic ministry without operational interface. Governance debt accrues as non-operational AI strategy, public service digitalisation without integration, trade narratives unlinked from digital systems design.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O'BRIEN -->
+    <div class="case-card" id="case-obrien">
+      <div class="case-header" onclick="toggleCase('case-obrien')">
+        <div class="ch-fault" style="color:var(--ivb)">VI · IV-B · III-L</div>
+        <div class="ch-name">Darragh O'Brien <em>· Throughput-Entropy Bind · Climate, Energy, Transport, Environment</em></div>
+        <div class="ch-arrow">▶</div>
+      </div>
+      <div class="case-body">
+        <div class="case-inner">
+          <div class="ci-label">ECRM Node: Architecte ↔ Antinomie Systémique / Résilience Systémique · Type VI Control-Design Interference</div>
+          <div class="ci-prose">
+            <strong>The false unity of the portfolio:</strong> Energy and Transport are design domains requiring O.R., predictive modelling,
+            and technical coordination. Climate and Environment are discursive constructs shaped by public meaning,
+            ethical framing, and interpretive controversy. Collapsing both into one department pretends they share
+            the same governing logic. <em>They do not.</em>
+          </div>
+          <div class="ci-prose">
+            <strong>The throughput-entropy bind:</strong> As Transport Minister, O'Brien must expand infrastructure
+            (throughput) while simultaneously reducing its emissions (entropy suppression).
+            Every new road increases system throughput while deepening entropy: emissions rise, modal lock-in hardens,
+            adaptive capacity shrinks. <strong>This is a thermodynamic impossibility</strong> — the same authority must
+            simultaneously accelerate and suppress the same systemic flow.
+          </div>
+          <div class="ci-prose">
+            Building new motorways while pledging to reduce car dependency is akin to incurring debt to expand
+            the business one is trying to exit. Climate targets rely on cutting transport emissions;
+            infrastructure policy locks those emissions in. Bateson would call this a <em>self-amplifying contradiction</em>.
+          </div>
+          <div class="ci-faults">
+            <div class="cf-chip" style="color:var(--ivb)">VI · Control-Design Interference</div>
+            <div class="cf-chip" style="color:var(--iiil)">III-L · Strategic Obstruction</div>
+            <div class="cf-chip" style="color:var(--ivb)">Throughput-Entropy Bind</div>
+          </div>
+          <div class="ci-verdict" style="color:var(--ivb)">
+            <div class="cv-label">Systemic effect</div>
+            <div class="cv-body">Modal antinomy: Ireland publishes climate targets that require cutting transport emissions, but operationalises infrastructure that locks those emissions in. If O.R. logic were applied, this would be flagged as unviable. Governance by design converts it into a permanent balancing act.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- O'DONNELL -->
+    <div class="case-card" id="case-odonnell">
+      <div class="case-header" onclick="toggleCase('case-odonnell')">
+        <div class="ch-fault" style="color:var(--viid)">VII-D</div>
+        <div class="ch-name">Kieran O'Donnell <em>· Omnibus Dispersion · Health, Housing, Local Government, Heritage</em></div>
+        <div class="ch-arrow">▶</div>
+      </div>
+      <div class="case-body">
+        <div class="case-inner">
+          <div class="ci-label">ECRM Node: Gestionnaire ↔ Dispersion Systémique · Type VII-D Omnibus Dispersion Fault</div>
+          <div class="ci-prose">
+            Four domains, four incompatible epistemic frameworks and temporal scales assigned to one junior minister:
+            Health (crisis response, immediate, hierarchical); Housing (long-term planning, market-mediated, capital-intensive);
+            Local Government (electoral cycles, deliberative, procedure-bound); Heritage (deep time, custodial, interpretive).
+            <strong>There is no unifying operational logic.</strong>
+          </div>
+          <div class="ci-prose">
+            This appointment represents the apotheosis of Ireland's administrative pathology:
+            <em>administrative wishful thinking</em> — the belief that complexity can be resolved
+            through role aggregation rather than structural reform. Every choice in one domain
+            creates problems in the others. <strong>The role is not merely administratively unwieldy — it is conceptually impossible.</strong>
+          </div>
+          <div class="ci-faults">
+            <div class="cf-chip" style="color:var(--viid)">VII-D · Omnibus Dispersion</div>
+            <div class="cf-chip" style="color:var(--viid)">Decision Paralysis</div>
+            <div class="cf-chip" style="color:var(--viid)">Governance Debt Cascade</div>
+          </div>
+          <div class="ci-verdict" style="color:var(--viid)">
+            <div class="cv-label">Systemic effect</div>
+            <div class="cv-body">A dispersion vortex: multiple governance circuits converge but cannot integrate. Rather than creating coherent institutional interfaces, the state creates human shock absorbers — individual ministers expected to personally resolve structural contradictions the system refuses to address.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DILLON -->
+    <div class="case-card" id="case-dillon">
+      <div class="case-header" onclick="toggleCase('case-dillon')">
+        <div class="ch-fault" style="color:var(--vib)">VI-B</div>
+        <div class="ch-name">Alan Dillon <em>· Circular Paralysis · Small Business, Retail, Circular Economy</em></div>
+        <div class="ch-arrow">▶</div>
+      </div>
+      <div class="case-body">
+        <div class="case-inner">
+          <div class="ci-label">ECRM Node: Réformateur ↔ Économie Fracturée · Type VI-B Instrumental Convergence with Strategic Dissociation</div>
+          <div class="ci-prose">
+            Deputy Dillon must convince retailers to act like ecologists, ask entrepreneurs to forecast supply chains
+            they do not control, deliver growth by reducing throughput, and align microeconomic actors with
+            macro-environmental accounting. <strong>There is no operational bridge between these expectations.</strong>
+          </div>
+          <div class="ci-prose">
+            Small business and retail are fast-cycle, supply-demand responsive, bottom-line driven.
+            The circular economy is constraint-oriented, intergenerational, regulation-intensive.
+            Circular economy mandates limit throughput; retail survival requires it.
+            <em>This is a design contradiction dressed as an innovation brief.</em>
+          </div>
+          <div class="ci-prose">
+            The minister is cast as reformer across a broken economic interface — a node where system logic
+            (resource constraint) collides with commercial practice (competitive responsiveness).
+            The brief implies market stewardship but carries <strong>no executive levers to rewire the supply system</strong>.
+          </div>
+          <div class="ci-faults">
+            <div class="cf-chip" style="color:var(--vib)">VI-B · Instrumental Convergence</div>
+            <div class="cf-chip" style="color:var(--vib)">Governance Latency</div>
+            <div class="cf-chip" style="color:var(--vib)">Instrumental Drift</div>
+          </div>
+          <div class="ci-verdict" style="color:var(--vib)">
+            <div class="cv-label">Systemic effect</div>
+            <div class="cv-body">Circular economy degraded to branding, not lifecycle redesign. Sustainability becomes narrative, not method. The system does not fail by accident — it assigns an impossible brief and proceeds as if alignment were self-evident.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /case-accordion -->
+
+  <div class="recall-section reveal">
+    <div class="recall-label">Section IV · Recall</div>
+    <div class="recall-grid">
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">In what sense is the Harris quad-bound vortex a "bisimulation failure" (connecting to the Landauer framework)?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">A bisimulation requires that two systems produce identical observable behaviours at each step. The Harris node <strong>presents as a unified command structure</strong> (Foreign Affairs, Defence, Trade, Emergency Planning) but produces divergent observable behaviours across all four: non-response to O.R. alerts, non-liaison with OEP, non-activation of trade, non-discharge of executive duty. The machine claims unity but produces fragmentation. <strong>It is not bisimilar to the command structure it performs.</strong></div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What is "Hardcopy Antinomy" and what legal significance does it carry?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Hardcopy Antinomy is the precise moment when <strong>designable intelligence entered the governance circuit and was neutralised</strong> by the system's reflex to file but not enact. Reference FIN-MO-03632-2024 (August 2024): Jack Chambers received actionable O.R. guidance by fax, acknowledged by ministerial secretary. Under the <strong>Interpretation Act 2005</strong> and Order 121A RSC, this constitutes legally sufficient proof of ministerial awareness — binding for misfeasance, tort liability, and judicial review. The hardcopy proves the system <em>knew how to close the loop</em> and chose instead to confirm its deliberate breakage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION V · SYNTHESIS MATRIX
+══════════════════════════════════════════ -->
+<section class="doc-section" id="s5">
+  <div class="sec-eyebrow reveal" style="color:var(--syn)">Section V · Full Synthesis</div>
+  <h2 class="sec-title reveal">Everything <em>Triangulated</em></h2>
+  <div class="sec-sub reveal">Fault types × three frameworks × institutional outcomes</div>
+
+  <p class="prose reveal">
+    The three frameworks from the companion document (Landauer, Habermas, Ricard) and the ECRM fault taxonomy
+    of the Formal Complaint are not parallel — they are <strong>convergent</strong>. Each names the same
+    structural condition from a different angle. The matrix below makes the connections explicit.
+  </p>
+
+  <div class="table-wrap reveal">
+    <table class="synth-table">
+      <thead>
+        <tr>
+          <th class="row-h" style="min-width:120px;">Fault / Pattern</th>
+          <th style="color:var(--lnd)">Landauer reads</th>
+          <th style="color:var(--hab)">Habermas reads</th>
+          <th style="color:var(--ric)">Ricard reads</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label">Nullification Loop</td>
+          <td><strong>Max ΔE without convergence.</strong> Iterative computation that never terminates. The Silence Veto is thermodynamically asymmetric: zero cost for system, max cost for petitioner.</td>
+          <td><strong>Strategic action in communicative grammar.</strong> Sincerity violated at every iteration. The loop performs Verständigung while systematically preventing it.</td>
+          <td><strong>Effectively infinite altruistic discount rate</strong> applied to the petitioner. Care expires at each portfolio transition. The compassion substrate is absent.</td>
+        </tr>
+        <tr>
+          <td class="row-label">I-A Executive Non-Response</td>
+          <td>ΔE_knowledge is paid; ΔE_action is withheld. The system incurs informational cost without producing the state transition the information was supposed to trigger. <strong>Energy consumed, output absent.</strong></td>
+          <td>Primary validity claim violation: rightness. The system received the submission (truth maintained) but failed to meet the normative expectation it created (rightness violated). <strong>Legitimacy is performed, not earned.</strong></td>
+          <td>The most direct failure of the compassion substrate: <strong>care is withheld at the moment of maximum visibility.</strong> The submission is received and seen — and nothing is done. The altruistic discount rate applied is infinite.</td>
+        </tr>
+        <tr>
+          <td class="row-label">VI-R Recursive Command</td>
+          <td>A self-blocking computational loop: <strong>no signal can propagate</strong> because every propagation path loops back through the same node that initiated it. ΔE_signal dissipates without reaching its target.</td>
+          <td>The communicative relation is severed by structure, not intention. No actor can name the loop (meta-communication is blocked). <strong>The ideal speech situation is structurally unavailable within the node.</strong></td>
+          <td>The compassion substrate cannot compensate for structural impossibility. Even a compassionate actor placed inside a VI-R node <strong>cannot produce the response their care would generate</strong> — the structure prevents it.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Séachanachas / Designed Forgetting</td>
+          <td>Portfolio transition resets the system's memory without carrying forward the duty-vector. <strong>ΔE_reset is avoided by pretending the obligation no longer exists.</strong> Hysteresis compounds with each transition.</td>
+          <td>Institutional sincerity is structurally non-persistent. Each new portfolio holder inherits the strategic-action pattern, not the communicative obligation. <strong>The distortion reproduces itself without coordination.</strong></td>
+          <td>Temporal altruism fails at each transition point. The care that was due in 2006 is extinguished at every handoff — <strong>not maliciously, but through the absence of the motivational architecture</strong> that would carry it across time.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Bateson Double Bind</td>
+          <td>A computational state where all valid transitions are simultaneously forbidden. <strong>The system cannot advance because every step creates a constraint violation.</strong> The loop is not a bug — it is the architecture.</td>
+          <td>Communicative impossibility: the actor cannot name the contradiction (violates collective responsibility), resolve it privately (no protected channel), or exit it (constitutional mandate). <strong>Meta-communication is the signal; the bind is its suppression.</strong></td>
+          <td>Second-order altruism — deutero-learning of care — is precisely what the double bind prevents. <strong>The bind does not just trap action; it traps the motivational learning that would generate corrective action.</strong> Reform of the compassion substrate requires dismantling the bind first.</td>
+        </tr>
+        <tr>
+          <td class="row-label">Deutero-Binding</td>
+          <td>The institutional equivalent of thermodynamic irreversibility at the learning level. <strong>The cost of reversing deutero-binding grows with time</strong> — ΔE_learning_reset compounds as the structure embeds itself more deeply in role design.</td>
+          <td>The systematic foreclosure of the conditions for legitimate discourse <em>about</em> the conditions for legitimate discourse. Not just communicative distortion — <strong>distortion of the capacity to recognise distortion.</strong></td>
+          <td>Anti-learning as the structural opponent of second-order altruism. <strong>Ricard's deutero-learning of care is exactly what deutero-binding prevents.</strong> The deepest failure: a system that has learned to prevent itself from learning to care.</td>
+        </tr>
+        <tr>
+          <td class="row-label">CC0 Archive / Public Record</td>
+          <td>Lowest-erasure substrate available. <strong>Cannot be routed away.</strong> Enables future computation on a stable record. Thermodynamically the cheapest form of sustained Voice.</td>
+          <td>An attempt to instantiate the public sphere (Öffentlichkeit) as corrective substrate — <strong>rational-critical discourse made structurally available to all</strong>, bypassing the colonised administrative system.</td>
+          <td>Disclosure as the first act of compassion. <strong>Making suffering visible</strong> creates the conditions under which compassionate response becomes possible for any actor who encounters the record. A gift to future concern.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="recall-section reveal">
+    <div class="recall-label">Section V · Final Recall</div>
+    <div class="recall-grid">
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What is the key thesis of Annex IV, stated in one sentence?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">When a system repeatedly suppresses or disables the conditions for deutero-learning — despite clear theoretical grounding and accessible models from psychology, organisational science, and systems dynamics — <strong>it ceases to function as a learning institution and thereby forfeits any claim to adaptive legitimacy or ethical authority.</strong></div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What does "governance by delegation of impossibility" mean, and which case illustrates it most purely?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Governance by delegation of impossibility is the systematic outsourcing of <strong>structural contradictions to individual actors who cannot, by definition, resolve them</strong>. The state does not fix the contradiction — it assigns a person to absorb it. The O'Donnell case (Type VII-D) illustrates it most purely: four incompatible domains (Health, Housing, Local Government, Heritage) assigned to one junior minister, with no unifying operational logic — ensuring that all four operate below capacity while the system performs active management.</div>
+      </div>
+      <div class="rc" onclick="this.classList.toggle('open')">
+        <div class="rc-q">What does the Conservation of Corrective Signal require, per the complaint's conclusion?</div>
+        <div class="rc-hint">tap to reveal</div>
+        <div class="rc-ans">Sustainable reform requires <strong>refounding structure itself</strong>: embedding protected epistemic corridors where contradiction can flow, transform, and exit as adaptive correction — not frozen residue. A governance system that feeds on contradiction survives by converting signal to drift. <strong>Democratic accountability cannot be procedurally exempted when institutional integrity is at stake.</strong> Those with the power to correct failures cannot systematically evade the processes designed to compel such correction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CODA ── -->
+<section class="coda reveal" id="coda">
+  <h2 class="coda-title">What Annexes III and IV together prove</h2>
+
+  <div class="coda-row">
+    <div class="coda-n" style="color:var(--ia);opacity:0.3;">I</div>
+    <div class="coda-body">
+      <strong>The legal architecture is complete.</strong> Twelve trigger types across constitutional, legislative, administrative, EU, scientific, and common law domains are simultaneously engaged. The mandate is not merely legal — it is <em>multi-jurisdictionally irresistible</em>. From mandamus at Order 84 to Article 41 of the EU Charter, from the Ombudsman Act to misfeasance in public office: the complaint cannot be routed away through any single channel because it inhabits all of them.
+    </div>
+  </div>
+
+  <div class="coda-row">
+    <div class="coda-n" style="color:var(--vir);opacity:0.3;">II</div>
+    <div class="coda-body">
+      <strong>The fault topology is patterned, not accidental.</strong> Seven ECRM fault types — I-A through VII-D — are not a catalogue of failures; they are a <em>predictable topology</em>. The same design faults reproduce across levels of the governance hierarchy: from Taoiseach to junior minister, from emergency response to circular economy. Pattern is the most important word. Once visible, the pattern cannot be attributed to individual incompetence.
+    </div>
+  </div>
+
+  <div class="coda-row">
+    <div class="coda-n" style="color:var(--hab);opacity:0.3;">III</div>
+    <div class="coda-body">
+      <strong>The psychological framework confirms the diagnosis.</strong> Bateson's double bind, Festinger's cognitive dissonance, Lewin's frozen field, Zeigarnik's permanent decisional residue, Hirschman's closed triangle — five frameworks from social psychology independently arrive at the same conclusion: the system does not fail despite its architecture; it fails <em>through</em> it. Deutero-binding is the name for a system that has learned to prevent its own learning. Where self-learning offers lawful correction, refusal converts error into breach.
+    </div>
+  </div>
+
+  <div class="coda-row">
+    <div class="coda-n" style="color:var(--syn);opacity:0.3;">IV</div>
+    <div class="coda-body">
+      <strong>The remedy is now architecturally specified.</strong> Not personality reform, not policy adjustment, not procedural diligence — but <em>structural refounding</em>: protected epistemic corridors; discharge of the original duty; formal accountability for the accumulated gap; second-order institutional transformation that cultivates the motivational substrate without which any new structure will reproduce the same loops. The complaint is not built on moral outrage. It is an instrumentally measured breakdown in operational cogency. The diagnostics are immediate. The record is public. The duty has not been discharged.
+    </div>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<footer>
+  <div class="footer-left">
+    <a href="https://dr-crunch.github.io/nullification-loops/" target="_blank" rel="noopener">dr-crunch.github.io/nullification-loops</a><br>
+    <a href="https://dr-crunch.github.io/redundancy-awareness/" target="_blank" rel="noopener">Redundancy Awareness · Secondary Repository</a><br>
+    <a href="https://github.com/dr-wojak/econ" target="_blank" rel="noopener">github.com/dr-wojak/econ · Landauer Thesis</a><br>
+    <a href="https://drive.google.com/drive/u/0/folders/12o4-OPXJ0W5E8pxF9pN-VKUeODagy17g" target="_blank" rel="noopener">Full Archive · CC0 · The record is public</a>
+  </div>
+  <div class="footer-right">
+    Compound Failure Modes · Annexes III & IV<br>
+    ECRM · Double Bind · Deutero-Binding<br>
+    <span style="opacity:0.35;">Where self-learning offers lawful correction,<br>refusal converts error into breach.</span>
+  </div>
+</footer>
+
+<script>
+/* ── STARFIELD ── */
+(function(){
+  const c=document.getElementById('starfield'),ctx=c.getContext('2d');let st=[];
+  const COLS=['#d4643d','#c9881f','#7faad4','#9098b0','#5e9e9a','#c084fc','#82c8b0','#d4cfc0'];
+  function resize(){c.width=innerWidth;c.height=innerHeight;}
+  function seed(){
+    st=[];
+    for(let i=0;i<180;i++){const m=Math.random();st.push({
+      x:Math.random()*c.width,y:Math.random()*c.height,
+      r:m<0.05?1.2:m<0.18?0.75:0.4,a:0.1+(1-m)*0.45,
+      t:Math.random()*Math.PI*2,s:0.003+Math.random()*0.004,
+      col:COLS[Math.floor(Math.random()*COLS.length)]
+    });}
+  }
+  function draw(t){
+    ctx.clearRect(0,0,c.width,c.height);
+    st.forEach(s=>{
+      ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=s.col;ctx.globalAlpha=s.a*(0.85+0.15*Math.sin(s.t+t*s.s));ctx.fill();
+    });ctx.globalAlpha=1;requestAnimationFrame(draw);
+  }
+  resize();seed();window.addEventListener('resize',()=>{resize();seed();});requestAnimationFrame(draw);
+})();
+
+/* ── PROGRESS ── */
+const pb=document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{pb.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*55);obs.unobserve(e.target);}});
+},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── TRIGGER FILTER ── */
+function filterTriggers(domain,btn){
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.trig-card').forEach(card=>{
+    if(domain==='all'||card.dataset.domain===domain){card.classList.remove('hidden');}
+    else{card.classList.add('hidden');}
+  });
+}
+
+/* ── CASE ACCORDION ── */
+function toggleCase(id){
+  const card=document.getElementById(id);
+  const wasOpen=card.classList.contains('open');
+  // close all
+  document.querySelectorAll('.case-card').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen) card.classList.add('open');
+}
+</script>
+</body>
+</html>
