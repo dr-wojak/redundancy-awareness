@@ -2,7 +2,11 @@
 
 *A Secondary Repository of Ministerial Correspondence, Jurisdictional Deflection, and Executive Enquiries*
 
-**The Redundancy Record (Primary Evidence Links)**
+---
+
+This repository documents a governance matter that has remained unresolved for nineteen years. It is not a polemic. It is a record — of submissions made, of acknowledgements received, and of determinations never issued. The materials here are presented plainly, for anyone who wishes to look.
+
+A structured, navigable version of the full evidentiary corpus is available at **[dr-crunch.github.io/sitemap](https://dr-crunch.github.io/sitemap)**. An introduction to the matter in its current state is here: **[x.com/BroekMeinhardt](https://x.com/BroekMeinhardt/status/2045286354343305692?s=20)**. The web version of this document is at **[dr-crunch.github.io/redundancy-awareness](https://dr-crunch.github.io/redundancy-awareness/)**.
 
 ---
 
@@ -19,6 +23,19 @@ These documents demonstrate the jurisdictional gap in which complex strategic si
 - **Jurisdictional Dead-Ends**: Records of the circular referral process — the enquiry routed between departments to avoid substantive engagement — providing a live case study of *Séachanachas* (Governance by Avoidance).
 - **The Trigger for Statutory Filing**: This record serves as the immediate precursor to the *Ethics in Public Office Act* filings; it establishes that the "Policy Disagreement" defence is void, as the [State refused to even acknowledge the scientific basis of the proposal, let alone disagree with it.](https://github.com/dr-wojak/governmentality-2025)
 
+### Nullification Loop — Committee Response Taxonomy
+
+Every body contacted has operated within one of four categories of non-determination:
+
+| Category | Body | Disposition |
+|---|---|---|
+| **A — Formal declination with reference** | JCDEF (S-2025-0174-DEF), JCJUST (R2025 0106), BOC (S-2025-0087-BOC), JCFIN (S-2025-0207-FIN), JCEUA (JCEUA-I-57) | Acknowledged; declined jurisdiction |
+| **B — Informal acknowledgement** | Joint Committee on Foreign Affairs and Trade | Email acknowledgement; informal declination |
+| **C — Complete silence** | JCPP — 18 submissions, 0 responses | Procedural nullification through silence |
+| **D — Unreviewable determination** | Clerk of the Dáil — Section 8(3) | "Final and unreviewable"; rebuttals refused; accused members never informed |
+
+No body across any category has evaluated the material on its merits, issued a statutory determination, or provided a reasoned written decision.
+
 ---
 
 ## Status — Active Record · April 2026
@@ -27,6 +44,7 @@ This repository is part of the live pre-litigation evidentiary record of the Mei
 
 | Metric | Value |
 |---|---|
+| Date of first submission | May 2006 |
 | Duration of non-determination | 19 years (2006–2026) |
 | Governments spanned | Five |
 | Taoisigh spanned | Six |
@@ -38,6 +56,8 @@ This repository is part of the live pre-litigation evidentiary record of the Mei
 | MEP responses received | **0** |
 | Commissioner McGrath (formal EU capacity) | 4 contacts · **0** acknowledgements |
 | Irish Ombudsman complaint | Lodged — OMB-260331-CSD014 |
+| European Ombudsman complaint | In preparation |
+| High Court — Writ of Mandamus | In preparation |
 | Hard deadline | **1 July 2026** — Ireland assumes EU Council Presidency |
 
 The *Interregnum Nullificans — A Statement of Record* (March 2026) is the master document of the corpus. It is publicly indexed at [dr-crunch.github.io/sitemap](https://dr-crunch.github.io/sitemap).
@@ -177,9 +197,27 @@ This record is grounded in the following statutory pillars:
 1. **Constitutional Petitions**: The right to petition the State under **Article 15.10** of *Bunreacht na hÉireann*.
 2. **Collective Responsibility**: The requirement under **Article 28** for the Government to act on strategic risks known to its members.
 3. **The Ministers and Secretaries Acts**: Defining the legal obligation of Ministers to manage the business of their departments with necessary foresight.
-4. **EU Regulation 2021/821** (recast of 428/2009): Dual-use export control regulation; DFA held National Competent Authority designation 2008–2024; designation transferred to DETE on 22 August 2024 under the Control of Exports Act 2023. Zero evaluations or statutory determinations across the full period.
-5. **Article 2 TEU / Article 41 CFR / Article 47 CFR**: Rule of law, right to good administration, right to effective remedy — each independently engaged by the nineteen-year non-determination record.
-6. **Redacted Personal Dispatches**: Documents within this repository have been redacted to remove sensitive personal identifiers of non-public figures while maintaining evidential integrity.[^1]
+4. **EU Regulation 2021/821** (recast of 428/2009): Dual-use export control regulation. O.R. methodologies fall within Annex I, Category 4 (Computers), subsection 4.E.1 (Software). DFA held National Competent Authority designation 2008–2024; designation transferred to DETE on 22 August 2024 under the Control of Exports Act 2023. Zero evaluations or statutory determinations across the full period. No public mechanism exists to confirm that the nineteen-year record of unprocessed submissions was disclosed to, or reviewed by, the incoming competent authority upon transfer — a hand-off without discharge constituting a further independent governance breach.
+5. **Article 2 TEU / Article 41 CFR / Article 47 CFR**: Rule of law, right to good administration, right to effective remedy — each independently engaged by the nineteen-year non-determination record. Art. 41 is breached by the nineteen-year non-determination and non-functional public contact channels. Art. 47 is breached by the Section 8(3) "unreviewable" determination and suppression of rebuttals.
+6. **Commission Evaluation Window — Reg. 2021/821**: The Commission is required to conduct a full evaluation of Regulation 2021/821 between **10 September 2026** and **10 September 2028**. A nineteen-year Member State competent authority vacancy is precisely the class of compliance failure that evaluation is designed to surface. The matter will enter the evaluation record regardless of domestic resolution.
+7. **Data Sovereignty Dimension**: Ireland is the lead data protection regulator for the world's largest data-processing entities (Meta, Google, Apple, Microsoft). Without O.R. integration, the Irish Data Protection Commission cannot model systemic risks in complex cross-border data transfers, adequacy determinations under GDPR Article 45 cannot be quantitatively verified, and surveillance exposure under FISA 702 / EO 12333 cannot be properly assessed. The data sovereignty Ireland exercises on behalf of 450 million EU citizens rests on analytic foundations it has declined to build across two decades.
+8. **Redacted Personal Dispatches**: Documents within this repository have been redacted to remove sensitive personal identifiers of non-public figures while maintaining evidential integrity.[^1]
+
+---
+
+## Open Legal Vectors
+
+Active and prepared proceedings as of April 2026:
+
+| Proceeding | Status |
+|---|---|
+| High Court of Ireland — Writ of Mandamus | In preparation |
+| CJEU — Member State failure under Art. 258 TFEU | In preparation |
+| Irish Ombudsman complaint (OMB-260331-CSD014) | Lodged |
+| European Ombudsman complaint | In preparation |
+| DETE — written question via IMCO (Doherty / EPP route) | Requested |
+| EPP Group written question to Commissioner McGrath (Weimers route) | Requested |
+| Commission evaluation record (Reg. 2021/821 — opens 10 September 2026) | Will receive the record regardless of domestic resolution |
 
 ---
 
